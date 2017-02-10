@@ -49,3 +49,6 @@ Temporary Items
 # Linux archives
 .tar.gz
 .tzr.bz2
+
+.idea
+*.iml
