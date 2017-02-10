@@ -1,0 +1,28 @@
+Waf: Entering directory `/root/smb4build/samba-4.3.0/bin'
+* removing /etc/samba
+* removing /var/lib/samba/private
+* removing /var/log/samba
+* removing /var/lib/samba/private
+* removing /var/lib/samba
+* removing /var/lib/samba
+* removing /var/cache/samba
+* removing /var/run/samba
+* removing /var/run/samba
+* removing /var/run/samba
+        Selected embedded Heimdal build
+
+		
+Waf: Entering directory `/store/smb4build/samba-4.3.0/bin'
+* removing /etc/samba
+* removing /var/lib/samba/private
+* removing /var/log/samba
+* removing /var/lib/samba/private
+* removing /var/lib/samba
+* removing /var/lib/samba
+* removing /var/cache/samba
+* removing /var/run/samba
+* removing /var/run/samba
+* removing /var/run/samba
+        Selected embedded Heimdal build
+Checking project rules ...
+Project rules pass

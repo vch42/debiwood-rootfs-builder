@@ -1,0 +1,27 @@
+preboot=setenv stderr serial; setenv stdin serial; setenv stdout serial; setenv baudrate 115200; setenv console ttyS0,115200; setenv bootdelay 10
+baudrate=115200
+console=ttyS0,115200
+stderr=serial
+stdin=serial
+stdout=serial
+ethact=egiga0
+ethaddr=28:28:5d:16:09:06
+bootdelay=10
+led_error=orange blinking
+led_exit=green off
+led_init=green blinking
+
+mtdids=nand0=orion_nand
+mtdparts=mtdparts=orion_nand:0x100000(uboot),0x80000(stock_uboot_env),0x80000(key_store),0x80000(info),0xA00000(etc),0xA00000(kernel_1),0x2FC0000(rootfs1),0xA00000(kernel_2),0x2FC0000(rootfs2)
+partition=nand0,2
+
+bootcmd=run bootcmd_uenv; run bootcmd_usb; usb stop; run bootcmd_sata; reset
+bootcmd_uenv=run uenv_load; if test $uenv_loaded -eq 1; then run uenv_import; fi
+bootcmd_usb=run usb_init; run set_bootargs_usb; run usb_boot
+bootcmd_sata=run sata_init; run set_bootargs_sata; run sata_boot
+
+uenv_import=echo importing envs ...; env import -t 0x810000
+uenv_load=usb start; setenv uenv_loaded 0; for devtype in usb; do for disknum in 0; do run uenv_read_disk; done; done
+uenv_read_disk=if $devtype part $disknum; then run uenv_read; fi
+uenv_read=echo loading envs from $devtype $disknum ...; if load $devtype $disknum:1 0x810000 /boot/uEnv/uEnv.txt; then setenv uenv_loaded 1; fi
+

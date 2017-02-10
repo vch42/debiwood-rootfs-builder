@@ -1,0 +1,261 @@
+root@deb864:/home/vch# apt-cache showpkg samba
+Package: samba
+Versions: 
+2:4.1.17+dfsg-2+deb8u1 (/var/lib/apt/lists/ftp.lug.ro_debian_dists_jessie_main_binary-amd64_Packages) (/var/lib/apt/lists/security.debian.org_dists_jessie_updates_main_binary-amd64_Packages)
+ Description Language: 
+                 File: /var/lib/apt/lists/ftp.lug.ro_debian_dists_jessie_main_binary-amd64_Packages
+                  MD5: 3dcec89b7baaa655b2536933cdaeab54
+ Description Language: en
+                 File: /var/lib/apt/lists/ftp.lug.ro_debian_dists_jessie_main_i18n_Translation-en
+                  MD5: 3dcec89b7baaa655b2536933cdaeab54
+
+
+Reverse Depends: 
+  qemu-system-x86,samba
+  qemu-system-sparc,samba
+  qemu-system-ppc,samba
+  qemu-system-misc,samba
+  qemu-system-mips,samba
+  qemu-system-arm,samba
+  winbind,samba 2:4.1.17+dfsg-2+deb8u1
+  smbclient,samba 2.999+3.0.alpha21-4
+  samba-vfs-modules,samba
+  samba-libs,samba 2:4
+  samba-dbg,samba 2:4.1.17+dfsg-2+deb8u1
+  samba-common-bin,samba 2:3.3.0~rc2-5
+  samba-common,samba 3.0.20b-1
+  samba,samba 2:3.3.0~rc2-5
+  libwbclient0,samba 2:3.4.1
+  libpam-winbind,samba 2.2.3-2
+  libpam-smbpass,samba
+  libnss-winbind,samba 2.2.3-2
+  qemu-system-x86,samba
+  qemu-system-sparc,samba
+  qemu-system-ppc,samba
+  qemu-system-misc,samba
+  qemu-system-mips,samba
+  qemu-system-arm,samba
+  openchangeserver,samba 2:4.0.0~
+  openchangeproxy,samba 2:4.0.0~
+  nautilus-share,samba 3.0.27a
+  gadmin-samba,samba
+  education-main-server,samba
+Dependencies: 
+2:4.1.17+dfsg-2+deb8u1 - adduser (0 (null)) heimdal-hdb-api-8 (0 (null)) libpam-modules (0 (null)) libpam-runtime (2 1.0.1-11) lsb-base (2 4.1+Debian) procps (0 (null)) python (2 2.7) python-dnspython (0 (null)) python-ntdb (0 (null)) python-samba (0 (null)) samba-common (5 2:4.1.17+dfsg-2+deb8u1) samba-common-bin (5 2:4.1.17+dfsg-2+deb8u1) samba-dsdb-modules (0 (null)) tdb-tools (0 (null)) update-inetd (0 (null)) python (3 2.8) python2.7:any (0 (null)) libasn1-8-heimdal (2 1.4.0+git20110226) libbsd0 (2 0.5.0) libc6 (2 2.14) libcomerr2 (2 1.01) libhdb9-heimdal (2 1.4.0+git20110226) libkdc2-heimdal (2 1.4.0+git20110226) libkrb5-26-heimdal (2 1.4.0+git20110226) libldb1 (2 0.9.21) libpopt0 (2 1.14) libpython2.7 (2 2.7) libroken18-heimdal (2 1.4.0+git20110226) libtalloc2 (2 2.0.4~git20101213) libtdb1 (2 1.2.7+git20101214) libtevent0 (2 0.9.14) samba-libs (5 2:4.1.17+dfsg-2+deb8u1) dpkg (2 1.15.6~) multiarch-support (0 (null)) bind9 (2 1:9.5.1) bind9utils (0 (null)) ctdb (0 (null)) ldb-tools (0 (null)) ntp (0 (null)) smbldap-tools (0 (null)) winbind (0 (null)) attr (0 (null)) logrotate (0 (null)) samba-vfs-modules (0 (null)) libldb1 (3 1:1.1.15) samba (3 2:3.3.0~rc2-5) samba-ad-dc (0 (null)) samba-doc (3 2:4.0.5~) samba-tools (0 (null)) samba4 (3 4.0.0~alpha6-2) qtsmbstatus-server (3 2.2.1-3~) libsamdb0 (3 4.0.0~alpha17~) python-samba (3 2:4.1.4+dfsg-3) samba-ad-dc (0 (null)) samba-common (1 2.0.5a-2) samba-doc (3 2:4.0.5~) samba-libs (3 2:4.1.4+dfsg-2) samba4 (0 (null)) bind9 (0 (null)) ntp (0 (null)) 
+Provides: 
+2:4.1.17+dfsg-2+deb8u1 - 
+Reverse Provides: 
+root@deb864:/home/vch# 
+
+
+root@deb864:/home/vch# apt-cache showpkg ssh
+Package: ssh
+Versions: 
+1:6.7p1-5+deb8u1 (/var/lib/apt/lists/ftp.lug.ro_debian_dists_jessie_main_binary-amd64_Packages) (/var/lib/apt/lists/security.debian.org_dists_jessie_updates_main_binary-amd64_Packages)
+ Description Language: 
+                 File: /var/lib/apt/lists/ftp.lug.ro_debian_dists_jessie_main_binary-amd64_Packages
+                  MD5: b00e309365895c14a10af55945efb136
+ Description Language: en
+                 File: /var/lib/apt/lists/ftp.lug.ro_debian_dists_jessie_main_i18n_Translation-en
+                  MD5: b00e309365895c14a10af55945efb136
+
+
+Reverse Depends: 
+  webcam,ssh
+  tla,ssh
+  xtightvncviewer,ssh
+  slbackup-php,ssh
+  slbackup,ssh
+  rancid,ssh
+  proxytunnel,ssh
+  perlpanel,ssh
+  pdsh,ssh 1:3.8.1p1-9
+  ssh-askpass-gnome,ssh 1:3.5p1-3
+  ssh-askpass-gnome,ssh 1:1.2pre7-4
+  openssh-server,ssh
+  openssh-client,ssh
+  mhc-utils,ssh
+  mew-beta,ssh
+  mew,ssh
+  mandos-client,ssh
+  maildirsync,ssh
+  ldm,ssh
+  im,ssh
+  hdup,ssh
+  grcm,ssh
+  flexbackup,ssh
+  dupload,ssh
+  dpkg-sig,ssh
+  dms,ssh
+  dish,ssh
+  dirvish,ssh 3.4p1
+  cook-rsh,ssh
+  cedar-backup2,ssh
+  bootcd,ssh
+Dependencies: 
+1:6.7p1-5+deb8u1 - openssh-client (2 1:6.7p1-5+deb8u1) openssh-server (2 1:6.7p1-5+deb8u1) dpkg (2 1.17.5) 
+Provides: 
+1:6.7p1-5+deb8u1 - 
+Reverse Provides: 
+
+
+
+root@deb864:/home/vch# apt-cache showpkg openssh-server 
+Package: openssh-server
+Versions: 
+1:6.7p1-5+deb8u1 (/var/lib/apt/lists/ftp.lug.ro_debian_dists_jessie_main_binary-amd64_Packages) (/var/lib/apt/lists/security.debian.org_dists_jessie_updates_main_binary-amd64_Packages) (/var/lib/dpkg/status)
+ Description Language: 
+                 File: /var/lib/apt/lists/ftp.lug.ro_debian_dists_jessie_main_binary-amd64_Packages
+                  MD5: 842cc998cae371b9d8106c1696373919
+ Description Language: en
+                 File: /var/lib/apt/lists/ftp.lug.ro_debian_dists_jessie_main_i18n_Translation-en
+                  MD5: 842cc998cae371b9d8106c1696373919
+
+
+Reverse Depends: 
+  xpra,openssh-server
+  x2goplugin,openssh-server
+  x2goclient,openssh-server
+  winswitch,openssh-server
+  vpnc-scripts,openssh-server
+  task-ssh-server,openssh-server
+  sslh,openssh-server
+  ssh-import-id,openssh-server
+  ssh-contact-service,openssh-server
+  slack,openssh-server
+  rsync,openssh-server
+  rssh,openssh-server
+  rsbackup,openssh-server
+  piuparts-master,openssh-server
+  ssh-krb5,openssh-server 1:6.7p1-5+deb8u1
+  ssh,openssh-server 1:6.7p1-5+deb8u1
+  openssh-sftp-server,openssh-server
+  openssh-sftp-server,openssh-server 1:6.5p1-5
+  openssh-sftp-server,openssh-server 1:6.5p1-5
+  openssh-sftp-server,openssh-server
+  oar-server,openssh-server
+  oar-node,openssh-server
+  mysecureshell,openssh-server
+  watch-maildirs,openssh-server
+  monkeysphere,openssh-server
+  molly-guard,openssh-server
+  mercurial-server,openssh-server
+  python-lunch,openssh-server
+  ltsp-server-standalone,openssh-server
+  ltsp-server,openssh-server
+  libconfig-model-openssh-perl,openssh-server
+  ldm-server,openssh-server
+  lam-runtime,openssh-server
+  kup-server,openssh-server
+  gesftpserver,openssh-server
+  ganeti-2.12,openssh-server
+  gforge-shell-postgresql,openssh-server
+  fai-server,openssh-server
+  login-duo,openssh-server
+  dtc-xen,openssh-server
+  barman,openssh-server
+  apt-dater-host,openssh-server
+  ajaxterm,openssh-server
+Dependencies: 
+1:6.7p1-5+deb8u1 - libc6 (2 2.17) libcomerr2 (2 1.01) libgssapi-krb5-2 (2 1.12.1+dfsg-2) libkrb5-3 (2 1.6.dfsg.2) libpam0g (2 0.99.7.1) libselinux1 (2 1.32) libssl1.0.0 (2 1.0.1) libwrap0 (2 7.6-4~) zlib1g (2 1:1.1.4) debconf (18 0.5) debconf-2.0 (0 (null)) init-system-helpers (2 1.18~) openssh-client (5 1:6.7p1-5+deb8u1) libpam-runtime (2 0.76-14) libpam-modules (2 0.72-9) adduser (2 3.9) dpkg (2 1.9.0) lsb-base (2 4.1+Debian3) procps (0 (null)) openssh-sftp-server (0 (null)) ssh-askpass (0 (null)) rssh (0 (null)) molly-guard (0 (null)) ufw (0 (null)) monkeysphere (0 (null)) xauth (0 (null)) ncurses-term (0 (null)) sftp (0 (null)) ssh-socks (0 (null)) ssh2 (0 (null)) ssh (0 (null)) ssh-krb5 (0 (null)) 
+Provides: 
+1:6.7p1-5+deb8u1 - ssh-server 
+Reverse Provides: 
+
+
+
+
+
+
+
+
+
+
+
+#mc iotop htop iftop screen less command-not-found bash-completion \
+#nano lm-sensors sudo fancontrol sensord ca-certificates parted i2c-tools unzip \
+#build-essential mtd-utils iptables iptables-persistent tree ntfs-3g locate \
+#hdparm bonnie++ mdadm btrfs-tools build-essential ntp ntpdate ssh u-boot-tools \
+#busybox-syslogd isc-dhcp-client bzip2 iperf ethtool device-tree-compiler \
+#zlibc zlib1g zlib1g-dev libssl-dev libpam0g libpam0g-dev wget curl
+
+
+
+Dependencies samba4: 
+2:4.1.17+dfsg-2+deb8u1
+- adduser (0 (null))
+heimdal-hdb-api-8 (0 (null)) 
+libpam-modules (0 (null)) 
+libpam-runtime (2 1.0.1-11) 
+lsb-base (2 4.1+Debian) 
+procps (0 (null)) 
+python (2 2.7) 
+python-dnspython (0 (null)) 
+python-ntdb (0 (null)) 
+python-samba (0 (null)) 
+samba-common (5 2:4.1.17+dfsg-2+deb8u1) 
+samba-common-bin (5 2:4.1.17+dfsg-2+deb8u1) 
+samba-dsdb-modules (0 (null)) 
+tdb-tools (0 (null)) 
+update-inetd (0 (null)) 
+python (3 2.8) 
+python2.7:any (0 (null)) 
+libasn1-8-heimdal (2 1.4.0+git20110226) 
+libbsd0 (2 0.5.0) 
+libc6 (2 2.14) 
+libcomerr2 (2 1.01) 
+libhdb9-heimdal (2 1.4.0+git20110226) 
+libkdc2-heimdal (2 1.4.0+git20110226) 
+libkrb5-26-heimdal (2 1.4.0+git20110226) 
+libldb1 (2 0.9.21) 
+libpopt0 (2 1.14) 
+libpython2.7 (2 2.7) 
+libroken18-heimdal (2 1.4.0+git20110226) 
+libtalloc2 (2 2.0.4~git20101213) 
+libtdb1 (2 1.2.7+git20101214) 
+libtevent0 (2 0.9.14) 
+samba-libs (5 2:4.1.17+dfsg-2+deb8u1) 
+dpkg (2 1.15.6~) 
+multiarch-support (0 (null)) 
+bind9 (2 1:9.5.1) 
+bind9utils (0 (null)) 
+ctdb (0 (null)) 
+ldb-tools (0 (null)) 
+ntp (0 (null)) 
+smbldap-tools (0 (null)) 
+winbind (0 (null)) 
+attr (0 (null)) 
+logrotate (0 (null)) 
+samba-vfs-modules (0 (null)) 
+libldb1 (3 1:1.1.15) 
+libldb1:armel (3 1:1.1.15) 
+samba (3 2:3.3.0~rc2-5) 
+samba:armel (3 2:3.3.0~rc2-5) 
+samba-ad-dc (0 (null)) 
+samba-ad-dc:armel (0 (null)) 
+samba-doc (3 2:4.0.5~) 
+samba-doc:armel (3 2:4.0.5~) 
+samba-tools (0 (null)) 
+samba-tools:armel (0 (null)) 
+samba4 (3 4.0.0~alpha6-2) 
+samba4:armel (3 4.0.0~alpha6-2) 
+qtsmbstatus-server (3 2.2.1-3~) 
+qtsmbstatus-server:armel (3 2.2.1-3~) 
+libsamdb0 (3 4.0.0~alpha17~) 
+libsamdb0:armel (3 4.0.0~alpha17~) 
+python-samba (3 2:4.1.4+dfsg-3) 
+python-samba:armel (3 2:4.1.4+dfsg-3) 
+samba-ad-dc (0 (null)) 
+samba-ad-dc:armel (0 (null)) 
+samba-common (1 2.0.5a-2) 
+samba-common:armel (1 2.0.5a-2) 
+samba-doc (3 2:4.0.5~) 
+samba-doc:armel (3 2:4.0.5~) 
+samba-libs (3 2:4.1.4+dfsg-2) 
+samba-libs:armel (3 2:4.1.4+dfsg-2) 
+samba4 (0 (null)) 
+samba4:armel (0 (null)) 
+bind9 (0 (null)) 
+ntp (0 (null)) 
+samba:armel (0 (null)) 
+Provides: 

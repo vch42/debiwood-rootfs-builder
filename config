@@ -1,0 +1,70 @@
+label='rootfs'
+targetdir="$label-$(date +"%Y%m%d%H%M")"
+filename="$targetdir.tar.bz2"
+
+distro='jessie'
+repo='http://ftp.lug.ro/debian/'
+arch='armel'
+machine='nsa320'
+
+kernel='4.9.0-kirkwood-tld-1'
+
+samba=false
+hpnssh=false
+cups=false
+
+uboot-sntp=false
+uboot-sntp-dns='192.168.0.1'
+uboot-sntp-server='europe.pool.ntp.org'
+
+timezone='Europe/Bucharest'
+initial_user='user'
+initial_pass='changeme'
+hname='deb320'
+
+
+usbblkdev='/dev/sdb'
+write2usb=false
+pack2archive=false
+send2server=false
+server2send=''
+serverusername=''
+
+
+
+
+packs1='sudo mc htop tree locate unzip bzip2 screen command-not-found bash-completion nano ca-certificates'
+packs2='build-essential device-tree-compiler i2c-tools u-boot-tools'
+packs3='isc-dhcp-client iperf ethtool iftop iptables iptables-persistent ntp ntpdate ssh curl busybox-syslogd'
+packs4='lm-sensors fancontrol sensord'
+packs5='ntfs-3g btrfs-tools mtd-utils parted mdadm hdparm iotop bonnie++'
+packs="$packs1 $packs2 $packs3 $packs4 $packs5"
+
+
+
+
+
+###########################################################################################################################################################
+
+tools='qemu-user-static debootstrap binfmt-support udisks udisks2 udisks-glue parted u-boot-tools'
+
+extra_deps_hpn='zlibc zlib1g zlib1g-dev libssl-dev libpam0g libpam0g-dev'
+
+extra_deps_samba='acl attr autoconf dnsutils gdb krb5-user libjson-perl ntp perl perl-modules python-crypto'
+
+
+
+
+if $samba; then
+    packs+=$extra_deps_samba
+fi
+
+if $hpnssh; then
+    packs+=$extra_deps_hpn
+fi
+
+if $cups; then
+	packs+=" cups"
+fi
+
+#############################################################################################################################################################
