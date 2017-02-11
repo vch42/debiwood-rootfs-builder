@@ -60,7 +60,7 @@ if $samba; then
 fi
 
 if $samba_fs; then
-    packs+=' samba'
+    packs+=" samba"
 fi
 
 if $hpnssh; then
