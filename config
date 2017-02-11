@@ -14,9 +14,9 @@ samba_fs=true
 hpnssh=false
 cups=false
 
-#uboot-sntp=false
-#uboot-sntp-dns='192.168.0.1'
-#uboot-sntp-server='europe.pool.ntp.org'
+uboot_sntp=false
+uboot_sntp_dns='192.168.0.1'
+uboot_sntp_server='europe.pool.ntp.org'
 
 timezone='Europe/Bucharest'
 initial_user='user'

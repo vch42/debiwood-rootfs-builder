@@ -56,11 +56,11 @@ if [ $write2usb ] && [ -z "$usbblkdev" ]; then
 	echo '$write2usb is true, but no value found for $usbblkdev, disabling write2usb.'
 fi
 
-if $uboot-sntp; then
+if $uboot_sntp; then
 	echo 'Uboot SNTP setup not yet implemented!!! Disabling...'
-	uboot-sntp=false
-#	if [ $uboot-sntp ] && [[ -z $uboot-sntp-dnsn ] || [ -z $uboot-sntp-server ]]; then
-#		uboot-sntp=false
-#		echo '$uboot-sntp is true, but values are missing for $uboot-sntp-dns or $uboot-sntp-server, disabling uboot-sntp.'
-#	fi
+	uboot_sntp=false
+	if [ $uboot_sntp ] && [[ -z $uboot_sntp_dns ] || [ -z $uboot_sntp_server ]]; then
+		uboot_sntp=false
+		echo '$uboot_sntp is true, but values are missing for $uboot_sntp_dns or $uboot_sntp_server, disabling uboot_sntp.'
+	fi
 fi
