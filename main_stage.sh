@@ -65,6 +65,7 @@ mkdir -p $targetdir/root/kern
 
 \cp -p ./chroot_stage.sh $targetdir/root/
 \cp -p ./config $targetdir/root/
+\cp -p ./chkconfig.sh $targetdir/root/
 \cp -p ./stuff/firstrun.sh $targetdir/root/
 
 if $samba; then
