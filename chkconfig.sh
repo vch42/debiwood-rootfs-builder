@@ -59,8 +59,8 @@ fi
 if $uboot-sntp; then
 	echo 'Uboot SNTP setup not yet implemented!!! Disabling...'
 	uboot-sntp=false
-	if [ $uboot-sntp ] && [[ -z $uboot-sntp-dns ] || [ -z $uboot-sntp-server ]]; then
-		uboot-sntp=false
-		echo '$uboot-sntp is true, but values are missing for $uboot-sntp-dns or $uboot-sntp-server, disabling uboot-sntp.'
-	fi
+#	if [ $uboot-sntp ] && [[ -z $uboot-sntp-dnsn ] || [ -z $uboot-sntp-server ]]; then
+#		uboot-sntp=false
+#		echo '$uboot-sntp is true, but values are missing for $uboot-sntp-dns or $uboot-sntp-server, disabling uboot-sntp.'
+#	fi
 fi
