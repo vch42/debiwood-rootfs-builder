@@ -54,7 +54,7 @@ echo "Copy kernel packages and other stuff to ./$targetdir/root/"
 echo "(to be installed in chroot and after first boot)"; sleep 1
 
 mkdir -p ./stuff/kern/$kernel/extracted
-tar zxf ./stuff/kern/$kernel/*.tar.gz -C ./stuff/kern/$kernel/extracted
+tar jxf ./stuff/kern/$kernel/*.tar.bz2 -C ./stuff/kern/$kernel/extracted
 tar xf  ./stuff/kern/$kernel/extracted/*.tar -C ./stuff/kern/$kernel/extracted
 mkdir -p $targetdir/root/kern
 \cp -p  ./stuff/kern/$kernel/extracted/*.deb $targetdir/root/kern/
