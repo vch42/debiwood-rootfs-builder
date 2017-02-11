@@ -3,7 +3,7 @@ targetdir="$label-$(date +"%Y%m%d%H%M")"
 filename="$targetdir.tar.bz2"
 
 distro='jessie'
-repo='http://ftp.lug.ro/debian/'
+repo='http://ftp.ro.debian.org/debian/'
 arch='armel'
 machine='nsa320'
 
