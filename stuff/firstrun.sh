@@ -40,7 +40,7 @@ fi
 #	#do the happy dance and puke. rinse and repeat.
 #fi
 
-apt-get install -y samba
+#apt-get install -y samba
 
 #clean rc.local
 sed -ie "/firstrun.sh/d" /etc/rc.local
