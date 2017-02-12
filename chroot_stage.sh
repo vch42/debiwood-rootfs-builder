@@ -153,7 +153,7 @@ cat <<EOT > /etc/fstab
 # that works even if disks are added and removed. See fstab(5).
 #
 # <file system> <mount point>   <type> <options>              <dump>  <pass>
-LABEL=rootfs       /                ext4  errors=remount-ro        0       1
+LABEL=$label       /                ext4  errors=remount-ro        0       1
 EOT
 
 
