@@ -16,9 +16,9 @@ update-command-not-found &> /dev/null
 #install hpnssh
 if [ -d /root/hpnssh ]; then
 	cd /root/hpnssh
-	tar zxf openssh-7.1p1.tar.gz
-	cd openssh-7.1p1
-	cat ../openssh-7_1_P1-hpn-14.9.diff | patch -p1
+	tar zxf openssh-7.2p2.tar.gz
+	cd openssh-7.2p2
+	cat ../openssh-7_2_P2-hpn-14.10.diff | patch -p1
 	./configure --prefix=/usr --sysconfdir=/etc/ssh --with-ssl-engine --with-pam
 	make
 	\cp /lib/systemd/system/ssh.service ../ssh.service
@@ -35,7 +35,19 @@ if [ -d /root/hpnssh ]; then
 	systemctl stop ssh.service
 fi
 
-#install samba4
+#generate 512MB swap file and add it to fstab
+dd if=/dev/zero of=/swapfile bs=1024k count=1k
+chown root:root /swapfile
+chmod 0600 /swapfile
+mkswap /swapfile
+cat <<EOT >> /etc/fstab
+/swapfile   none   swap   sw   0   0
+
+EOT
+swapon /swapfile
+
+
+#install samba4 from source
 #if [ -d /root/samba4 ]; then
 #	#do the happy dance and puke. rinse and repeat.
 #fi

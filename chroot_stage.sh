@@ -33,7 +33,9 @@ APT::Install-Recommends "0";
 APT::Install-Suggests "0";
 EOT
 
-
+cat <<EOT > /etc/apt/apt.conf.d/99force-ipv4
+Acquire::ForceIPv4 "true";
+EOT
 
 
 echo;echo;echo '*****************************************************'
@@ -92,6 +94,8 @@ echo nsa3xx-hwmon >> /etc/modules
 #	echo " - setup machid for Pogo v4"; sleep 1
 #	echo "machid=f78" >> /boot/uEnv/uEnv.txt
 #fi
+
+
 # Uboot SNTP to be done
 #if $uboot-sntp then;
 #echo " -setup uboot rtc sntp "; sleep 2
@@ -120,7 +124,6 @@ echo;echo;echo '*****************************************************'
 echo "Setting  hostname"
 echo "($hname)"; sleep 1
 echo $hname > /etc/hostname
-
 cat <<EOT > /etc/hosts
 127.0.0.1    localhost.localdomain localhost
 127.0.1.1    $hname
@@ -133,18 +136,9 @@ EOT
 
 echo;echo;echo '*****************************************************'
 echo "Setting  /etc/fstab"
-echo "(skel, will be modified when writing to USB)"
+#echo "(skel, will be modified when writing to USB)"
+echo "LABEL=$label    /   ext4  errors=remount-ro  0  1"
 sleep 1
-#cat <<EOT > /etc/fstab
-## /etc/fstab: static file system information.
-##
-## Use 'blkid' to print the universally unique identifier for a
-## device; this may be used with UUID= as a more robust way to name devices
-## that works even if disks are added and removed. See fstab(5).
-##
-## <file system> <mount point>   <type> <options>              <dump>  <pass>
-#device_UUID_here       /                ext4  errors=remount-ro        0       1
-#EOT
 cat <<EOT > /etc/fstab
 # /etc/fstab: static file system information.
 #
@@ -154,6 +148,8 @@ cat <<EOT > /etc/fstab
 #
 # <file system> <mount point>   <type> <options>              <dump>  <pass>
 LABEL=$label       /                ext4  errors=remount-ro        0       1
+#device_UUID_here       /                ext4  errors=remount-ro        0       1
+
 EOT
 
 
