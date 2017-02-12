@@ -143,8 +143,8 @@ if $write2usb; then
 		mkfs.ext4 -F -L $label $usbblkdev"1"; sleep 1
 		mount $usbblkdev"1" ./mnt; sleep 1
 		\cp -rpv $targetdir/* ./mnt/; sleep 1
-                echo "Customizing /etc/fstab for this specific partition UUID: " $(blkid $usbblkdev"1"|cut -d \  -f 3|sed -e "s@\"@@g")
-		sed -ie "s@device_UUID_here@$(blkid $usbblkdev"1"|cut -d \  -f 3|sed -e "s@\"@@g")@" ./mnt/etc/fstab
+        #echo "Customizing /etc/fstab for this specific partition UUID: " $(blkid $usbblkdev"1"|cut -d \  -f 3|sed -e "s@\"@@g")
+		#sed -ie "s@device_UUID_here@$(blkid $usbblkdev"1"|cut -d \  -f 3|sed -e "s@\"@@g")@" ./mnt/etc/fstab
 		echo "Syncing USB drive..."
 		sync
 cat <<EOT
