@@ -1,8 +1,8 @@
-#!/bin/sh
+#!/bin/bash
 #chroot_stage.sh
 
-source ./root/config
-source ./root/chkconfig.sh
+source /root/config
+source /root/chkconfig.sh
 
 export LANG=C
 
