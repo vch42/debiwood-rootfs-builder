@@ -59,9 +59,6 @@ if $samba; then
     packs+=$extra_deps_samba
 fi
 
-if $samba_fs; then
-    packs+=" samba"
-fi
 
 if $hpnssh; then
     packs+=$extra_deps_hpn
