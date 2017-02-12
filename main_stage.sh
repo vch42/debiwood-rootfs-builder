@@ -67,6 +67,9 @@ mkdir -p $targetdir/root/kern
 \cp -p ./config $targetdir/root/
 \cp -p ./chkconfig.sh $targetdir/root/
 \cp -p ./stuff/firstrun.sh $targetdir/root/
+if samba_package; then
+    sed -i -e 's/#apt-get install -y samba/apt-get install -y samba/' $targetdir/root/firstrun.sh
+fi
 \cp -p ./stuff/LEDs.sh $targetdir/root/
 \cp -p ./stuff/LEDs.service $targetdir/root/
 

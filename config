@@ -10,7 +10,7 @@ machine='nsa320'
 kernel='4.9.0-kirkwood-tld-1'
 
 samba=false
-samba_fs=true
+samba_package=true
 hpnssh=false
 cups=false
 
