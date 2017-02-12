@@ -36,10 +36,11 @@ if [ -d /root/hpnssh ]; then
 fi
 
 #install samba4
-if [ -d /root/samba4 ]; then
-	#do the happy dance and puke. rinse and repeat.
-fi
+#if [ -d /root/samba4 ]; then
+#	#do the happy dance and puke. rinse and repeat.
+#fi
 
+apt-get install -y samba
 
 #clean rc.local
 sed -ie "/firstrun.sh/d" /etc/rc.local

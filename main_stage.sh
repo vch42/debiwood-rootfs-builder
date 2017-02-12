@@ -61,7 +61,7 @@ mkdir -p $targetdir/root/kern
 \cp -rp ./stuff/kern/$kernel/extracted/dts $targetdir/boot/
 \rm -rf ./stuff/kern/$kernel/extracted
 
-\cp -rp ./stuff/boot/* $targetdir/boot/
+#\cp -rp ./stuff/boot/* $targetdir/boot/
 
 \cp -p ./chroot_stage.sh $targetdir/root/
 \cp -p ./config $targetdir/root/
