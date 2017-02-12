@@ -2,10 +2,10 @@
 apt-get update && apt-get upgrade -y && apt-get autoremove -y
 apt-get install -y build-essential linux-headers-$(uname -r) zlibc zlib1g zlib1g-dev libssl-dev libpam0g libpam0g-dev wget curl
 sleep 5
-tar zxvf openssh-7.1p1.tar.gz
-cd openssh-7.1p1
+tar zxvf openssh-7.2p2.tar.gz
+cd openssh-7.2p2
 sleep 5
-cat ../openssh-7_1_P1-hpn-14.9.diff | patch -p1
+cat ../openssh-7_2_P2-hpn-14.10.diff | patch -p1
 sleep 5
 ./configure --prefix=/usr --sysconfdir=/etc/ssh --with-ssl-engine --with-pam
 sleep 5
