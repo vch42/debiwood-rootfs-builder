@@ -67,6 +67,9 @@ mkdir -p $targetdir/root/kern
 \cp -p ./config $targetdir/root/
 \cp -p ./chkconfig.sh $targetdir/root/
 \cp -p ./stuff/firstrun.sh $targetdir/root/
+\cp -p ./stuff/LEDs.sh $targetdir/root/
+\cp -p ./stuff/LEDs.service $targetdir/root/
+
 
 if $samba; then
 	cp -rp ./stuff/samba4 $targetdir/root/

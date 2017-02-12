@@ -70,8 +70,7 @@ apt-get install -y initramfs-tools
 echo;echo;echo '*****************************************************'
 echo "Installing kernel and headers"
 echo "/root/kern/"; sleep 1
-dpkg -i /root/kern/*
-\rm -rf /root/kern
+dpkg -i /root/kern/* && \rm -rf /root/kern
 
 
 echo;echo;echo '*****************************************************'
@@ -80,19 +79,19 @@ echo nsa3xx-hwmon >> /etc/modules
 
 
 
-echo;echo;echo '*****************************************************'
-echo "Setting some values in /boot/uEnv/uEnv.txt."
-echo " -select machine DTB file: kirkwood-"$machine
-echo " -setup sata_root and usb_root variables for partition with LABEL="$label; sleep 2
-sed -ie "s/set_label_here/$label/g; s/set_dtb_here/kirkwood-$DTB/g" /boot/uEnv/uEnv.txt
-if [ $machine == "pogo_e02" ]; then
-	echo " -setup machid for Pogo E02"; sleep 1
-	echo "machid=dd6" >> /boot/uEnv/uEnv.txt
-fi
-if [ $machine == "pogoplug_v4" ]; then
-	echo " - setup machid for Pogo v4"; sleep 1
-	echo "machid=f78" >> /boot/uEnv/uEnv.txt
-fi
+#echo;echo;echo '*****************************************************'
+#echo "Setting some values in /boot/uEnv/uEnv.txt."
+#echo " -select machine DTB file: kirkwood-"$machine
+#echo " -setup sata_root and usb_root variables for partition with LABEL="$label; sleep 2
+#sed -ie "s/set_label_here/$label/g; s/set_dtb_here/kirkwood-$DTB/g" /boot/uEnv/uEnv.txt
+#if [ $machine == "pogo_e02" ]; then
+#	echo " -setup machid for Pogo E02"; sleep 1
+#	echo "machid=dd6" >> /boot/uEnv/uEnv.txt
+#fi
+#if [ $machine == "pogoplug_v4" ]; then
+#	echo " - setup machid for Pogo v4"; sleep 1
+#	echo "machid=f78" >> /boot/uEnv/uEnv.txt
+#fi
 # Uboot SNTP to be done
 #if $uboot-sntp then;
 #echo " -setup uboot rtc sntp "; sleep 2
@@ -136,6 +135,16 @@ echo;echo;echo '*****************************************************'
 echo "Setting  /etc/fstab"
 echo "(skel, will be modified when writing to USB)"
 sleep 1
+#cat <<EOT > /etc/fstab
+## /etc/fstab: static file system information.
+##
+## Use 'blkid' to print the universally unique identifier for a
+## device; this may be used with UUID= as a more robust way to name devices
+## that works even if disks are added and removed. See fstab(5).
+##
+## <file system> <mount point>   <type> <options>              <dump>  <pass>
+#device_UUID_here       /                ext4  errors=remount-ro        0       1
+#EOT
 cat <<EOT > /etc/fstab
 # /etc/fstab: static file system information.
 #
@@ -144,7 +153,7 @@ cat <<EOT > /etc/fstab
 # that works even if disks are added and removed. See fstab(5).
 #
 # <file system> <mount point>   <type> <options>              <dump>  <pass>
-device_UUID_here       /                ext4  errors=remount-ro        0       1
+LABEL=rootfs       /                ext4  errors=remount-ro        0       1
 EOT
 
 
@@ -312,146 +321,9 @@ EOT
 echo;echo;echo '*****************************************************'
 echo "Creating the service to start/stop LEDs"
 echo ""; sleep 3
-
-cat <<EOT > /usr/sbin/LEDs.sh
-#!/bin/bash
-Start() {
-#################
-# Activate LEDs #
-#######################################################################
-if [ -d /sys/class/leds/nsa320:orange:sys ]; then
-	echo none > /sys/class/leds/nsa320:orange:sys/trigger
-	if [ -d /sys/class/leds/nsa320:green:sys ]; then
-		echo default-on  > /sys/class/leds/nsa320:green:sys/trigger
-	fi
-	if [ -d /sys/class/leds/nsa320:orange:sys ]; then
-		echo heartbeat  > /sys/class/leds/nsa320:orange:sys/trigger
-	fi
-	if [ -d /sys/class/leds/nsa320:red:hdd1 ]; then
-		echo ide-disk1  > /sys/class/leds/nsa320:red:hdd1/trigger
-	fi
-	if [ -d /sys/class/leds/nsa320:red:hdd2 ]; then
-		echo ide-disk2  > /sys/class/leds/nsa320:red:hdd2/trigger
-	fi
-	if [ -d /sys/class/leds/nsa320:green:usb ]; then
-		echo usb-host  > /sys/class/leds/nsa320:green:usb/trigger
-	fi
-	if [ -d /sys/class/leds/nsa320:green:copy ]; then
-		echo nand-disk  > /sys/class/leds/nsa320:red:copy/trigger
-	fi
-fi
-
-########################################################################
-
-if [ -d /sys/class/leds/status:green:health ]; then
-   echo default-on > /sys/class/leds/status:green:health/trigger
-   if [ -d /sys/class/leds/status:orange:fault ]; then
-      echo none > /sys/class/leds/status:orange:fault/trigger
-   fi
-   if [ -d /sys/class/leds/status:blue:health ]; then
-      echo none > /sys/class/leds/status:blue:health/trigger
-   fi
-fi
-
-#########################################################################
-
-if [ -d /sys/class/leds/dockstar:green:health ]; then
-   echo default-on > /sys/class/leds/dockstar:green:health/trigger
-   echo none > /sys/class/leds/dockstar:orange:misc/trigger
-fi
-
-#########################################################################
-
-if [ -d /sys/class/leds/plug:green:health ]; then
-   echo default-on > /sys/class/leds/plug:green:health/trigger
-   if [ -d /sys/class/leds/plug:red:misc ]; then
-      echo none  > /sys/class/leds/plug:red:misc/trigger
-   fi
-fi
-
-##########################################################################
-
-if [ -d /sys/class/leds/power:blue ]; then
-   echo default-on  > /sys/class/leds/power:blue/trigger
-   ### echo default-on  > /sys/class/leds/otb:blue/trigger
-   echo none        > /sys/class/leds/power:red/trigger
-fi
-
-if [ -d /sys/class/leds/usb1:blue ]; then
-   echo usb-host > /sys/class/leds/usb1\:blue/trigger
-fi
-if [ -d /sys/class/leds/usb2:blue ]; then
-   echo usb-host > /sys/class/leds/usb2\:blue/trigger
-fi
-if [ -d /sys/class/leds/usb3:blue ]; then
-   echo usb-host > /sys/class/leds/usb3\:blue/trigger
-fi
-if [ -d /sys/class/leds/usb4:blue ]; then
-   echo usb-host > /sys/class/leds/usb4\:blue/trigger
-fi
-
-##########################################################################
-
-if [ -d /sys/class/leds/nsa325:green:sys ]; then
-   echo default-on  > /sys/class/leds/nsa325:green:sys/trigger
-   echo none        > /sys/class/leds/nsa325:orange:sys/trigger
-fi
-
-if [ -d /sys/class/leds/nsa325:green:sata1 ]; then
-   echo ide-disk1  > /sys/class/leds/nsa325:green:sata1/trigger
-fi
-
-if [ -d /sys/class/leds/nsa325:green:sata2 ]; then
-   echo ide-disk2  > /sys/class/leds/nsa325:green:sata2/trigger
-fi
-
-if [ -d /sys/class/leds/nsa325:green:usb ]; then
-   echo usb-host > /sys/class/leds/nsa325\:green\:usb/trigger
-fi
-
-###########################################################################
-
-}
-
-
-Stop() {
-###################
-# Deactivate LEDs #
-#######################################################################
-for x in /sys/class/leds/*
-do
-	if [ -d "\$x/trigger" ]; then
-		echo none > \$x/trigger
-	fi
-done
-
-}
-
-case \$1 in
-        start|stop) "\$1" ;;
-        *) echo "Usage: systemctl start|stop LEDs"
-esac
-
-
-EOT
-
+\mv /root/LEDs.sh /usr/sbin/LEDs.sh
+\mv /root/LEDs.service /lib/systemd/system/LEDs.service
 chmod +x /usr/sbin/LEDs.sh
-
-cat <<EOT > /lib/systemd/system/LEDs.service
-[Unit]
-Description=LEDs
-After=udev.service
-Before=sysinit.target
-
-[Service]
-Type=oneshot
-ExecStart=/usr/sbin/LEDs.sh start
-ExecStop=/usr/sbin/LEDs.sh stop
-RemainAfterExit=yes
-
-[Install]
-WantedBy=multi-user.target
-EOT
 
 systemctl daemon-reload
 systemctl enable LEDs.service

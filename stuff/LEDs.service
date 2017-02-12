@@ -1,0 +1,13 @@
+[Unit]
+Description=LEDs
+After=udev.service
+Before=sysinit.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/sbin/LEDs.sh start
+ExecStop=/usr/sbin/LEDs.sh stop
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
