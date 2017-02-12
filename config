@@ -25,7 +25,7 @@ hname='deb320'
 
 
 usbblkdev='/dev/sdb'
-write2usb=true
+write2usb=false
 pack2archive=true
 send2server=false
 server2send=''
