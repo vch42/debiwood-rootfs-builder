@@ -1,0 +1,7 @@
+mainlineLinux=yes
+arcNumber=3956
+machid=0x118f
+file_dtb=/boot/dts/kirkwood-nsa320.dtb
+rootfs=LABEL=set_label_here
+rootfstype=ext4
+initsystem=init=/bin/systemd
