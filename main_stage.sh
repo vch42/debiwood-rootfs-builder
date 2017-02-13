@@ -115,10 +115,10 @@ mkimage -A arm -O linux -T ramdisk -C gzip -a 0x00000000 -e 0x00000000 -n initra
 echo;echo;echo '*****************************************************'
 echo "Cleaning up rootfs and preparing."
 echo " "; sleep 1
-\rm -f $targetdir/etc/resolv.conf
-\rm -f $targetdir/usr/bin/qemu-arm-static
-\rm -f $targetdir/root/chroot_stage.sh
-\rm -f $targetdir/root/config
+\rm -f  $targetdir/etc/resolv.conf
+\rm -f  $targetdir/usr/bin/qemu-arm-static
+\rm -f  $targetdir/root/chroot_stage.sh
+\rm -f  $targetdir/root/config
 \rm -rf $targetdir/debootstrap/
 
 
