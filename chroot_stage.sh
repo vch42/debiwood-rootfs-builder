@@ -100,7 +100,7 @@ nsa320)
 *)
     sed -ie "s/set_arc_number_here//g; s/set_machid_here//g" /boot/uEnv;;
 esac
-#need to set filesystem type ext4/ext3/ext2
+#need to set filesystem type ext4/ext3/ext2 in uEnv
 
 
 # Uboot SNTP to be done
