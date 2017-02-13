@@ -88,9 +88,9 @@ fi
 
 echo;echo;echo '*****************************************************'
 echo "Will now chroot into $targetdir to continue the setup."; sleep 1
-\cp -p /usr/bin/qemu-arm-static $targetdir/usr/bin/;
+\cp -p /usr/bin/qemu-arm-static $targetdir/usr/bin/
 \cp -p /etc/resolv.conf $targetdir/etc/
-chroot $targetdir /root/chroot_stage.sh;
+chroot $targetdir /root/chroot_stage.sh
 
 
 
