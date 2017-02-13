@@ -35,7 +35,7 @@ if [ -d /root/hpnssh ]; then
 	systemctl stop ssh.service
 fi
 
-#generate 512MB swap file and add it to fstab
+#generate 1024MB swap file and add it to fstab
 dd if=/dev/zero of=/swapfile bs=1024k count=1k
 chown root:root /swapfile
 chmod 0600 /swapfile
