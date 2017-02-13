@@ -1,7 +1,7 @@
 mainlineLinux=yes
-arcNumber=xxxx
-machid=xxxxxx
-file_dtb=/boot/dts/kirkwood-xxxxxx.dtb
-rootfs=LABEL=xxxxxx
+arcNumber=set_arc_number_here
+machid=set_machid_here
+file_dtb=/boot/dts/set_dtb_here.dtb
+rootfs=LABEL=set_label_here
 rootfstype=xxx
 initsystem=init=/bin/systemd

@@ -81,19 +81,26 @@ echo nsa3xx-hwmon >> /etc/modules
 
 
 
-#echo;echo;echo '*****************************************************'
-#echo "Setting some values in /boot/uEnv/uEnv.txt."
-#echo " -select machine DTB file: kirkwood-"$machine
-#echo " -setup sata_root and usb_root variables for partition with LABEL="$label; sleep 2
-#sed -ie "s/set_label_here/$label/g; s/set_dtb_here/kirkwood-$DTB/g" /boot/uEnv/uEnv.txt
-#if [ $machine == "pogo_e02" ]; then
-#	echo " -setup machid for Pogo E02"; sleep 1
-#	echo "machid=dd6" >> /boot/uEnv/uEnv.txt
-#fi
-#if [ $machine == "pogoplug_v4" ]; then
-#	echo " - setup machid for Pogo v4"; sleep 1
-#	echo "machid=f78" >> /boot/uEnv/uEnv.txt
-#fi
+echo;echo;echo '*****************************************************'
+echo "Setting some values in /boot/uEnv"
+echo " -select machine DTB file: kirkwood-"$machine
+echo " -setup rootfs label variables for partition with LABEL="$label; sleep 2
+sed -ie "s/set_label_here/$label/g; s/set_dtb_here/kirkwood-$machine/g" /boot/uEnv
+echo " -setup machid/arcNumber for "$machine; sleep 1
+case $machine in
+pogo_e02)
+    sed -ie "s/set_arc_number_here/$$$$/g; s/set_machid_here/$$$$/g" /boot/uEnv;;
+pogoplug_v4)
+    sed -ie "s/set_arc_number_here/$$$$/g; s/set_machid_here/$$$$/g" /boot/uEnv;;
+nsa320)
+    sed -ie "s/set_arc_number_here/3956/g; s/set_machid_here/0x118f/g" /boot/uEnv;;
+
+
+
+*)
+    sed -ie "s/set_arc_number_here//g; s/set_machid_here//g" /boot/uEnv;;
+esac
+#need to set filesystem type ext4/ext3/ext2
 
 
 # Uboot SNTP to be done
