@@ -67,14 +67,14 @@ tar xf  ./stuff/kern/$kernel/extracted/*.tar -C ./stuff/kern/$kernel/extracted
 \cp -p ./config $targetdir/root/
 \cp -p ./chkconfig.sh $targetdir/root/
 \cp -p ./stuff/firstrun.sh $targetdir/root/
-if samba_package; then
+if $samba_from_apt; then
     sed -i -e 's/#apt-get install -y samba/apt-get install -y samba/' $targetdir/root/firstrun.sh
 fi
 \cp -p ./stuff/LEDs.sh $targetdir/root/
 \cp -p ./stuff/LEDs.service $targetdir/root/
 
 
-if $samba; then
+if $samba_from_source; then
 	cp -rp ./stuff/samba4 $targetdir/root/
 fi
 
@@ -143,7 +143,7 @@ if $write2usb; then
 		sleep 1
 		parted -s $usbblkdev mklabel msdos; sleep 1
 		parted -s -a optimal -- $usbblkdev mkpart primary 1 -1; sleep 1
-		mkfs.ext4 -F -L $label $usbblkdev"1"; sleep 1
+		mkfs.$filesystem -F -L $label $usbblkdev"1"; sleep 1
 		mount $usbblkdev"1" ./mnt; sleep 1
 		\cp -rpv $targetdir/* ./mnt/; sleep 1
         #echo "Customizing /etc/fstab for this specific partition UUID: " $(blkid $usbblkdev"1"|cut -d \  -f 3|sed -e "s@\"@@g")
