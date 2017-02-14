@@ -1,4 +1,6 @@
 label='rootfs'
+filesystem='ext4'
+initsystem=systemd
 targetdir="$label-$(date +"%Y%m%d%H%M")"
 filename="$targetdir.tar.bz2"
 

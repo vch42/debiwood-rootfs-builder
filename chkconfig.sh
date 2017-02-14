@@ -6,6 +6,16 @@ if [ -z "$label" ]; then
 	echo 'No value found for $label, falling back to '$label
 fi
 
+if [ -z "$filesystem" ]; then
+	filesystem='ext4'
+	echo 'No value found for $filesystem, falling back to '$filesystem
+fi
+
+if [ -z "$initsystem" ]; then
+	initsystem='systemd'
+	echo 'No value found for $initsystem, falling back to '$initsystem
+fi
+
 if [ -z "$distro" ]; then
 	distro='jessie'
 	echo 'No value found for $distro, falling back to '$distro

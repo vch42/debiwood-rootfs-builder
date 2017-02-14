@@ -3,5 +3,6 @@ arcNumber=set_arc_number_here
 machid=set_machid_here
 file_dtb=/boot/dts/set_dtb_here.dtb
 rootfs=LABEL=set_label_here
-rootfstype=xxx
-initsystem=init=/bin/systemd
+rootfstype=set_filesystem_here
+initsystem=set_init_here
+
