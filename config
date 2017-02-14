@@ -33,6 +33,7 @@ send2server=false
 server2send=''
 serverusername=''
 
+move_to_raid_on_first_boot=false
 
 
 
