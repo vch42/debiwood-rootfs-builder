@@ -70,6 +70,9 @@ tar xf  ./stuff/kern/$kernel/extracted/*.tar -C ./stuff/kern/$kernel/extracted
 if $samba_from_apt; then
     sed -i -e 's/#apt-get install -y samba/apt-get install -y samba/' $targetdir/root/firstrun.sh
 fi
+if $move_to_raid_on_first_boot; then
+    sed -i -e 's/move_to_raid=false/move_to_raid=true/' $targetdir/root/firstrun.sh
+fi
 \cp -p ./stuff/LEDs.sh $targetdir/root/
 \cp -p ./stuff/LEDs.service $targetdir/root/
 
