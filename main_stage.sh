@@ -32,7 +32,7 @@ fi
 
 echo;echo;echo '*****************************************************'
 echo Installing tools...;sleep 1
-apt-get -y install $tools
+apt-get update && apt-get -y install $tools
 
 
 
