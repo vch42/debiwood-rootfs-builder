@@ -11,8 +11,8 @@ machine='nsa320'
 
 kernel='4.9.0-kirkwood-tld-1'
 
-samba=false
-samba_package=true
+samba_from_source=false
+samba_from_apt=true
 hpnssh=false
 cups=false
 
@@ -57,7 +57,7 @@ extra_deps_samba='acl attr autoconf dnsutils gdb krb5-user libjson-perl ntp perl
 
 
 
-if $samba; then
+if $samba_from_source; then
     packs+=$extra_deps_samba
 fi
 
