@@ -73,6 +73,8 @@ fi
 if $move_to_raid_on_first_boot; then
     sed -i -e 's/move_to_raid=false/move_to_raid=true/' $targetdir/root/firstrun.sh
 fi
+sed -i -e "s/mkfs.put_fs_here/mkfs.$filesystem/" $targetdir/root/firstrun.sh
+sed -i -e "s/L put_label_here/L $label/" $targetdir/root/firstrun.sh
 \cp -p ./stuff/LEDs.sh $targetdir/root/
 \cp -p ./stuff/LEDs.service $targetdir/root/
 
