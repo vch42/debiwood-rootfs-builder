@@ -41,7 +41,7 @@ packs1=' sudo mc htop tree locate unzip bzip2 screen command-not-found bash-comp
 packs2=' build-essential device-tree-compiler i2c-tools u-boot-tools initramfs-tools '
 packs3=' isc-dhcp-client iperf ethtool iftop iptables iptables-persistent ntp ntpdate ssh curl busybox-syslogd '
 packs4=' lm-sensors fancontrol sensord haveged '
-packs5=' ntfs-3g btrfs-tools mtd-utils parted mdadm hdparm iotop bonnie++ '
+packs5=' ntfs-3g btrfs-tools mtd-utils parted mdadm hdparm iotop bonnie++ rsync '
 packs="$packs1 $packs2 $packs3 $packs4 $packs5"
 
 
