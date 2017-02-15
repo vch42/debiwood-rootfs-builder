@@ -21,6 +21,7 @@ if $move_to_raid; then
     for n in {1..10} ; do
 		parted -s /dev/sda rm $n;
 	done
+	sleep 15;
     parted -s /dev/sda mklabel gpt && \
     parted -s /dev/sda mkpart primary 1 16500 && \
     sleep 15 && \
