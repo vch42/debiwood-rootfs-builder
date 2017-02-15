@@ -423,6 +423,10 @@ echo 'DEVICE /dev/sd?*' >> /etc/mdadm/mdadm.conf
 update-initramfs -u -k all
 
 
+echo;echo;echo '*****************************************************'
+echo "Activating rc.local.service"
+echo " "; sleep 5
+systemctl enable rc.local.service
 
 
 echo;echo;echo '*****************************************************'
