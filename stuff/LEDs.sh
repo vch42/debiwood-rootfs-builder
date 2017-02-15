@@ -1,5 +1,5 @@
 #!/bin/bash
-Start() {
+start() {
 #################
 # Activate LEDs #
 #######################################################################
@@ -7,9 +7,6 @@ if [ -d /sys/class/leds/nsa320:orange:sys ]; then
 	echo none > /sys/class/leds/nsa320:orange:sys/trigger
 	if [ -d /sys/class/leds/nsa320:green:sys ]; then
 		echo default-on  > /sys/class/leds/nsa320:green:sys/trigger
-	fi
-	if [ -d /sys/class/leds/nsa320:orange:sys ]; then
-		echo heartbeat  > /sys/class/leds/nsa320:orange:sys/trigger
 	fi
 	if [ -d /sys/class/leds/nsa320:red:hdd1 ]; then
 		echo ide-disk1  > /sys/class/leds/nsa320:red:hdd1/trigger
@@ -98,20 +95,20 @@ fi
 }
 
 
-Stop() {
+stop() {
 ###################
 # Deactivate LEDs #
 #######################################################################
 for x in /sys/class/leds/*
 do
-	if [ -d "\$x/trigger" ]; then
-		echo none > \$x/trigger
+	if [ -a "$x/trigger" ]; then
+		echo none > $x/trigger
 	fi
 done
 
 }
 
-case \$1 in
-        start|stop) "\$1" ;;
+case $1 in
+        start|stop) "$1" ;;
         *) echo "Usage: systemctl start|stop LEDs"
 esac
