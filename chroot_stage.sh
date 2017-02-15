@@ -427,6 +427,12 @@ echo;echo;echo '*****************************************************'
 echo "Activating rc-local.service"
 echo " "; sleep 5
 chmod +x /etc/rc.local
+cat<<EOT >> /lib/systemd/system/rc-local.service
+
+
+[Install]
+ WantedBy=multi-user.target
+EOT
 systemctl enable rc-local.service
 
 
