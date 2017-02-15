@@ -149,8 +149,9 @@ if $write2usb; then
 		parted -s $usbblkdev mklabel msdos; sleep 1
 		parted -s -a optimal -- $usbblkdev mkpart primary 1 -1; sleep 1
 		mkfs.$filesystem -F -L $label $usbblkdev"1"; sleep 1
-		mount $usbblkdev"1" ./mnt; sleep 1
-		\cp -rpv $targetdir/* ./mnt/; sleep 1
+		mkdir -p /tmp/mnt
+		mount $usbblkdev"1" /tmp/mnt; sleep 1
+		\cp -rpv $targetdir/* /tmp/mnt/; sleep 1
         #echo "Customizing /etc/fstab for this specific partition UUID: " $(blkid $usbblkdev"1"|cut -d \  -f 3|sed -e "s@\"@@g")
 		#sed -ie "s@device_UUID_here@$(blkid $usbblkdev"1"|cut -d \  -f 3|sed -e "s@\"@@g")@" ./mnt/etc/fstab
 		echo "Syncing USB drive..."
