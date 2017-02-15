@@ -4,13 +4,13 @@ exec 2> /var/log/firstrun.log  # send stderr to a log file
 exec 1>&2                      # send stdout to the same log file
 set -x                         # tell sh to display commands before execution
 
+sleep 90;
 echo timer  > /sys/class/leds/nsa320:red:copy/trigger
 echo default-on  > /sys/class/leds/nsa320:green:copy/trigger
 
 #If move to raid array is requested, do it first, reboot from array and continue.
 move_to_raid=false
 if $move_to_raid; then
-    sleep 90;
     for n in {0..10} ; do
         mdadm --stop /dev/md$n
         mdadm --remove /dev/md$n
