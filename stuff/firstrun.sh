@@ -10,18 +10,30 @@ echo default-on  > /sys/class/leds/nsa320:green:copy/trigger
 #If move to raid array is requested, do it first, reboot from array and continue.
 move_to_raid=false
 if $move_to_raid; then
-    parted -s -a optimal /dev/sda mklabel gpt
-    parted -s -a optimal /dev/sda mkpart primary 1 16500
-    mdadm --create /dev/md0 --metadata=0.90 --level=1 --raid-devices=2 missing /dev/sda1
-    mkfs.put_fs_here -L put_label_here /dev/md0
-    mdadm --detail --scan >> /etc/mdadm/mdadm.conf
-    mkdir /tmp/mnt
-    mount /dev/md0 /tmp/mnt
-    rsync -auHxv --exclude=/proc/* --exclude=/sys/* --exclude=/tmp/* /* /tmp/mnt
-    e2label /dev/sdb1 "oldrfs"
-    mv /boot /old-boot
-    umount /tmp/mnt
-    sed -ie "s/move_to_raid=true/move_to_raid=false/g" /root/firstrun.sh
+    sleep 90;
+    for n in {0..10} ; do
+        mdadm --stop /dev/md$n
+        mdadm --remove /dev/md$n
+    done
+    for n in {1..10} ; do
+        mdadm --zero-superblock /dev/sda$i
+    done
+    for n in {1..10} ; do
+		parted -s /dev/sda rm $n;
+	done
+    parted -s /dev/sda mklabel gpt && \
+    parted -s /dev/sda mkpart primary 1 16500 && \
+    sleep 15 && \
+    mdadm --create /dev/md0 --metadata=0.90 --level=1 --raid-devices=2 missing /dev/sda1 && \
+    mkfs.put_fs_here -L put_label_here /dev/md0 && \
+    mdadm --detail --scan >> /etc/mdadm/mdadm.conf && \
+    mkdir /tmp/mnt && \
+    mount /dev/md0 /tmp/mnt && \
+    rsync -auHxv --exclude=/proc/* --exclude=/sys/* --exclude=/tmp/* /* /tmp/mnt && \
+    e2label /dev/sdb1 "oldrfs" && \
+    mv /boot /old-boot && \
+    umount /tmp/mnt && \
+    sed -ie "s/move_to_raid=true/move_to_raid=false/g" /root/firstrun.sh && \
     shutdown -r now
 fi
 
