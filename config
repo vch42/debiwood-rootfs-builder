@@ -13,7 +13,7 @@ kernel='4.9.0-kirkwood-tld-1'
 
 samba_from_source=false
 samba_from_apt=true
-hpnssh=false
+hpnssh=true
 cups=false
 
 uboot_sntp=false
@@ -27,13 +27,13 @@ hname='deb320'
 
 
 usbblkdev='/dev/sdb'
-write2usb=false
-pack2archive=true
+write2usb=true
+pack2archive=false
 send2server=false
 server2send=''
 serverusername=''
 
-move_to_raid_on_first_boot=false
+move_to_raid_on_first_boot=true
 
 
 
