@@ -59,15 +59,15 @@ sed -ie "/firstrun.sh/d" /etc/rc.local
 
 move_to_raid=false
 if $move_to_raid; then
-    parted -s -a optimal /dev/sdb mklabel gpt
-    parted -s -a optimal /dev/sdb mkpart primary 1 16500
-    mdadm --create /dev/md0 --metadata=0.90 --level=1 --raid-devices=2 missing /dev/sdb1
+    parted -s -a optimal /dev/sda mklabel gpt
+    parted -s -a optimal /dev/sda mkpart primary 1 16500
+    mdadm --create /dev/md0 --metadata=0.90 --level=1 --raid-devices=2 missing /dev/sda1
     mkfs.put_fs_here -L put_label_here /dev/md0
     mdadm --detail --scan >> /etc/mdadm/mdadm.conf
     mkdir /tmp/mnt
     mount /dev/md0 /tmp/mnt
     rsync -auHxv --exclude=/proc/* --exclude=/sys/* --exclude=/tmp/* /* /tmp/mnt
-    e2label /dev/sda1 "oldrfs"
+    e2label /dev/sdb1 "oldrfs"
     mv /boot /old-boot
     umount /tmp/mnt
 fi

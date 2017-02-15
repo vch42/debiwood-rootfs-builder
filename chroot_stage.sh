@@ -436,8 +436,6 @@ apt-get clean
 
 
 
-
-
 echo;echo;echo '*****************************************************'
 echo "Done here!"
 echo "Will now exit chroot."; sleep 5
