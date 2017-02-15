@@ -424,9 +424,10 @@ update-initramfs -u -k all
 
 
 echo;echo;echo '*****************************************************'
-echo "Activating rc.local.service"
+echo "Activating rc-local.service"
 echo " "; sleep 5
-systemctl enable rc.local.service
+chmod +x /etc/rc.local
+systemctl enable rc-local.service
 
 
 echo;echo;echo '*****************************************************'
