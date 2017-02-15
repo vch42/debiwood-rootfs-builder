@@ -142,9 +142,9 @@ if $write2usb; then
 			umount $n ;
 		done
 		sleep 1
-		for n in {1..9} ; do
-			parted -s $usbblkdev rm $n;
-		done
+#		for n in {1..9} ; do
+#			parted -s $usbblkdev rm $n;
+#		done
 		sleep 1
 		parted -s $usbblkdev mklabel msdos; sleep 1
 		parted -s -a optimal -- $usbblkdev mkpart primary 1 -1; sleep 1
