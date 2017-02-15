@@ -1,7 +1,11 @@
 #!/bin/bash
 #main_stage.sh
 
-# Change these variables in these files to fit your needs!
+chmod +x chkconfig.sh
+chmod +x config
+chmod +x chroot_stage.sh
+
+# Change variables in below files to fit your needs!
 source ./config
 source ./chkconfig.sh
 
@@ -75,16 +79,20 @@ if $move_to_raid_on_first_boot; then
 fi
 sed -i -e "s/mkfs.put_fs_here/mkfs.$filesystem/" $targetdir/root/firstrun.sh
 sed -i -e "s/L put_label_here/L $label/" $targetdir/root/firstrun.sh
+chmod +x $targetdir/root/firstrun.sh
 \cp -p ./stuff/LEDs.sh $targetdir/root/
 \cp -p ./stuff/LEDs.service $targetdir/root/
+chmod +x $targetdir/root/LEDs.sh
 
 
-if $samba_from_source; then
-	cp -rp ./stuff/samba4 $targetdir/root/
-fi
+#not yet implemented
+#if $samba_from_source; then
+#	cp -rp ./stuff/samba4 $targetdir/root/
+#fi
 
 if $hpnssh; then
 	cp -rp ./stuff/hpnssh $targetdir/root/
+	chmod +x $targetdir/root/hpnssh/install.sh
 fi
 
 
