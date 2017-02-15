@@ -16,7 +16,7 @@ if $move_to_raid; then
         mdadm --remove /dev/md$n
     done
     for n in {1..10} ; do
-        mdadm --zero-superblock /dev/sda$i
+        mdadm --zero-superblock /dev/sda$n
     done
     for n in {1..10} ; do
 		parted -s /dev/sda rm $n;
