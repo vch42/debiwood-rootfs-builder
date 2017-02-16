@@ -41,13 +41,13 @@ if $move_to_raid; then
     dpkg-reconfigure mdadm && \
     mkimage -A arm -O linux -T kernel  -C none -a 0x00008000 -e 0x00008000 -n Linux-kernel_name_here     -d /boot/vmlinuz-kernel_name_here    /boot/uImage && \
     mkimage -A arm -O linux -T ramdisk -C gzip -a 0x00000000 -e 0x00000000 -n initramfs-kernel_name_here -d /boot/initrd.img-kernel_name_here /boot/uInitrd && \
+    sed -i -e "s/move_to_raid=true/move_to_raid=false/" /root/firstrun.sh && \
     mkdir /tmp/mnt && \
     mount /dev/md0 /tmp/mnt && \
     rsync -auHxv --exclude=/proc/* --exclude=/sys/* --exclude=/tmp/* /* /tmp/mnt && \
     e2label /dev/sdb1 "oldrfs" && \
     mv /boot /old-boot && \
     umount /tmp/mnt && \
-    sed -i -e "s/move_to_raid=true/move_to_raid=false/" /root/firstrun.sh && \
     shutdown -r now
 fi
 
