@@ -28,13 +28,15 @@ if $move_to_raid; then
     mdadm --create /dev/md0 --metadata=0.90 --level=1 --raid-devices=2 missing /dev/sda1 && \
     mkfs.put_fs_here -L put_label_here /dev/md0 && \
     mdadm --detail --scan >> /etc/mdadm/mdadm.conf && \
+    mkimage -A arm -O linux -T kernel  -C none -a 0x00008000 -e 0x00008000 -n Linux-kernel_name_here     -d /boot/vmlinuz-kernel_name_here    /boot/uImage && \
+    mkimage -A arm -O linux -T ramdisk -C gzip -a 0x00000000 -e 0x00000000 -n initramfs-kernel_name_here -d /boot/initrd.img-kernel_name_here /boot/uInitrd && \
     mkdir /tmp/mnt && \
     mount /dev/md0 /tmp/mnt && \
     rsync -auHxv --exclude=/proc/* --exclude=/sys/* --exclude=/tmp/* /* /tmp/mnt && \
     e2label /dev/sdb1 "oldrfs" && \
     mv /boot /old-boot && \
     umount /tmp/mnt && \
-    sed -ie "s/move_to_raid=true/move_to_raid=false/" /root/firstrun.sh && \
+    sed -i -e "s/move_to_raid=true/move_to_raid=false/" /root/firstrun.sh && \
     shutdown -r now
 fi
 

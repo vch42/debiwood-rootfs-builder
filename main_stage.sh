@@ -77,8 +77,10 @@ fi
 if $move_to_raid_on_first_boot; then
     sed -i -e 's/move_to_raid=false/move_to_raid=true/' $targetdir/root/firstrun.sh
 fi
+
 sed -i -e "s/mkfs.put_fs_here/mkfs.$filesystem/" $targetdir/root/firstrun.sh
-sed -i -e "s/L put_label_here/L $label/" $targetdir/root/firstrun.sh
+sed -i -e "s/kernel_name_here/$kernel/g" $targetdir/root/firstrun.sh
+sed -i -e "s/kernel_name_here/$kernel/g" $targetdir/root/firstrun.sh
 chmod +x $targetdir/root/firstrun.sh
 \cp -p ./stuff/LEDs.sh $targetdir/root/
 \cp -p ./stuff/LEDs.service $targetdir/root/
@@ -160,6 +162,7 @@ if $write2usb; then
 		mkdir -p /tmp/mnt
 		mount $usbblkdev"1" /tmp/mnt; sleep 1
 		\cp -rpv $targetdir/* /tmp/mnt/; sleep 1
+		\rm -rf /tmp/mnt/boot/uEnve; sleep 1
         #bellow not needed anymore, using the LABEL method to identify rootfs part; keeping these for their mean look :-)
         #echo "Customizing /etc/fstab for this specific partition UUID: " $(blkid $usbblkdev"1"|cut -d \  -f 3|sed -e "s@\"@@g")
 		#sed -ie "s@device_UUID_here@$(blkid $usbblkdev"1"|cut -d \  -f 3|sed -e "s@\"@@g")@" ./mnt/etc/fstab
