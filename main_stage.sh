@@ -75,7 +75,7 @@ if $samba_from_apt; then
     sed -i -e 's/#apt-get install -y samba/apt-get install -y samba/' $targetdir/root/firstrun.sh
 fi
 if $move_to_raid_on_first_boot; then
-    sed -i -e 's/move_to_raid=false/move_to_raid=true/' $targetdir/root/firstrun.sh
+    sed -i -e 's/move_to_raid=false ; #flag/move_to_raid=true ; #flag/' $targetdir/root/firstrun.sh
 fi
 
 sed -i -e "s/mkfs.put_fs_here/mkfs.$filesystem/" $targetdir/root/firstrun.sh

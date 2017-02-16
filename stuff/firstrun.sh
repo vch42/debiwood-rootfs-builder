@@ -9,7 +9,7 @@ echo timer  > /sys/class/leds/nsa320:red:copy/trigger
 echo default-on  > /sys/class/leds/nsa320:green:copy/trigger
 
 #If move to raid array is requested, do it first, reboot from array and continue.
-move_to_raid=false
+move_to_raid=false ; #flag
 if $move_to_raid; then
     for n in {0..10} ; do
         mdadm --stop /dev/md$n
