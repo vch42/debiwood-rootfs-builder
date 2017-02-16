@@ -25,7 +25,7 @@ if $move_to_raid; then
     parted -s /dev/sda mklabel gpt && \
     parted -s /dev/sda mkpart primary 1 16500 && \
     sleep 15 && \
-    mdadm --create /dev/md0 --run --metadata=0.90 --level=1 --raid-devices=2 missing /dev/sda1 && \
+    mdadm --create /dev/md0 --run --force --metadata=0.90 --level=1 --raid-devices=2 missing /dev/sda1 && \
     mkfs.put_fs_here -L put_label_here /dev/md0 && \
     mdadm --detail --scan >> /etc/mdadm/mdadm.conf && \
     mkimage -A arm -O linux -T kernel  -C none -a 0x00008000 -e 0x00008000 -n Linux-kernel_name_here     -d /boot/vmlinuz-kernel_name_here    /boot/uImage && \
