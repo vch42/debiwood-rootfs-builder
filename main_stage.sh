@@ -79,8 +79,10 @@ if $move_to_raid_on_first_boot; then
 fi
 
 sed -i -e "s/mkfs.put_fs_here/mkfs.$filesystem/" $targetdir/root/firstrun.sh
+sed -i -e "s/L put_label_here /L $label /" $targetdir/root/firstrun.sh
 sed -i -e "s/kernel_name_here/$kernel/g" $targetdir/root/firstrun.sh
 sed -i -e "s/kernel_name_here/$kernel/g" $targetdir/root/firstrun.sh
+#sed -i -e "s/e2label \/dev\/sda1 put_label_here/e2label \/dev\/sda1 $label/" $targetdir/root/firstrun.sh
 chmod +x $targetdir/root/firstrun.sh
 \cp -p ./stuff/LEDs.sh $targetdir/root/
 \cp -p ./stuff/LEDs.service $targetdir/root/

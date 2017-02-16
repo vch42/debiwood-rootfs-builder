@@ -32,13 +32,6 @@ if $move_to_raid; then
     mdadm --create /dev/md0 --run --force --metadata=0.90 --level=1 --raid-devices=2 missing /dev/sda1 && \
     mkfs.put_fs_here -L put_label_here /dev/md0 && \
     mdadm --detail --scan >> /etc/mdadm/mdadm.conf && \
-    echo "mdadm mdadm/mail_to string  root" | debconf-set-selections && \
-    echo "mdadm mdadm/initrdstart string  all" | debconf-set-selections && \
-    echo "mdadm mdadm/autostart boolean true" | debconf-set-selections && \
-    echo "mdadm mdadm/autocheck boolean true" | debconf-set-selections && \
-    echo "mdadm mdadm/initrdstart_notinconf boolean false" | debconf-set-selections && \
-    echo "mdadm mdadm/start_daemon  boolean true" | debconf-set-selections && \
-    dpkg-reconfigure mdadm && \
     mkimage -A arm -O linux -T kernel  -C none -a 0x00008000 -e 0x00008000 -n Linux-kernel_name_here     -d /boot/vmlinuz-kernel_name_here    /boot/uImage && \
     mkimage -A arm -O linux -T ramdisk -C gzip -a 0x00000000 -e 0x00000000 -n initramfs-kernel_name_here -d /boot/initrd.img-kernel_name_here /boot/uInitrd && \
     sed -i -e "s/move_to_raid=true/move_to_raid=false/" /root/firstrun.sh && \
@@ -50,6 +43,16 @@ if $move_to_raid; then
     umount /tmp/mnt && \
     shutdown -r now
 fi
+
+    #echo "mdadm mdadm/mail_to string  root" | debconf-set-selections && \
+    #echo "mdadm mdadm/initrdstart string  all" | debconf-set-selections && \
+    #echo "mdadm mdadm/autostart boolean true" | debconf-set-selections && \
+    #echo "mdadm mdadm/autocheck boolean true" | debconf-set-selections && \
+    #echo "mdadm mdadm/initrdstart_notinconf boolean false" | debconf-set-selections && \
+    #echo "mdadm mdadm/start_daemon  boolean true" | debconf-set-selections && \
+    #dpkg-reconfigure mdadm && \
+
+
 
 rm -f /etc/ssh/ssh_host*
 ssh-keygen -Aq
