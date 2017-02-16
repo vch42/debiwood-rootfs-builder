@@ -34,7 +34,7 @@ if $move_to_raid; then
     e2label /dev/sdb1 "oldrfs" && \
     mv /boot /old-boot && \
     umount /tmp/mnt && \
-    sed -ie "s/move_to_raid=true/move_to_raid=false/g" /root/firstrun.sh && \
+    sed -ie "s/move_to_raid=true/move_to_raid=false/" /root/firstrun.sh && \
     shutdown -r now
 fi
 
