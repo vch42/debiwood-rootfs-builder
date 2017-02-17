@@ -145,8 +145,6 @@ if $write2usb; then
 	echo;echo;echo '*****************************************************'
 	echo "Will now write rootfs to $usbblkdev!"
 	echo "$usbblkdev WILL BE WIPED!!!"
-	read -p "Enter 'yes' to proceed or anything else to abort: " confirmation
-	if [ $confirmation = 'yes' ]; then
 		for n in $usbblkdev* ; do
 			umount $n ;
 		done
@@ -177,7 +175,6 @@ EOT
 
 		echo; echo; echo;
 		echo "You can now remove the usb stick and boot from it."; sleep 8
-	fi
 fi
 
 
@@ -213,13 +210,13 @@ $tools
 
 EOT
 
-read -p "Enter 'y' if you want to keep the installed tools or 'n' to remove: " confirmation
-if [ $confirmation != "y" ]; then
-        echo "Removing...."
-	apt-get purge -y $tools
-fi
+#read -p "Enter 'y' if you want to keep the installed tools or 'n' to remove: " confirmation
+#if [ $confirmation != "y" ]; then
+#        echo "Removing...."
+#	apt-get purge -y $tools
+#fi
 
-sleep 7
+#sleep 7
 
 cat <<EOT
 *************************
