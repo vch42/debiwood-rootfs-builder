@@ -5,8 +5,8 @@ After=sysinit.target
 
 [Service]
 Type=oneshot
-ExecStart=/etc/init.d/leds start
-ExecStop=/etc/init.d/leds stop
+ExecStart=/usr/sbin/leds start
+ExecStop=/usr/sbin/leds stop
 RemainAfterExit=yes
 
 [Install]
