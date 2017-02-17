@@ -67,9 +67,6 @@ tar xf  ./stuff/kern/$kernel/extracted/*.tar -C ./stuff/kern/$kernel/extracted
 \cp -p ./config $targetdir/root/
 \cp -p ./chkconfig.sh $targetdir/root/
 \cp -p ./stuff/firstrun.sh $targetdir/root/
-if $samba; then
-    sed -i -e 's/#apt-get install -y samba/apt-get install -y samba/' $targetdir/root/firstrun.sh
-fi
 if $move_to_raid_on_first_boot; then
     sed -i -e 's/move_to_raid=false ; #flag/move_to_raid=true ; #flag/' $targetdir/root/firstrun.sh
 fi
