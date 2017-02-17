@@ -32,12 +32,9 @@ fi
 
 
 
-
-
 echo;echo;echo '*****************************************************'
 echo Installing tools...;sleep 1
 apt-get update && apt-get -y install $tools
-
 
 
 
@@ -47,8 +44,6 @@ echo "Creating root filesystem in ./$targetdir"
 echo "(debootstrap stage 1 - downloading packages)"; sleep 1
 mkdir $targetdir
 debootstrap --arch=$arch --foreign $distro $targetdir $repo;
-
-
 
 
 
@@ -124,8 +119,6 @@ mkimage -A arm -O linux -T ramdisk -C gzip -a 0x00000000 -e 0x00000000 -n initra
 
 
 
-
-
 echo;echo;echo '*****************************************************'
 echo "Cleaning up rootfs and preparing."
 echo " "; sleep 1
@@ -134,6 +127,7 @@ echo " "; sleep 1
 \rm -f  $targetdir/root/chroot_stage.sh
 \rm -f  $targetdir/root/config
 \rm -rf $targetdir/debootstrap/
+
 
 
 
