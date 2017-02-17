@@ -35,14 +35,21 @@ if $move_to_raid; then
     mkfs.put_fs_here -L put_label_here /dev/md0 && \
     mdadm --detail --scan >> /etc/mdadm/mdadm.conf && \
     sleep 5;
-    echo 'mdadm mdadm/mail_to string root' | debconf-set-selections; sleep 5;
-    echo 'mdadm mdadm/initrdstart string all' | debconf-set-selections; sleep 5;
-    echo 'mdadm mdadm/autostart boolean true' | debconf-set-selections; sleep 5;
-    echo 'mdadm mdadm/autocheck boolean true' | debconf-set-selections; sleep 5;
-    echo 'mdadm mdadm/initrdstart_notinconf boolean true' | debconf-set-selections; sleep 5;
-    echo 'mdadm mdadm/start_daemon boolean true' | debconf-set-selections; sleep 5;
-    export DEBIAN_FRONTEND=noninteractive ; sleep 5;
-    dpkg-reconfigure mdadm ; sleep 15;
+    #echo 'mdadm mdadm/mail_to string root' | debconf-set-selections; sleep 5;
+    #echo 'mdadm mdadm/initrdstart string all' | debconf-set-selections; sleep 5;
+    #echo 'mdadm mdadm/autostart boolean true' | debconf-set-selections; sleep 5;
+    #echo 'mdadm mdadm/autocheck boolean true' | debconf-set-selections; sleep 5;
+    #echo 'mdadm mdadm/initrdstart_notinconf boolean true' | debconf-set-selections; sleep 5;
+    #echo 'mdadm mdadm/start_daemon boolean true' | debconf-set-selections; sleep 5;
+    #export DEBIAN_FRONTEND=noninteractive ; sleep 5;
+    #dpkg-reconfigure mdadm ; sleep 15;
+    debconf-set-selections <<< "mdadm mdadm/mail_to string root"
+    debconf-set-selections <<< "mdadm mdadm/initrdstart string all"
+    debconf-set-selections <<< "mdadm mdadm/initrdstart_notinconf boolean true"
+    debconf-set-selections <<< "mdadm mdadm/autostart boolean true"
+    debconf-set-selections <<< "mdadm mdadm/autocheck boolean true"
+    debconf-set-selections <<< "mdadm mdadm/start_daemon boolean true"
+    export DEBIAN_FRONTEND=noninteractive ; dpkg-reconfigure mdadm ; sleep 15;
     mkimage -A arm -O linux -T kernel  -C none -a 0x00008000 -e 0x00008000 -n Linux-kernel_name_here     -d /boot/vmlinuz-kernel_name_here    /boot/uImage && \
     mkimage -A arm -O linux -T ramdisk -C gzip -a 0x00000000 -e 0x00000000 -n initramfs-kernel_name_here -d /boot/initrd.img-kernel_name_here /boot/uInitrd && \
     sed -i -e "s/move_to_raid=true/move_to_raid=false/" /root/firstrun.sh && \
