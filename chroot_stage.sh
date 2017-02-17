@@ -414,11 +414,11 @@ systemctl enable rc-local.service
 echo;echo;echo '*****************************************************'
 echo "Creating the service to start/stop LEDs"
 echo ""; sleep 3
-\mv /root/LEDs.sh /usr/sbin/LEDs.sh
-\mv /root/LEDs.service /lib/systemd/system/LEDs.service
-chmod +x /usr/sbin/LEDs.sh
+\mv /root/leds /etc/init.d/leds
+\mv /root/leds.service /lib/systemd/system/leds.service
+chmod +x /etc/init.d/leds
 systemctl daemon-reload
-systemctl enable LEDs.service
+systemctl enable leds.service
 
 
 
