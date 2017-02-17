@@ -55,6 +55,13 @@ if $move_to_raid; then
     shutdown -r now
 fi
 
+# debconf-set-selections <<< "mdadm mdadm/mail_to string root"
+# debconf-set-selections <<< "mdadm mdadm/initrdstart string all"
+# debconf-set-selections <<< "mdadm mdadm/initrdstart_notinconf boolean true"
+# debconf-set-selections <<< "mdadm mdadm/autostart boolean true"
+# debconf-set-selections <<< "mdadm mdadm/autocheck boolean true"
+# debconf-set-selections <<< "mdadm mdadm/start_daemon boolean true"
+# export DEBIAN_FRONTEND=noninteractive ; dpkg-reconfigure mdadm
 
 
 
