@@ -1,6 +1,6 @@
 #!/bin/bash
 #firstrun.sh
-exec 2> /var/log/firstrun.log  # send stderr to a log file
+exec 2> /dev/ttyS0 #/var/log/firstrun.log  # send stderr to a log file
 exec 1>&2                      # send stdout to the same log file
 set -x                         # tell sh to display commands before execution
 

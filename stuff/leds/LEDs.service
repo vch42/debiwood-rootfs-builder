@@ -1,12 +1,12 @@
 [Unit]
-Description=LEDs
+Description=LEDs start/stop Service
 Wants=udev.service
 After=sysinit.target
 
 [Service]
 Type=oneshot
-ExecStart=/usr/sbin/LEDs.sh start
-ExecStop=/usr/sbin/LEDs.sh stop
+ExecStart=/etc/init.d/leds start
+ExecStop=/etc/init.d/leds stop
 RemainAfterExit=yes
 
 [Install]
