@@ -65,13 +65,14 @@ tar xf  ./stuff/kern/$kernel/extracted/*.tar -C ./stuff/kern/$kernel/extracted
 \cp -rp ./stuff/kern/$kernel/extracted/dts $targetdir/boot/
 \rm -rf ./stuff/kern/$kernel/extracted
 
-\cp -rp ./stuff/boot/* $targetdir/boot/
+\cp -rp ./stuff/uEnv/* $targetdir/boot/
+\mv $targetdir/boot/uEnv_skel $targetdir/boot/uEnv
 
 \cp -p ./chroot_stage.sh $targetdir/root/
 \cp -p ./config $targetdir/root/
 \cp -p ./chkconfig.sh $targetdir/root/
 \cp -p ./stuff/firstrun.sh $targetdir/root/
-if $samba_from_apt; then
+if $samba; then
     sed -i -e 's/#apt-get install -y samba/apt-get install -y samba/' $targetdir/root/firstrun.sh
 fi
 if $move_to_raid_on_first_boot; then
@@ -84,15 +85,11 @@ sed -i -e "s/kernel_name_here/$kernel/g" $targetdir/root/firstrun.sh
 sed -i -e "s/kernel_name_here/$kernel/g" $targetdir/root/firstrun.sh
 #sed -i -e "s/e2label \/dev\/sda1 put_label_here/e2label \/dev\/sda1 $label/" $targetdir/root/firstrun.sh
 chmod +x $targetdir/root/firstrun.sh
-\cp -p ./stuff/LEDs.sh $targetdir/root/
-\cp -p ./stuff/LEDs.service $targetdir/root/
+\cp -p ./stuff/leds/LEDs.sh $targetdir/root/
+\cp -p ./stuff/leds/LEDs.service $targetdir/root/
 chmod +x $targetdir/root/LEDs.sh
 
 
-#not yet implemented
-#if $samba_from_source; then
-#	cp -rp ./stuff/samba4 $targetdir/root/
-#fi
 
 if $hpnssh; then
 	cp -rp ./stuff/hpnssh $targetdir/root/
@@ -164,10 +161,9 @@ if $write2usb; then
 		mkdir -p /tmp/mnt
 		mount $usbblkdev"1" /tmp/mnt; sleep 1
 		\cp -rpv $targetdir/* /tmp/mnt/; sleep 1
-		\rm -rf /tmp/mnt/boot/uEnve; sleep 1
-        #bellow not needed anymore, using the LABEL method to identify rootfs part; keeping these for their mean look :-)
-        #echo "Customizing /etc/fstab for this specific partition UUID: " $(blkid $usbblkdev"1"|cut -d \  -f 3|sed -e "s@\"@@g")
-		#sed -ie "s@device_UUID_here@$(blkid $usbblkdev"1"|cut -d \  -f 3|sed -e "s@\"@@g")@" ./mnt/etc/fstab
+
+		\rm -rf /tmp/mnt/boot/uEnve; sleep 1    # <<<<<< to be removed when finding out why uEnve appears
+
 		echo "Syncing USB drive..."
 		sync
 cat <<EOT

@@ -196,7 +196,7 @@ echo "Setting /etc/fw_env.config "
 echo "(/dev/mtd0 0xc0000 0x20000 0x20000)"; sleep 1
 cat <<EOT > /etc/fw_env.config
 # MTD device name       Device offset   Env. size       Flash sector size       Number of sectors
-/dev/mtd0 0xc0000 0x20000 0x20000
+  /dev/mtd0             0xc0000         0x20000         0x20000
 EOT
 
 
@@ -218,7 +218,6 @@ EOT
 
 echo;echo;echo '*****************************************************'
 echo "Setting  /etc/fstab"
-#echo "(skel, will be modified when writing to USB)"
 echo "LABEL=$label    /   ext4  errors=remount-ro  0  1"
 sleep 1
 cat <<EOT > /etc/fstab
@@ -229,8 +228,10 @@ cat <<EOT > /etc/fstab
 # that works even if disks are added and removed. See fstab(5).
 #
 # <file system> <mount point>   <type> <options>              <dump>  <pass>
-LABEL=$label       /                ext4  errors=remount-ro        0       1
 #device_UUID_here       /                ext4  errors=remount-ro        0       1
+
+LABEL=$label       /                ext4  errors=remount-ro        0       1
+
 
 EOT
 
@@ -397,29 +398,6 @@ EOT
 
 
 echo;echo;echo '*****************************************************'
-echo "Creating the service to start/stop LEDs"
-echo ""; sleep 3
-\mv /root/LEDs.sh /usr/sbin/LEDs.sh
-\mv /root/LEDs.service /lib/systemd/system/LEDs.service
-chmod +x /usr/sbin/LEDs.sh
-
-systemctl daemon-reload
-systemctl enable LEDs.service
-
-
-
-
-echo;echo;echo '*****************************************************'
-echo "Installing the rest of the packages"
-echo " "; sleep 5
-echo iptables-persistent iptables-persistent/autosave_v4 boolean true | debconf-set-selections
-echo iptables-persistent iptables-persistent/autosave_v6 boolean true | debconf-set-selections
-apt-get install -y $packs
-echo 'DEVICE /dev/sd?*' >> /etc/mdadm/mdadm.conf
-update-initramfs -u -k all
-
-
-echo;echo;echo '*****************************************************'
 echo "Activating rc-local.service"
 echo " "; sleep 5
 chmod +x /etc/rc.local
@@ -430,6 +408,30 @@ cat<<EOT >> /lib/systemd/system/rc-local.service
  WantedBy=multi-user.target
 EOT
 systemctl enable rc-local.service
+
+
+
+echo;echo;echo '*****************************************************'
+echo "Creating the service to start/stop LEDs"
+echo ""; sleep 3
+\mv /root/LEDs.sh /usr/sbin/LEDs.sh
+\mv /root/LEDs.service /lib/systemd/system/LEDs.service
+chmod +x /usr/sbin/LEDs.sh
+systemctl daemon-reload
+systemctl enable LEDs.service
+
+
+
+
+echo;echo;echo '*****************************************************'
+echo "Installing the rest of the packages"
+echo " "; sleep 5
+debconf-set-selections <<< 'iptables-persistent iptables-persistent/autosave_v4 boolean true'
+debconf-set-selections <<< 'iptables-persistent iptables-persistent/autosave_v6 boolean true'
+apt-get install -y $packs
+echo 'DEVICE /dev/sd?*' >> /etc/mdadm/mdadm.conf
+update-initramfs -u -k all
+
 
 
 echo;echo;echo '*****************************************************'

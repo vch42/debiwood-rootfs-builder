@@ -100,10 +100,6 @@ EOT
 swapon /swapfile
 
 
-#install samba4 from source
-#if [ -d /root/samba4 ]; then
-#	#do the happy dance and puke. rinse and repeat.
-#fi
 
 #apt-get install -y samba
 
