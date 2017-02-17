@@ -85,9 +85,9 @@ sed -i -e "s/kernel_name_here/$kernel/g" $targetdir/root/firstrun.sh
 sed -i -e "s/kernel_name_here/$kernel/g" $targetdir/root/firstrun.sh
 #sed -i -e "s/e2label \/dev\/sda1 put_label_here/e2label \/dev\/sda1 $label/" $targetdir/root/firstrun.sh
 chmod +x $targetdir/root/firstrun.sh
-\cp -p ./stuff/leds/LEDs.sh $targetdir/root/
-\cp -p ./stuff/leds/LEDs.service $targetdir/root/
-chmod +x $targetdir/root/LEDs.sh
+\cp -p ./stuff/leds/leds $targetdir/root/
+\cp -p ./stuff/leds/leds.service $targetdir/root/
+chmod +x $targetdir/root/leds
 
 
 

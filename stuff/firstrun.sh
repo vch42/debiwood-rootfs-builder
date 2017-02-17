@@ -4,9 +4,10 @@ exec 2> /var/log/firstrun.log  # send stderr to a log file
 exec 1>&2                      # send stdout to the same log file
 set -x                         # tell sh to display commands before execution
 
+echo default-on > /sys/class/leds/nsa320:green:copy/trigger
 sleep 60;
-echo timer  > /sys/class/leds/nsa320:red:copy/trigger
-echo default-on  > /sys/class/leds/nsa320:green:copy/trigger
+echo timer > /sys/class/leds/nsa320:red:copy/trigger
+
 
 
 #If move to raid array is requested, do it first, reboot from array and continue.
