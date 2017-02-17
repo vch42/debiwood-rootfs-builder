@@ -1,7 +1,7 @@
 [Unit]
 Description=LEDs
-After=udev.service
-Before=sysinit.target
+Wants=udev.service
+After=sysinit.target
 
 [Service]
 Type=oneshot
