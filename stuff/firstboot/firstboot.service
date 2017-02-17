@@ -1,0 +1,12 @@
+[Unit]
+Description=Initial configuration Service
+Wants=udev.service
+After=sysinit.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/sbin/firstboot
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
