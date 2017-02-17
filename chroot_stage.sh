@@ -75,10 +75,6 @@ echo "/root/kern/"; sleep 1
 dpkg -i /root/kern/* && \rm -rf /root/kern
 
 
-echo;echo;echo '*****************************************************'
-echo "Adding nsa3xx-hwmon in /etc/modules"; sleep 1
-echo nsa3xx-hwmon >> /etc/modules
-
 
 
 echo;echo;echo '*****************************************************'
