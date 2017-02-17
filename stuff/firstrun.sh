@@ -35,14 +35,6 @@ if $move_to_raid; then
     mkfs.put_fs_here -L put_label_here /dev/md0 && \
     mdadm --detail --scan >> /etc/mdadm/mdadm.conf && \
     sleep 5;
-    #echo 'mdadm mdadm/mail_to string root' | debconf-set-selections; sleep 5;
-    #echo 'mdadm mdadm/initrdstart string all' | debconf-set-selections; sleep 5;
-    #echo 'mdadm mdadm/autostart boolean true' | debconf-set-selections; sleep 5;
-    #echo 'mdadm mdadm/autocheck boolean true' | debconf-set-selections; sleep 5;
-    #echo 'mdadm mdadm/initrdstart_notinconf boolean true' | debconf-set-selections; sleep 5;
-    #echo 'mdadm mdadm/start_daemon boolean true' | debconf-set-selections; sleep 5;
-    #export DEBIAN_FRONTEND=noninteractive ; sleep 5;
-    #dpkg-reconfigure mdadm ; sleep 15;
     debconf-set-selections <<< "mdadm mdadm/mail_to string root"
     debconf-set-selections <<< "mdadm mdadm/initrdstart string all"
     debconf-set-selections <<< "mdadm mdadm/initrdstart_notinconf boolean true"
@@ -61,14 +53,6 @@ if $move_to_raid; then
     umount /tmp/mnt && \
     shutdown -r now
 fi
-
-# debconf-set-selections <<< "mdadm mdadm/mail_to string root"
-# debconf-set-selections <<< "mdadm mdadm/initrdstart string all"
-# debconf-set-selections <<< "mdadm mdadm/initrdstart_notinconf boolean true"
-# debconf-set-selections <<< "mdadm mdadm/autostart boolean true"
-# debconf-set-selections <<< "mdadm mdadm/autocheck boolean true"
-# debconf-set-selections <<< "mdadm mdadm/start_daemon boolean true"
-# export DEBIAN_FRONTEND=noninteractive ; dpkg-reconfigure mdadm
 
 
 

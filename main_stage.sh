@@ -148,8 +148,8 @@ if $write2usb; then
 	echo;echo;echo '*****************************************************'
 	echo "Will now write rootfs to $usbblkdev!"
 	echo "$usbblkdev WILL BE WIPED!!!"
-	#read -p "Enter 'yes' to proceed or anything else to abort: " confirmation
-	#if [ $confirmation = 'yes' ]; then
+	read -p "Enter 'yes' to proceed or anything else to abort: " confirmation
+	if [ $confirmation = 'yes' ]; then
 		for n in $usbblkdev* ; do
 			umount $n ;
 		done
@@ -181,7 +181,7 @@ EOT
 
 		echo; echo; echo;
 		echo "You can now remove the usb stick and boot from it."; sleep 8
-	#fi
+	fi
 fi
 
 
