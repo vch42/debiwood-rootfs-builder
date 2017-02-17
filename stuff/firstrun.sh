@@ -62,7 +62,10 @@ ssh-keygen -Aq
 
 systemctl stop ssh.service
 
-ntpdate europe.pool.ntp.org
+systemctl stop ntp.service && ntpdate europe.pool.ntp.org
+sleep 3
+systemctl start ntp.service
+
 apt-get -qq update
 update-command-not-found &> /dev/null
 
