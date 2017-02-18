@@ -1,6 +1,6 @@
 #!/bin/bash
 #firstboot
-exec 2> /var/log/firstboot.log  # send stderr to a log file
+exec 2> /var/log/firstboot.log # send stderr to a log file
 exec 1>&2                      # send stdout to the same log file
 set -x                         # tell sh to display commands before execution
 
@@ -57,17 +57,28 @@ fi
 
 
 
+#reset SSH host keys
+while [ $(pgrep -c sshd) -gt 1 ]; do
+    systemctl stop ssh.service; sleep 1
+    pkill --signal HUP sshd; sleep 1
+    pkill --signal KILL sshd; sleep 1
+done
 rm -f /etc/ssh/ssh_host*
 ssh-keygen -Aq
+sleep 3
+systemctl start ssh.service
 
-systemctl stop ssh.service
 
+#force update time with ntpdate
 systemctl stop ntp.service && ntpdate europe.pool.ntp.org
 sleep 3
 systemctl start ntp.service
 
+
+#update apt and command-not-found
 apt-get -qq update
 update-command-not-found &> /dev/null
+
 
 #install hpnssh
 if [ -d /root/hpnssh ]; then
