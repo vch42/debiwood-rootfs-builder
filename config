@@ -14,6 +14,7 @@ samba=true
 hpnssh=true
 cups=false
 create_swap=true
+samba_from_source=false
 
 uboot_sntp=false
 uboot_sntp_dns='192.168.0.1'
@@ -38,7 +39,7 @@ move_to_raid_on_first_boot=true
 
 packs1=' sudo mc htop tree locate unzip bzip2 screen command-not-found bash-completion nano ca-certificates '
 packs2=' build-essential device-tree-compiler i2c-tools u-boot-tools initramfs-tools '
-packs3=' isc-dhcp-client iperf ethtool iftop iptables iptables-persistent ntp ntpdate ssh curl busybox-syslogd '
+packs3=' isc-dhcp-client iperf ethtool iftop iptables iptables-persistent ntp ntpdate ssh curl '
 packs4=' lm-sensors fancontrol sensord haveged '
 packs5=' ntfs-3g btrfs-tools mtd-utils parted mdadm hdparm iotop bonnie++ rsync '
 packs="$packs1 $packs2 $packs3 $packs4 $packs5"
@@ -62,6 +63,10 @@ if $samba_from_source; then
     packs+="samba "
 fi
 
+if $samba; then
+    packs+=" samba "
+fi
+
 
 if $hpnssh; then
     packs+=$deps_hpn
@@ -69,6 +74,11 @@ fi
 
 if $cups; then
 	packs+=" cups"
+fi
+
+if ! [[ $move_to_raid_on_first_boot ]]; then
+    packs+=" busybox-syslogd "
+    create_swap=false
 fi
 
 #############################################################################################################################################################
