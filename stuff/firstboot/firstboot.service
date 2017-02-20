@@ -1,7 +1,7 @@
 [Unit]
 Description=Initial configuration Service
 Wants=udev.service
-After=sysinit.target
+After=rc-local.service
 
 [Service]
 Type=oneshot
