@@ -73,11 +73,11 @@ tar xf  ./stuff/kern/$kernel/extracted/*.tar -C ./stuff/kern/$kernel/extracted
 \cp -p ./stuff/firstboot/firstboot.conf $targetdir/etc/
 \cp -p ./stuff/firstboot/firstboot.service $targetdir/lib/systemd/system/
 if $move_to_raid_on_first_boot; then
-    sed -i -e 's/move_to_raid=false/move_to_raid=true/' $targetdir/etc/firstboot.conf
+    sed -ie 's/move_to_raid=false/move_to_raid=true/' $targetdir/etc/firstboot.conf
 fi
-sed -i -e "s/rootfs_fs_here/$filesystem/" $targetdir/etc/firstboot.conf
-sed -i -e "s/rootfs_label_here/$label/" $targetdir/etc/firstboot.conf
-sed -i -e "s/kernel_name_here/$kernel/" $targetdir/etc/firstboot.conf
+sed -ie "s/rootfs_fs_here/$filesystem/" $targetdir/etc/firstboot.conf
+sed -ie "s/rootfs_label_here/$label/" $targetdir/etc/firstboot.conf
+sed -ie "s/kernel_name_here/$kernel/" $targetdir/etc/firstboot.conf
 
 
 \cp -p ./stuff/leds/leds $targetdir/usr/sbin/
@@ -87,11 +87,11 @@ pause
 
 if $hpnssh; then
 	cp -rp ./stuff/hpnssh $targetdir/usr/src/
-	sed -i -e "s/hpnssh=false/hpnssh=true/" $targetdir/etc/firstboot.conf
+	sed -ie "s/hpnssh=false/hpnssh=true/" $targetdir/etc/firstboot.conf
 fi
 
 if $create_swap; then
-    sed -i -e "s/create_swap=false/create_swap=true/" $targetdir/etc/firstboot.conf
+    sed -ie "s/create_swap=false/create_swap=true/" $targetdir/etc/firstboot.conf
 fi
 
 
