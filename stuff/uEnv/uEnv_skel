@@ -4,4 +4,4 @@ machid=set_machid_here
 file_dtb=/boot/dts/set_dtb_here.dtb
 rootfs=LABEL=set_label_here
 rootfstype=set_filesystem_here
-initsystem=set_init_here
+initsystem=init=/bin/systemd

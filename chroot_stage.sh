@@ -49,7 +49,7 @@ apt-get upgrade -y
 echo;echo;echo '*****************************************************'
 echo "Setting timezone..."
 echo "(currently selected $timezone)"; sleep 1
-echo $timezone > /etc/timezone && dpkg-reconfigure -f noninteractive tzdata
+echo $timezone > /etc/timezone && dpkg-reconfigure --frontend=noninteractive tzdata
 
 
 
@@ -85,15 +85,13 @@ echo " -setup rootfs filesystem type to "$filesystem
 echo " -setup init system to "$initsystem
 echo " -setup machid/arcNumber for "$machine; sleep 2
 
-sed -ie "s/set_label_here/$label/g; s/set_dtb_here/kirkwood-$machine/g" /boot/uEnv
+sed -ie "s/set_label_here/$label/g; s/set_dtb_here/kirkwood-$machine/g; s/set_filesystem_here/$filesystem/g" /boot/uEnv
 
-sed -ie "s/set_filesystem_here/$filesystem/g" /boot/uEnv
-
-if [ $initsystem = "systemd" ]; then
-    sed -ie "s/set_init_here/init=\/bin\/systemd/g" /boot/uEnv
-else
-    sed -ie "s/set_init_here//g" /boot/uEnv
-fi
+#if [ $initsystem = "systemd" ]; then
+#    sed -ie "s/set_init_here/init=\/bin\/systemd/g" /boot/uEnv
+#else
+#    sed -ie "s/set_init_here//g" /boot/uEnv
+#fi
 
 case $machine in
 nsa310)
@@ -175,6 +173,8 @@ ts219-6282)
 *)
     sed -ie "s/set_arc_number_here//g; s/set_machid_here//g" /boot/uEnv;;
 esac
+
+
 
 
 
@@ -382,19 +382,21 @@ Host: \n.\O
 IPv4: \4{eth0}
 IPv6: \6{eth0}
 ===================================================
+Default user: $initial_user
+Default pass: $initial_pass
+CHANGE THEM ON FIRST LOGIN !!!!
+===================================================
 EOT
 
 
 
 echo;echo;echo '*****************************************************'
-echo "Setting first run script in rc.local"
+echo "Setting firstboot.service to run /usr/sbin/firstboot "
 echo " "; sleep 1
-sed -ie '/exit 0/d' /etc/rc.local
-cat <<EOT >> /etc/rc.local
-/root/firstrun.sh &
+chmod +x /usr/sbin/firstboot
+systemctl daemon-reload
+systemctl enable firstboot.service
 
-exit 0
-EOT
 
 
 echo;echo;echo '*****************************************************'
@@ -414,8 +416,6 @@ systemctl enable rc-local.service
 echo;echo;echo '*****************************************************'
 echo "Creating the service to start/stop LEDs"
 echo ""; sleep 3
-\mv /root/leds /usr/sbin/leds
-\mv /root/leds.service /lib/systemd/system/leds.service
 chmod +x /usr/sbin/leds
 systemctl daemon-reload
 systemctl enable leds.service

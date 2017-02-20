@@ -60,35 +60,38 @@ tar xf  ./stuff/kern/$kernel/extracted/*.tar -C ./stuff/kern/$kernel/extracted
 \cp -rp ./stuff/kern/$kernel/extracted/dts $targetdir/boot/
 \rm -rf ./stuff/kern/$kernel/extracted
 
-\cp -rp ./stuff/uEnv/* $targetdir/boot/
-\mv $targetdir/boot/uEnv_skel $targetdir/boot/uEnv
+
+\cp -rp ./stuff/uEnv/uEnv_skel $targetdir/boot/uEnv
+
 
 \cp -p ./chroot_stage.sh $targetdir/root/
 \cp -p ./config $targetdir/root/
 \cp -p ./chkconfig.sh $targetdir/root/
-\cp -p ./stuff/firstrun.sh $targetdir/root/
+
+
+\cp -p ./stuff/firstboot/firstboot $targetdir/usr/sbin/
+\cp -p ./stuff/firstboot/firstboot.conf $targetdir/etc/
+\cp -p ./stuff/firstboot/firstboot.service $targetdir/lib/systemd/system/
 if $move_to_raid_on_first_boot; then
-    sed -i -e 's/move_to_raid=false ; #flag/move_to_raid=true ; #flag/' $targetdir/root/firstrun.sh
+    sed -i -e 's/move_to_raid=false/move_to_raid=true/' $targetdir/etc/firstboot.conf
 fi
+sed -i -e "s/rootfs_fs_here/$filesystem/" $targetdir/etc/firstboot.conf
+sed -i -e "s/rootfs_label_here/$label/" $targetdir/etc/firstboot.conf
+sed -i -e "s/kernel_name_here/$kernel/" $targetdir/etc/firstboot.conf
 
-sed -i -e "s/mkfs.put_fs_here/mkfs.$filesystem/" $targetdir/root/firstrun.sh
-sed -i -e "s/L put_label_here /L $label /" $targetdir/root/firstrun.sh
-sed -i -e "s/kernel_name_here/$kernel/g" $targetdir/root/firstrun.sh
-sed -i -e "s/kernel_name_here/$kernel/g" $targetdir/root/firstrun.sh
-#sed -i -e "s/e2label \/dev\/sda1 put_label_here/e2label \/dev\/sda1 $label/" $targetdir/root/firstrun.sh
-chmod +x $targetdir/root/firstrun.sh
-\cp -p ./stuff/leds/leds $targetdir/root/
-\cp -p ./stuff/leds/leds.service $targetdir/root/
-chmod +x $targetdir/root/leds
 
+\cp -p ./stuff/leds/leds $targetdir/usr/sbin/
+\cp -p ./stuff/leds/leds.service $targetdir/lib/systemd/system/
 
 
 if $hpnssh; then
-	cp -rp ./stuff/hpnssh $targetdir/root/
-	chmod +x $targetdir/root/hpnssh/install.sh
+	cp -rp ./stuff/hpnssh $targetdir/usr/src/
+	sed -i -e "s/hpnssh=false/hpnssh=true/" $targetdir/etc/firstboot.conf
 fi
 
-
+if $create_swap; then
+    sed -i -e "s/create_swap=false/create_swap=true/" $targetdir/etc/firstboot.conf
+fi
 
 
 
@@ -123,6 +126,7 @@ echo " "; sleep 1
 \rm -f  $targetdir/usr/bin/qemu-arm-static
 \rm -f  $targetdir/root/chroot_stage.sh
 \rm -f  $targetdir/root/config
+\rm -f  $targetdir/root/chkconfig.sh
 \rm -rf $targetdir/debootstrap/
 
 
