@@ -11,10 +11,10 @@ if [ -z "$filesystem" ]; then
 	echo 'No value found for $filesystem, falling back to '$filesystem
 fi
 
-if [ -z "$initsystem" ]; then
-	initsystem='systemd'
-	echo 'No value found for $initsystem, falling back to '$initsystem
-fi
+#if [ -z "$initsystem" ]; then
+#	initsystem='systemd'
+#	echo 'No value found for $initsystem, falling back to '$initsystem
+#fi
 
 if [ -z "$distro" ]; then
 	distro='jessie'
