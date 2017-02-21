@@ -31,7 +31,7 @@ else
 	    done
 	    sleep 5;
         parted -s /dev/sda mklabel gpt && \
-        parted -s /dev/sda mkpart primary 1 16500 && \
+        parted -s /dev/sda mkpart primary 1 $raid_part_size && \
         sleep 5;
         mdadm --create /dev/md0 --run --force --metadata=0.90 --level=1 --raid-devices=2 missing /dev/sda1 && \
         mkfs.$rfs_filesystem -L $rfs_label /dev/md0 && \

@@ -85,7 +85,7 @@ fi
 sed -ie "s/rootfs_fs_here/$filesystem/" $targetdir/etc/firstboot.conf
 sed -ie "s/rootfs_label_here/$label/" $targetdir/etc/firstboot.conf
 sed -ie "s/kernel_name_here/$kernel/" $targetdir/etc/firstboot.conf
-
+sed -ie "s/size_of_raid_part/$raid_rootfs_partition_size/" $targetdir/etc/firstboot.conf
 
 \cp -p ./stuff/leds/leds $targetdir/usr/sbin/
 \cp -p ./stuff/leds/leds.service $targetdir/lib/systemd/system/

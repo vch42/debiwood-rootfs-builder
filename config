@@ -38,6 +38,7 @@ server2send=''
 serverusername=''
 
 move_to_raid_on_first_boot=true
+raid_rootfs_partition_size=11500
 
 custom_dtb_nsa320_vch=true
 
