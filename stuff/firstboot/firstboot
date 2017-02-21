@@ -10,9 +10,9 @@ source /etc/firstboot.conf
 if $no_run; then
     exit 0;
 else
-    echo default-on > /sys/class/leds/nsa320:green:copy/trigger
-    sleep 60;
     echo timer > /sys/class/leds/nsa320:red:copy/trigger
+    sleep 60;
+    echo default-on > /sys/class/leds/nsa320:green:copy/trigger
 
 
     #If move to raid array is requested, do it first, reboot from array and continue.
