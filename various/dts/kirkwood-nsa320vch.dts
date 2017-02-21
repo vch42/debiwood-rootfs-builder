@@ -36,7 +36,7 @@
 		};
 	};
 
-	mbus {
+	mbus@f1000000 {
 		compatible = "marvell,kirkwood-mbus", "simple-bus";
 		#address-cells = <0x2>;
 		#size-cells = <0x1>;
@@ -116,7 +116,7 @@
 			phandle = <0xb>;
 		};
 
-		pcie-controller {
+		pcie-controller@82000000 {
 			compatible = "marvell,kirkwood-pcie";
 			status = "okay";
 			device_type = "pci";
@@ -646,7 +646,7 @@
 
 		audio-controller@a0000 {
 			compatible = "marvell,kirkwood-audio";
-			#sound-dai-cells = <0x0>;
+			#sound-dai-cells = <0x1>;
 			reg = <0xa0000 0x2210>;
 			interrupts = <0x18>;
 			clocks = <0x3 0x9>;
@@ -702,19 +702,19 @@
 		pinctrl-0 = <0x13 0x14 0x15>;
 		pinctrl-names = "default";
 
-		button@1 {
+		power {
 			label = "Power Button";
 			linux,code = <0x74>;
 			gpios = <0x12 0xe 0x0>;
 		};
 
-		button@2 {
+		copy {
 			label = "Copy Button";
 			linux,code = <0x85>;
 			gpios = <0x12 0x5 0x1>;
 		};
 
-		button@3 {
+		reset {
 			label = "Reset Button";
 			linux,code = <0x198>;
 			gpios = <0x12 0x4 0x1>;
@@ -792,12 +792,12 @@
 		};
 	};
 
-	nsa3xx-hwmon {
+	hwmon {
 		compatible = "zyxel,nsa320-mcu";
 		pinctrl-0 = <0x21 0x22 0x23>;
 		pinctrl-names = "default";
 		data-gpios = <0x17 0xe 0x0>;
 		clk-gpios = <0x17 0x10 0x0>;
-		act-gpios = <0x17 0x11 0x0>;
+		act-gpios = <0x17 0x11 0x1>;
 	};
 };
