@@ -163,6 +163,7 @@ if $write2usb; then
 		\cp -rpv $targetdir/* /tmp/mnt/; sleep 1
 
 		\rm -rf /tmp/mnt/boot/uEnve; sleep 1    # <<<<<< to be removed when finding out why uEnve appears
+        \rm -rf /tmp/mnt/etc/firstboot.confe; sleep 1
 
 		echo "Syncing USB drive..."
 		sync
