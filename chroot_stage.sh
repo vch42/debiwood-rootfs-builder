@@ -181,7 +181,7 @@ esac
 # Uboot SNTP
 if $uboot_sntp; then
 echo " -setup uboot rtc sntp "; sleep 2
-cat <<EOT >> /boot/uEnv/uEnv
+cat <<EOT >> /boot/uEnv
 
 set_rtc=setenv ipaddr $sntp_ip ; setenv dnsip $sntp_dns ; setenv gatewayip $sntp_gw ; setenv netmask $sntp_mask; dns $sntp_server ntpserverip; sntp
 bootcmd=mw 0x800000 0 1; run set_rtc; run bootcmd_uenv; run scan_disk; run set_bootargs; run bootcmd_exec; sleep 5; reset
