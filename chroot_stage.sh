@@ -179,7 +179,7 @@ esac
 
 
 # Uboot SNTP
-if $uboot_sntp then;
+if $uboot_sntp; then
 echo " -setup uboot rtc sntp "; sleep 2
 cat <<EOT >> /boot/uEnv/uEnv.txt
 
