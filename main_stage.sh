@@ -90,7 +90,6 @@ sed -ie "s/kernel_name_here/$kernel/" $targetdir/etc/firstboot.conf
 \cp -p ./stuff/leds/leds $targetdir/usr/sbin/
 \cp -p ./stuff/leds/leds.service $targetdir/lib/systemd/system/
 
-pause
 
 if $hpnssh; then
 	cp -rp ./stuff/hpnssh $targetdir/usr/src/
