@@ -83,5 +83,3 @@ fi
 #		echo '$uboot_sntp is true, but values are missing for $uboot_sntp_dns or $uboot_sntp_server, disabling uboot_sntp.'
 #	fi
 #fi
-
-sleep 30
