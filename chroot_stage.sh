@@ -178,14 +178,15 @@ esac
 
 
 
-# Uboot SNTP to be done
-#if $uboot-sntp then;
-#echo " -setup uboot rtc sntp "; sleep 2
-#cat <<EOT >> /boot/uEnv/uEnv.txt
-#setenv set_rtc \'setenv dnsip $uboot-sntp-gw;setenv gatewayip $uboot-sntp-gw;setenv netmask $uboot-sntp-nmask; dns $uboot-sntp-server ntpserver; sntp \$ntpserver\'
-#EOT
-#sed -ie "s/usb_boot=/usb_boot=run set_rtc;/; s/sata_boot=/sata_boot=run set_rtc;/" /boot/uEnv/uEnv.txt
-#fi
+# Uboot SNTP
+if $uboot_sntp then;
+echo " -setup uboot rtc sntp "; sleep 2
+cat <<EOT >> /boot/uEnv/uEnv.txt
+
+set_rtc=setenv ipaddr $sntp_ip ; setenv dnsip $sntp_dns ; setenv gatewayip $sntp_gw ; setenv netmask $sntp_mask; dns $sntp_server ntpserverip; sntp
+bootcmd=mw 0x800000 0 1; run set_rtc; run bootcmd_uenv; run scan_disk; run set_bootargs; run bootcmd_exec; sleep 5; reset
+EOT
+fi
 
 
 

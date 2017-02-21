@@ -7,3 +7,9 @@ run set_rtc
 172.19.68.11
 255.255.255.224
 setenv set_rtc 'setenv dnsip 192.168.173.251; setenv gatewayip 192.168.173.254; setenv netmask 255.255.255.0; setenv ipaddr 192.168.173.19; dns europe.pool.ntp.org ntpserverip'; sntp $ntpserver'
+
+10.16.46.91
+255.255.254.0
+10.16.46.1
+172.19.68.11
+
