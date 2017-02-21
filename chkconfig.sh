@@ -66,6 +66,15 @@ if [ $write2usb ] && [ -z "$usbblkdev" ]; then
 	echo '$write2usb is true, but no value found for $usbblkdev, disabling write2usb.'
 fi
 
+if ! [[ $move_to_raid_on_first_boot ]]; then
+    packs+=" busybox-syslogd "
+    create_swap=false
+    echo '$move_to_raid_on_first_boot is false. Swap and logging on USB is not recommended, it leads to increased medium ware.'
+    echo 'Disabling swap creation and installing busybox-syslogd to log to RAM.'
+    echo 'Will implement logs persistence at a later time.'
+fi
+
+
 if $uboot_sntp; then
 	echo 'Uboot SNTP setup not yet implemented!!! Disabling...'
 	uboot_sntp=false
@@ -74,3 +83,5 @@ if $uboot_sntp; then
 		echo '$uboot_sntp is true, but values are missing for $uboot_sntp_dns or $uboot_sntp_server, disabling uboot_sntp.'
 	fi
 fi
+
+sleep 30

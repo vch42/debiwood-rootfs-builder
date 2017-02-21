@@ -35,6 +35,10 @@ serverusername=''
 
 move_to_raid_on_first_boot=true
 
+custom_dtb_nsa320_vch=true
+
+
+
 
 
 packs1=' sudo mc htop tree locate unzip bzip2 screen command-not-found bash-completion nano ca-certificates '
@@ -60,25 +64,21 @@ deps_samba=' acl attr autoconf dnsutils gdb krb5-user libjson-perl ntp perl perl
 
 if $samba_from_source; then
     packs+=$deps_samba
-    packs+="samba "
 fi
 
 if $samba; then
     packs+=" samba "
 fi
 
-
 if $hpnssh; then
     packs+=$deps_hpn
 fi
 
 if $cups; then
-	packs+=" cups"
+	packs+=" cups "
 fi
 
-if ! [[ $move_to_raid_on_first_boot ]]; then
-    packs+=" busybox-syslogd "
-    create_swap=false
+if $custom_dtb_nsa320_vch; then
+    tools+=" device-tree-compiler "
 fi
-
 #############################################################################################################################################################
