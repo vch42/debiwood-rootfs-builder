@@ -75,13 +75,13 @@ if ! [[ $move_to_raid_on_first_boot ]]; then
 fi
 
 
-if $uboot_sntp; then
-	echo 'Uboot SNTP setup not yet implemented!!! Disabling...'
-	uboot_sntp=false
-	if [ $uboot_sntp ] && [ [ -z $uboot_sntp_dns ] || [ -z $uboot_sntp_server ] ]; then
-		uboot_sntp=false
-		echo '$uboot_sntp is true, but values are missing for $uboot_sntp_dns or $uboot_sntp_server, disabling uboot_sntp.'
-	fi
-fi
+#if $uboot_sntp; then
+#	echo 'Uboot SNTP setup not yet implemented!!! Disabling...'
+#	uboot_sntp=false
+#	if [ $uboot_sntp ] && [ [ -z $uboot_sntp_dns ] || [ -z $uboot_sntp_server ] ]; then
+#		uboot_sntp=false
+#		echo '$uboot_sntp is true, but values are missing for $uboot_sntp_dns or $uboot_sntp_server, disabling uboot_sntp.'
+#	fi
+#fi
 
 sleep 30
