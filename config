@@ -11,7 +11,7 @@ machine='nsa320'
 kernel='4.9.0-kirkwood-tld-1'
 
 samba=true
-hpnssh=true
+hpnssh=false
 cups=false
 create_swap=true
 samba_from_source=false
