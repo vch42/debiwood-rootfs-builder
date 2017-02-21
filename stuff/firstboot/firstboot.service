@@ -1,7 +1,7 @@
 [Unit]
 Description=Initial configuration Service
 Wants=udev.service
-After=rc-local.service
+After=serial-getty@.service
 
 [Service]
 Type=oneshot
