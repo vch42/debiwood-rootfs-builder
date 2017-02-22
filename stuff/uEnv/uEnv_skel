@@ -1,3 +1,4 @@
+autoload=no
 mainlineLinux=yes
 arcNumber=set_arc_number_here
 machid=set_machid_here
