@@ -47,4 +47,8 @@ Temporary Items
 .apdisk
 
 # Linux archives
+#.tar.gz
+#.tzr.bz2
 
+.idea
+.iml
