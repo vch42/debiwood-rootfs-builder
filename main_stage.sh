@@ -61,6 +61,7 @@ tar xf  ./stuff/kern/$kernel/extracted/*.tar -C ./stuff/kern/$kernel/extracted
 \rm -rf ./stuff/kern/$kernel/extracted
 
 if $custom_dtb_nsa320_vch; then
+	\cp -p $targetdir/boot/dts/kirkwood-nsa320.dts $targetdir/boot/dts/kirkwood-nsa320.dts.orig
     dtc -I dtb -O dts -o $targetdir/boot/dts/kirkwood-nsa320.dts $targetdir/boot/dts/kirkwood-nsa320.dtb
     sed -ie 's/chip-delay = <0x23>;/chip-delay = <0x28>;/' $targetdir/boot/dts/kirkwood-nsa320.dts
     \rm -f $targetdir/boot/dts/kirkwood-nsa320.dtb
