@@ -1,9 +1,5 @@
 #!/bin/bash
 #firstboot
-#exec 2> /var/log/firstboot.log  # send stderr to a log file
-#exec 2> /dev/ttyS0              # send stderr to ttyS0
-#exec 1>&2                       # send stdout to the same log file
-#set -x                          # tell sh to display commands before execution
 
 source /etc/firstboot.conf
 
@@ -53,7 +49,7 @@ else
         e2label /dev/sdb1 "oldrfs" && \
         mv /boot /old-boot && \
         umount /tmp/mnt && \
-        shutdown -r +3
+        shutdown -r +5
         #exit gracefully and wait for reboot
         exit 0
     fi
@@ -132,6 +128,7 @@ EOT
 
     #all done, prevent script to run on next boot
     sed -ie "s/no_run=false/no_run=true/" /etc/firstboot.conf
+    systemctl disable firstboot.service
 
     #reboot in 1 min
     shutdown -r
