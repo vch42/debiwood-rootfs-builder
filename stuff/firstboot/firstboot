@@ -53,7 +53,7 @@ else
         e2label /dev/sdb1 "oldrfs" && \
         mv /boot /old-boot && \
         umount /tmp/mnt && \
-        shutdown -r
+        shutdown -r +3
         #exit gracefully and wait for reboot
         exit 0
     fi
