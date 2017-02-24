@@ -11,7 +11,7 @@ machine='nsa320'
 kernel='4.9.0-kirkwood-tld-1'
 
 samba=true
-hpnssh=false
+hpnssh=true
 cups=false
 create_swap=true
 samba_from_source=false
@@ -40,10 +40,9 @@ serverusername=''
 move_to_raid_on_first_boot=true
 raid_rootfs_partition_size=11500
 
-custom_dtb_nsa320_vch=false
 
 
-
+nsa320_dtb_chip_delay_0x28=true
 
 
 packs1=' sudo mc htop tree locate unzip bzip2 screen command-not-found bash-completion nano ca-certificates '
