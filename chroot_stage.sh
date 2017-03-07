@@ -56,7 +56,7 @@ echo $timezone > /etc/timezone && dpkg-reconfigure --frontend=noninteractive tzd
 echo;echo;echo '*****************************************************'
 echo "Installing/Configuring locales to en_US.UTF-8"; sleep 1
 apt-get install -y locales dialog
-sed -ie 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
+sed -i 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
 echo 'LANG="en_US.UTF-8"'>/etc/default/locale && \
 dpkg-reconfigure --frontend=noninteractive locales && \
 update-locale LANG=en_US.UTF-8
@@ -85,7 +85,7 @@ echo " -setup rootfs filesystem type to "$filesystem
 echo " -setup init system to "$initsystem
 echo " -setup machid/arcNumber for "$machine; sleep 2
 
-sed -ie "s/set_label_here/$label/g; s/set_dtb_here/kirkwood-$machine/g; s/set_filesystem_here/$filesystem/g" /boot/uEnv
+sed -i "s/set_label_here/$label/g; s/set_dtb_here/kirkwood-$machine/g; s/set_filesystem_here/$filesystem/g" /boot/uEnv
 
 #if [ $initsystem = "systemd" ]; then
 #    sed -ie "s/set_init_here/init=\/bin\/systemd/g" /boot/uEnv
@@ -95,83 +95,83 @@ sed -ie "s/set_label_here/$label/g; s/set_dtb_here/kirkwood-$machine/g; s/set_fi
 
 case $machine in
 nsa310)
-    sed -ie "s/set_arc_number_here/4022/g; s/set_machid_here//g" /boot/uEnv;;
+    sed -i "s/set_arc_number_here/4022/g; s/set_machid_here//g" /boot/uEnv;;
 nsa310s)
-    sed -ie "s/set_arc_number_here/4931/g; s/set_machid_here//g" /boot/uEnv;;
+    sed -i "s/set_arc_number_here/4931/g; s/set_machid_here//g" /boot/uEnv;;
 nsa320)
-    sed -ie "s/set_arc_number_here/3956/g; s/set_machid_here/0x118f/g" /boot/uEnv;;
+    sed -i "s/set_arc_number_here/3956/g; s/set_machid_here/0x118f/g" /boot/uEnv;;
 nsa320s)
-    sed -ie "s/set_arc_number_here/4931/g; s/set_machid_here//g" /boot/uEnv;;
+    sed -i "s/set_arc_number_here/4931/g; s/set_machid_here//g" /boot/uEnv;;
 nsa325)
-    sed -ie "s/set_arc_number_here/4995/g; s/set_machid_here//g" /boot/uEnv;;
+    sed -i "s/set_arc_number_here/4995/g; s/set_machid_here//g" /boot/uEnv;;
 pogo_e02)
-    sed -ie "s/set_arc_number_here/3542/g; s/set_machid_here/0xdd6/g" /boot/uEnv;;
+    sed -i "s/set_arc_number_here/3542/g; s/set_machid_here/0xdd6/g" /boot/uEnv;;
 pogoplug_v4)
-    sed -ie "s/set_arc_number_here/3960/g; s/set_machid_here/0xf78/g" /boot/uEnv;;
+    sed -i "s/set_arc_number_here/3960/g; s/set_machid_here/0xf78/g" /boot/uEnv;;
 iconnect)
-    sed -ie "s/set_arc_number_here/2870/g; s/set_machid_here//g" /boot/uEnv;;
+    sed -i "s/set_arc_number_here/2870/g; s/set_machid_here//g" /boot/uEnv;;
 netgear_stora_ms2000)
-    sed -ie "s/set_arc_number_here/2743/g; s/set_machid_here//g" /boot/uEnv;;
+    sed -i "s/set_arc_number_here/2743/g; s/set_machid_here//g" /boot/uEnv;;
 dockstar)
-    sed -ie "s/set_arc_number_here/2998/g; s/set_machid_here//g" /boot/uEnv;;
+    sed -i "s/set_arc_number_here/2998/g; s/set_machid_here//g" /boot/uEnv;;
 goflexhome)
-    sed -ie "s/set_arc_number_here/3338/g; s/set_machid_here//g" /boot/uEnv;;
+    sed -i "s/set_arc_number_here/3338/g; s/set_machid_here//g" /boot/uEnv;;
 goflexnet)
-    sed -ie "s/set_arc_number_here/3089/g; s/set_machid_here//g" /boot/uEnv;;
+    sed -i "s/set_arc_number_here/3089/g; s/set_machid_here//g" /boot/uEnv;;
 sheevaplug)
-    sed -ie "s/set_arc_number_here/2097/g; s/set_machid_here//g" /boot/uEnv;;
+    sed -i "s/set_arc_number_here/2097/g; s/set_machid_here//g" /boot/uEnv;;
 cloudbox)
-    sed -ie "s/set_arc_number_here/4170/g; s/set_machid_here//g" /boot/uEnv;;
+    sed -i "s/set_arc_number_here/4170/g; s/set_machid_here//g" /boot/uEnv;;
 d2net)
-    sed -ie "s/set_arc_number_here/2282/g; s/set_machid_here//g" /boot/uEnv;;
+    sed -i "s/set_arc_number_here/2282/g; s/set_machid_here//g" /boot/uEnv;;
 db-88f6281)
-    sed -ie "s/set_arc_number_here/1680/g; s/set_machid_here//g" /boot/uEnv;;
+    sed -i "s/set_arc_number_here/1680/g; s/set_machid_here//g" /boot/uEnv;;
 dir665)
-    sed -ie "s/set_arc_number_here/3487/g; s/set_machid_here//g" /boot/uEnv;;
+    sed -i "s/set_arc_number_here/3487/g; s/set_machid_here//g" /boot/uEnv;;
 dns320)
-    sed -ie "s/set_arc_number_here/3985/g; s/set_machid_here//g" /boot/uEnv;;
+    sed -i "s/set_arc_number_here/3985/g; s/set_machid_here//g" /boot/uEnv;;
 dns325)
-    sed -ie "s/set_arc_number_here/3800/g; s/set_machid_here//g" /boot/uEnv;;
+    sed -i "s/set_arc_number_here/3800/g; s/set_machid_here//g" /boot/uEnv;;
 dreamplug)
-    sed -ie "s/set_arc_number_here/3550/g; s/set_machid_here//g" /boot/uEnv;;
+    sed -i "s/set_arc_number_here/3550/g; s/set_machid_here//g" /boot/uEnv;;
 guruplug-server-plus)
-    sed -ie "s/set_arc_number_here/2659/g; s/set_machid_here//g" /boot/uEnv;;
+    sed -i "s/set_arc_number_here/2659/g; s/set_machid_here//g" /boot/uEnv;;
 iomega_ix2_200)
-    sed -ie "s/set_arc_number_here/3119/g; s/set_machid_here//g" /boot/uEnv;;
+    sed -i "s/set_arc_number_here/3119/g; s/set_machid_here//g" /boot/uEnv;;
 km_kirkwood)
-    sed -ie "s/set_arc_number_here/2255/g; s/set_machid_here//g" /boot/uEnv;;
+    sed -i "s/set_arc_number_here/2255/g; s/set_machid_here//g" /boot/uEnv;;
 lsxhl)
-    sed -ie "s/set_arc_number_here/2663/g; s/set_machid_here//g" /boot/uEnv;;
+    sed -i "s/set_arc_number_here/2663/g; s/set_machid_here//g" /boot/uEnv;;
 mv88f6281gtw_ge)
-    sed -ie "s/set_arc_number_here/1932/g; s/set_machid_here//g" /boot/uEnv;;
+    sed -i "s/set_arc_number_here/1932/g; s/set_machid_here//g" /boot/uEnv;;
 nas2big)
-    sed -ie "s/set_arc_number_here/3757/g; s/set_machid_here//g" /boot/uEnv;;
+    sed -i "s/set_arc_number_here/3757/g; s/set_machid_here//g" /boot/uEnv;;
 net2big)
-    sed -ie "s/set_arc_number_here/2342/g; s/set_machid_here//g" /boot/uEnv;;
+    sed -i "s/set_arc_number_here/2342/g; s/set_machid_here//g" /boot/uEnv;;
 net5big)
-    sed -ie "s/set_arc_number_here/2426/g; s/set_machid_here//g" /boot/uEnv;;
+    sed -i "s/set_arc_number_here/2426/g; s/set_machid_here//g" /boot/uEnv;;
 openrd-base)
-    sed -ie "s/set_arc_number_here/2325/g; s/set_machid_here//g" /boot/uEnv;;
+    sed -i "s/set_arc_number_here/2325/g; s/set_machid_here//g" /boot/uEnv;;
 openrd-client)
-    sed -ie "s/set_arc_number_here/2361/g; s/set_machid_here//g" /boot/uEnv;;
+    sed -i "s/set_arc_number_here/2361/g; s/set_machid_here//g" /boot/uEnv;;
 openrd-ultimate)
-    sed -ie "s/set_arc_number_here/2884/g; s/set_machid_here//g" /boot/uEnv;;
+    sed -i "s/set_arc_number_here/2884/g; s/set_machid_here//g" /boot/uEnv;;
 rd88f6192)
-    sed -ie "s/set_arc_number_here/1681/g; s/set_machid_here//g" /boot/uEnv;;
+    sed -i "s/set_arc_number_here/1681/g; s/set_machid_here//g" /boot/uEnv;;
 rd88f6281-a)
-    sed -ie "s/set_arc_number_here/1682/g; s/set_machid_here//g" /boot/uEnv;;
+    sed -i "s/set_arc_number_here/1682/g; s/set_machid_here//g" /boot/uEnv;;
 rd88f6281-z0)
-    sed -ie "s/set_arc_number_here/1682/g; s/set_machid_here//g" /boot/uEnv;;
+    sed -i "s/set_arc_number_here/1682/g; s/set_machid_here//g" /boot/uEnv;;
 t5325)
-    sed -ie "s/set_arc_number_here/2846/g; s/set_machid_here//g" /boot/uEnv;;
+    sed -i "s/set_arc_number_here/2846/g; s/set_machid_here//g" /boot/uEnv;;
 topkick)
-    sed -ie "s/set_arc_number_here/4101/g; s/set_machid_here//g" /boot/uEnv;;
+    sed -i "s/set_arc_number_here/4101/g; s/set_machid_here//g" /boot/uEnv;;
 ts219-6281)
-    sed -ie "s/set_arc_number_here/2139/g; s/set_machid_here//g" /boot/uEnv;;
+    sed -i "s/set_arc_number_here/2139/g; s/set_machid_here//g" /boot/uEnv;;
 ts219-6282)
-    sed -ie "s/set_arc_number_here/2139/g; s/set_machid_here//g" /boot/uEnv;;
+    sed -i "s/set_arc_number_here/2139/g; s/set_machid_here//g" /boot/uEnv;;
 *)
-    sed -ie "s/set_arc_number_here//g; s/set_machid_here//g" /boot/uEnv;;
+    sed -i "s/set_arc_number_here//g; s/set_machid_here//g" /boot/uEnv;;
 esac
 
 

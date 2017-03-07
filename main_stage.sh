@@ -63,7 +63,7 @@ tar xf  ./stuff/kern/$kernel/extracted/*.tar -C ./stuff/kern/$kernel/extracted
 if $nsa320_dtb_chip_delay_0x28; then
 	\cp -p $targetdir/boot/dts/kirkwood-nsa320.dts $targetdir/boot/dts/kirkwood-nsa320.dts.orig
     dtc -I dtb -O dts -o $targetdir/boot/dts/kirkwood-nsa320.dts $targetdir/boot/dts/kirkwood-nsa320.dtb
-    sed -ie 's/chip-delay = <0x23>;/chip-delay = <0x28>;/' $targetdir/boot/dts/kirkwood-nsa320.dts
+    sed -i 's/chip-delay = <0x23>;/chip-delay = <0x28>;/' $targetdir/boot/dts/kirkwood-nsa320.dts
     \rm -f $targetdir/boot/dts/kirkwood-nsa320.dtb
     dtc -I dts -O dtb -o $targetdir/boot/dts/kirkwood-nsa320.dtb $targetdir/boot/dts/kirkwood-nsa320.dts
     \rm -f $targetdir/boot/dts/kirkwood-nsa320.dts
@@ -81,12 +81,12 @@ fi
 \cp -p ./stuff/firstboot/firstboot.conf $targetdir/etc/
 \cp -p ./stuff/firstboot/firstboot.service $targetdir/lib/systemd/system/
 if $move_to_raid_on_first_boot; then
-    sed -ie 's/move_to_raid=false/move_to_raid=true/' $targetdir/etc/firstboot.conf
+    sed -i 's/move_to_raid=false/move_to_raid=true/' $targetdir/etc/firstboot.conf
 fi
-sed -ie "s/rootfs_fs_here/$filesystem/" $targetdir/etc/firstboot.conf
-sed -ie "s/rootfs_label_here/$label/" $targetdir/etc/firstboot.conf
-sed -ie "s/kernel_name_here/$kernel/" $targetdir/etc/firstboot.conf
-sed -ie "s/size_of_raid_part/$raid_rootfs_partition_size/" $targetdir/etc/firstboot.conf
+sed -i "s/rootfs_fs_here/$filesystem/" $targetdir/etc/firstboot.conf
+sed -i "s/rootfs_label_here/$label/" $targetdir/etc/firstboot.conf
+sed -i "s/kernel_name_here/$kernel/" $targetdir/etc/firstboot.conf
+sed -i "s/size_of_raid_part/$raid_rootfs_partition_size/" $targetdir/etc/firstboot.conf
 
 \cp -p ./stuff/leds/leds $targetdir/usr/sbin/
 \cp -p ./stuff/leds/leds.service $targetdir/lib/systemd/system/
@@ -94,11 +94,11 @@ sed -ie "s/size_of_raid_part/$raid_rootfs_partition_size/" $targetdir/etc/firstb
 
 if $hpnssh; then
 	cp -rp ./stuff/hpnssh $targetdir/usr/src/
-	sed -ie "s/hpnssh=false/hpnssh=true/" $targetdir/etc/firstboot.conf
+	sed -i "s/hpnssh=false/hpnssh=true/" $targetdir/etc/firstboot.conf
 fi
 
 if $create_swap; then
-    sed -ie "s/create_swap=false/create_swap=true/" $targetdir/etc/firstboot.conf
+    sed -i "s/create_swap=false/create_swap=true/" $targetdir/etc/firstboot.conf
 fi
 
 
@@ -162,10 +162,6 @@ if $write2usb; then
 		mkdir -p /tmp/mnt
 		mount $usbblkdev"1" /tmp/mnt; sleep 1
 		\cp -rpv $targetdir/* /tmp/mnt/; sleep 1
-
-		\rm -rf /tmp/mnt/boot/uEnve; sleep 1    # <<<<<< to be removed when finding out why uEnve appears
-        \rm -rf /tmp/mnt/etc/firstboot.confe; sleep 1
-
 		echo "Syncing USB drive..."
 		sync
 cat <<EOT
