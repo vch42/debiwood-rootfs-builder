@@ -47,6 +47,7 @@ else
         mount /dev/md0 /tmp/mnt && \
         rsync -auHxv --exclude=/proc/* --exclude=/sys/* --exclude=/tmp/* /* /tmp/mnt && \
         e2label /dev/sdb1 "oldrfs" && \
+        e2label /dev/sdc1 "oldrfs" && \
         mv /boot /old-boot && \
         umount /tmp/mnt && \
         #shutdown -r +5
