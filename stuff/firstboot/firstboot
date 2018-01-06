@@ -133,6 +133,7 @@ EOT
     sed -ie "s/no_run=false/no_run=true/" /etc/firstboot.conf
     systemctl disable firstboot.service
 
+
     #reboot in 1 min
     sleep 60
     reboot
