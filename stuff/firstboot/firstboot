@@ -51,6 +51,7 @@ else
         mv /boot /old-boot && \
         umount /tmp/mnt && \
         #shutdown -r +5
+        sleep 300
         reboot
         #exit gracefully and wait for reboot
         exit 0
@@ -133,8 +134,9 @@ EOT
     systemctl disable firstboot.service
 
     #reboot in 1 min
+    sleep 60
     reboot
-    shutdown -r
+    #shutdown -r
 
     #exit service gracefully
     exit 0
