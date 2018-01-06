@@ -179,9 +179,9 @@ cat <<EOT
 *** Unmounting drive....  ***
 *****************************
 EOT
-		udisks --unmount $usbblkdev"1"
-		udisks --detach $usbblkdev
-
+		#udisks --unmount $usbblkdev"1"
+		#udisks --detach $usbblkdev
+        
 		echo; echo; echo;
 		echo "You can now remove the usb stick and boot from it."; sleep 8
 fi

@@ -17,7 +17,7 @@ fi
 #fi
 
 if [ -z "$distro" ]; then
-	distro='jessie'
+	distro='stretch'
 	echo 'No value found for $distro, falling back to '$distro
 fi
 
@@ -25,6 +25,12 @@ if [ -z "$repo" ]; then
 	repo='http://httpredir.debian.org/debian'
 	echo 'No value found for $repo, falling back to '$repo
 fi
+
+if [ -z "$repo_sec" ]; then
+	repo_sec='http://security.debian.org/debian-security'
+	echo 'No value found for $repo_sec, falling back to '$repo_sec
+fi
+
 
 if [ -z "$arch" ]; then
 	arch='armel'
@@ -37,7 +43,7 @@ if [ -z "$machine" ]; then
 fi
 
 if [ -z "$kernel" ]; then
-	kernel='4.4.0-kirkwood-tld-1'
+	kernel='4.14.1-kirkwood-tld-1'
 	echo 'No value found for $kernel, falling back to '$kernel
 fi
 
@@ -69,7 +75,7 @@ fi
 if ! [[ $move_to_raid_on_first_boot ]]; then
     packs+=" busybox-syslogd "
     create_swap=false
-    echo '$move_to_raid_on_first_boot is false. Swap and logging on USB is not recommended, it leads to increased medium ware.'
+    echo '$move_to_raid_on_first_boot is false. Swap and logging on USB is not recommended, it leads to increased medium wear.'
     echo 'Disabling swap creation and installing busybox-syslogd to log to RAM.'
     echo 'Will implement logs persistence at a later time.'
 fi
