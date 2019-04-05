@@ -11,7 +11,7 @@ machine='nsa320'
 
 kernel='4.14.1-kirkwood-tld-1'
 
-samba=true
+samba=false
 hpnssh=false
 cups=false
 create_swap=true
@@ -32,7 +32,7 @@ hname='deb320'
 
 
 usbblkdev='/dev/sdb'
-write2usb=true
+write2usb=false
 pack2archive=false
 send2server=false
 server2send=''
