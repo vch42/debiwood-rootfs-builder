@@ -1,5 +1,5 @@
 #!/bin/bash
-#Check variables and fall-back to defaults if needed
+#Check config variables and fall-back to defaults if needed
 
 if [ -z "$label" ]; then
 	label='rootfs'
@@ -43,7 +43,7 @@ if [ -z "$machine" ]; then
 fi
 
 if [ -z "$kernel" ]; then
-	kernel='4.14.1-kirkwood-tld-1'
+	kernel='4.20.6-kirkwood-tld-1'
 	echo 'No value found for $kernel, falling back to '$kernel
 fi
 

@@ -17,6 +17,8 @@ cat <<EOT
 WARNING!!! If write2usb is 'true', then the drive at usbblkdev will be wiped!
 Abort the script now if something is not configured ok!
 
+Current settings are:
+
 write2usb=$write2usb
 usbblkdev=$usbblkdev
 
