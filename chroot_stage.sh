@@ -404,7 +404,12 @@ systemctl enable firstboot.service
 echo;echo;echo '*****************************************************'
 echo "Activating rc-local.service"
 echo " "; sleep 5
-echo 'exit 0' > /etc/rc.local
+cat<<EOT > /etc/rc.local
+#!/bin/bash
+
+exit 0
+
+EOT
 chmod +x /etc/rc.local
 cat<<EOT >> /lib/systemd/system/rc-local.service
 

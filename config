@@ -5,7 +5,6 @@ filename="$targetdir.tar.bz2"
 
 distro='stretch'
 repo='http://deb.debian.org/debian'
-#repo='http://ftp.ro.debian.org/debian/'
 repo_sec='http://security.debian.org/debian-security/'
 arch='armel'
 machine='nsa320'
@@ -61,7 +60,7 @@ packs="$packs1 $packs2 $packs3 $packs4 $packs5"
 
 ###########################################################################################################################################################
 
-tools=' qemu-user-static debootstrap binfmt-support udisks2 udisks-glue parted u-boot-tools '
+tools=' qemu-user-static debootstrap binfmt-support udisks2 parted u-boot-tools '
 
 deps_hpn=' zlibc zlib1g zlib1g-dev libssl-dev libpam0g libpam0g-dev '
 
