@@ -6,6 +6,7 @@ source /etc/firstboot.conf
 if $no_run; then
     exit 0;
 else
+    sleep 30;
     echo timer > /sys/class/leds/nsa320:red:copy/trigger
     sleep 60;
     echo default-on > /sys/class/leds/nsa320:green:copy/trigger
@@ -61,14 +62,15 @@ else
         e2label /dev/sdb1 "oldrfs" && \
         e2label /dev/sdc1 "oldrfs" && \
         mv /boot /old-boot && \
-        umount /tmp/mnt && \
-        uuid_raid_md0=$(blkid -o export /dev/md0|grep UUID|sed 's/UUID=//') && \
-        sed -i "s/LABEL=$rfs_label/UUID=\"$uuid_raid_md0\"/" /etc/fstab
+        umount /tmp/mnt #&& \
+        #uuid_raid_md0=$(blkid -o export /dev/md0|grep UUID|sed 's/UUID=//') && \
+        #sed -i "s/LABEL=$rfs_label/UUID=\"$uuid_raid_md0\"/" /etc/fstab
         sleep 60
 
-        reboot
+        #reboot
 
-        #exit gracefully and wait for reboot
+        /sbin/shutdown -h
+        #exit gracefully and wait for power off
         exit 0
     fi
 

@@ -31,7 +31,7 @@ initial_pass='changeme'
 hname='debNAS'
 
 
-usbblkdev='/dev/sdb'
+usbblkdev='/dev/sdc'
 write2usb=true
 pack2archive=false
 send2server=false
@@ -48,7 +48,7 @@ nsa320_dtb_chip_delay_0x28=true
 packs1=' sudo mc htop tree locate unzip bzip2 screen command-not-found bash-completion nano ca-certificates '
 packs2=' build-essential device-tree-compiler i2c-tools u-boot-tools initramfs-tools '
 packs3=' isc-dhcp-client iperf ethtool iftop iptables iptables-persistent ntp ntpdate ssh curl '
-packs4=' lm-sensors fancontrol haveged less man '
+packs4=' lm-sensors fancontrol haveged less man dbus '
 packs5=' ntfs-3g btrfs-tools mtd-utils parted mdadm hdparm iotop bonnie++ rsync '
 packs_legacy=' sensord '
 packs="$packs1 $packs2 $packs3 $packs4 $packs5"
