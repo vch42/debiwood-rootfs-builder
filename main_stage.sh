@@ -1,6 +1,11 @@
 #!/bin/bash
 #main_stage.sh
 
+if [[ `id -u` -ne 0 ]]; then
+   echo "This script must be run as root, exiting."
+   exit 1
+fi
+
 chmod +x chkconfig.sh
 chmod +x config
 chmod +x chroot_stage.sh
@@ -42,7 +47,7 @@ apt-get update && apt-get -y install $tools
 
 
 echo;echo;echo '*****************************************************'
-echo "Creating root filesystem in ./$targetdir"
+echo "Creating root filesystem in $targetdir"
 echo "(debootstrap stage 1 - downloading packages)"; sleep 1
 mkdir $targetdir
 debootstrap --arch=$arch --foreign $distro $targetdir $repo;
@@ -50,66 +55,67 @@ debootstrap --arch=$arch --foreign $distro $targetdir $repo;
 
 
 echo;echo;echo '*****************************************************'
-echo "Copy kernel packages and other stuff to ./$targetdir/root/"
+echo "Copy kernel packages and other stuff to $targetdir/root/"
 echo "(to be installed in chroot and after first boot)"; sleep 1
 
 mkdir -p ./stuff/kern/$kernel/extracted
-mkdir -p ./$targetdir/root/kern
+mkdir -p $targetdir/root/kern
 tar jxf ./stuff/kern/$kernel/*.tar.bz2 -C ./stuff/kern/$kernel/extracted
 tar xf  ./stuff/kern/$kernel/extracted/*.tar -C ./stuff/kern/$kernel/extracted
-\cp -p  ./stuff/kern/$kernel/extracted/*.deb ./$targetdir/root/kern/
-\cp -rp ./stuff/kern/$kernel/extracted/dts ./$targetdir/boot/
+\cp -p  ./stuff/kern/$kernel/extracted/*.deb $targetdir/root/kern/
+\cp -rp ./stuff/kern/$kernel/extracted/dts $targetdir/boot/
 \rm -rf ./stuff/kern/$kernel/extracted
 
 if $nsa320_dtb_chip_delay_0x28; then
         echo "Changing DTB for NSA320 (chipdelay change from 0x23 to 0x28)..."
-        \cp -p ./$targetdir/boot/dts/kirkwood-nsa320.dtb ./$targetdir/boot/dts/kirkwood-nsa320.dtb.orig
-        dtc -q -I dtb -O dts -o ./$targetdir/boot/dts/kirkwood-nsa320.dts ./$targetdir/boot/dts/kirkwood-nsa320.dtb
-        sed -i 's/chip-delay = <0x23>;/chip-delay = <0x28>;/' ./$targetdir/boot/dts/kirkwood-nsa320.dts
-        \rm -f ./$targetdir/boot/dts/kirkwood-nsa320.dtb
-        dtc -q -I dts -O dtb -o ./$targetdir/boot/dts/kirkwood-nsa320.dtb ./$targetdir/boot/dts/kirkwood-nsa320.dts
-        \rm -f ./$targetdir/boot/dts/kirkwood-nsa320.dts
+        \cp -p $targetdir/boot/dts/kirkwood-nsa320.dtb $targetdir/boot/dts/kirkwood-nsa320.dtb.orig
+        dtc -q -I dtb -O dts -o $targetdir/boot/dts/kirkwood-nsa320.dts $targetdir/boot/dts/kirkwood-nsa320.dtb
+        sed -i 's/chip-delay = <0x23>;/chip-delay = <0x28>;/' $targetdir/boot/dts/kirkwood-nsa320.dts
+        \rm -f $targetdir/boot/dts/kirkwood-nsa320.dtb
+        dtc -q -I dts -O dtb -o $targetdir/boot/dts/kirkwood-nsa320.dtb $targetdir/boot/dts/kirkwood-nsa320.dts
+        \rm -f $targetdir/boot/dts/kirkwood-nsa320.dts
         echo "Changed."
 fi
 
 
-\cp -rp ./stuff/uEnv/uEnv_skel ./$targetdir/boot/uEnv
+\cp -rp ./stuff/uEnv/uEnv_skel $targetdir/boot/uEnv
 
 
-\cp -p ./chroot_stage.sh ./$targetdir/root/
-\cp -p ./config ./$targetdir/root/
-\cp -p ./chkconfig.sh ./$targetdir/root/
+\cp -p ./chroot_stage.sh $targetdir/root/
+\cp -p ./config $targetdir/root/
+\cp -p ./chkconfig.sh $targetdir/root/
 
 
-\cp -p ./stuff/firstboot/firstboot ./$targetdir/usr/sbin/
-\cp -p ./stuff/firstboot/firstboot.conf ./$targetdir/etc/
-#\cp -p ./stuff/firstboot/firstboot.service ./$targetdir/lib/systemd/system/
-\cp -p ./stuff/firstboot/firstboot.service ./$targetdir/root/
+\cp -p ./stuff/firstboot/firstboot $targetdir/usr/sbin/
+\cp -p ./stuff/firstboot/firstboot.conf $targetdir/etc/
+\cp -p ./stuff/firstboot/firstboot.service $targetdir/root/
 
 
 if $move_to_raid_on_first_boot; then
-   sed -i 's/move_to_raid=false/move_to_raid=true/' ./$targetdir/etc/firstboot.conf
+   sed -i 's/move_to_raid=false/move_to_raid=true/' $targetdir/etc/firstboot.conf
 fi
 
 
-sed -i "s/rootfs_fs_here/$filesystem/" ./$targetdir/etc/firstboot.conf
-sed -i "s/rootfs_label_here/$label/" ./$targetdir/etc/firstboot.conf
-sed -i "s/kernel_name_here/$kernel/" ./$targetdir/etc/firstboot.conf
-sed -i "s/size_of_raid_part/$raid_rootfs_partition_size/" ./$targetdir/etc/firstboot.conf
+sed -i "s/rootfs_fs_here/$filesystem/" $targetdir/etc/firstboot.conf
+sed -i "s/rootfs_label_here/$label/" $targetdir/etc/firstboot.conf
+sed -i "s/kernel_name_here/$kernel/" $targetdir/etc/firstboot.conf
+sed -i "s/size_of_raid_part/$raid_rootfs_partition_size/" $targetdir/etc/firstboot.conf
 
 
-\cp -p ./stuff/leds/leds ./$targetdir/usr/sbin/
-#\cp -p ./stuff/leds/leds.service ./$targetdir/lib/systemd/system/
-\cp -p ./stuff/leds/leds.service ./$targetdir/root/
+\cp -p ./stuff/leds/leds $targetdir/usr/sbin/
+\cp -p ./stuff/leds/leds.service $targetdir/root/
+
+\cp -p ./stuff/root.bashrc $targetdir/root/
+
 
 
 if $hpnssh; then
-    cp -rp ./stuff/hpnssh ./$targetdir/usr/src/
-    sed -i "s/hpnssh=false/hpnssh=true/" ./$targetdir/etc/firstboot.conf
+    cp -rp ./stuff/hpnssh $targetdir/usr/src/
+    sed -i "s/hpnssh=false/hpnssh=true/" $targetdir/etc/firstboot.conf
 fi
 
 if $create_swap; then
-    sed -i "s/create_swap=false/create_swap=true/" ./$targetdir/etc/firstboot.conf
+    sed -i "s/create_swap=false/create_swap=true/" $targetdir/etc/firstboot.conf
 fi
 
 
@@ -172,8 +178,9 @@ if $write2usb; then
 		mkfs.$filesystem -F -L $label $usbblkdev"1"; sleep 1
 		mkdir -p /tmp/mnt
 		mount $usbblkdev"1" /tmp/mnt; sleep 1
-		\cp -rpv $targetdir/* /tmp/mnt/; sleep 1
-		echo "Syncing USB drive..."
+		#\cp -rpv $targetdir/* /tmp/mnt/; sleep 1
+		\cp -rp $targetdir/* /tmp/mnt/; sleep 1
+                echo "Syncing USB drive..."
 		sync
 cat <<EOT
 *****************************
@@ -183,7 +190,7 @@ cat <<EOT
 EOT
 		#udisks --unmount $usbblkdev"1"
 		#udisks --detach $usbblkdev
-        
+                umount /tmp/mnt
 		echo; echo; echo;
 		echo "You can now remove the usb stick and boot from it."; sleep 8
 fi
