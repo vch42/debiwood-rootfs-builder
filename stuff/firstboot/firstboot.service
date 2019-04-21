@@ -4,7 +4,7 @@ Wants=udev.service
 After=serial-getty@.service
 
 [Service]
-Type=oneshot
+Type=simple
 ExecStart=/usr/sbin/firstboot
 RemainAfterExit=yes
 StandardOutput=journal+console
