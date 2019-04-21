@@ -53,13 +53,13 @@ echo $timezone > /etc/timezone && dpkg-reconfigure --frontend=noninteractive tzd
 
 
 
-#echo;echo;echo '*****************************************************'
-#echo "Installing/Configuring locales to en_US.UTF-8"; sleep 1
-#apt-get install -y locales dialog
-#sed -i 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
-#echo 'LANG="en_US.UTF-8"'>/etc/default/locale && \
-#dpkg-reconfigure --frontend=noninteractive locales && \
-#update-locale LANG=en_US.UTF-8
+echo;echo;echo '*****************************************************'
+echo "Installing/Configuring locales to en_US.UTF-8"; sleep 1
+apt-get install -y locales dialog
+sed -i 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
+echo 'LANG="en_US.UTF-8"'>/etc/default/locale && \
+dpkg-reconfigure --frontend=noninteractive locales && \
+update-locale LANG=en_US.UTF-8
 
 
 

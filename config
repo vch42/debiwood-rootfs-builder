@@ -4,7 +4,8 @@ targetdir="/tmp/$label-$(date +"%Y%m%d%H%M")"
 filename="$targetdir.tar.bz2"
 
 distro='stretch'
-repo='http://deb.debian.org/debian'
+#repo='http://deb.debian.org/debian'
+repo='http://ftp.ro.debian.org/debian'
 repo_sec='http://security.debian.org/debian-security/'
 arch='armel'
 machine='nsa320'
