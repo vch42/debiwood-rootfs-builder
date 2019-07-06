@@ -84,8 +84,15 @@ fi
 
 
 if $uboot_sntp; then
-	if [ [ -z $sntp_dns ] || [ -z $sntp_server ] || [ -z $sntp_ip ] || [ -z $sntp_mask ] || [ -z $sntp_gw ] ]; then
+	flag=0
+	[ -z $sntp_ip ]     && ((flag++));
+        [ -z $sntp_mask ]   && ((flag++));
+        [ -z $sntp_gw ]     && ((flag++));
+        [ -z $sntp_dns ]    && ((flag++));
+        [ -z $sntp_server ] && ((flag++));
+	if [ $flag -gt 0 ]; then
 		uboot_sntp=false
+		echo;echo;echo;
 		echo '$uboot_sntp is true, but values are missing for its config, disabling uboot_sntp.'
 		echo 'Check the config file and setup values for sntp_ip, sntp_mask, sntp_gw, sntp_dns and sntp_server.'
 	fi
