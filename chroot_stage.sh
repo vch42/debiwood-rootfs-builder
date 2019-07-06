@@ -211,13 +211,12 @@ echo;echo;echo '*****************************************************'
 echo "Setting  hostname"
 echo "($hname)"; sleep 1
 echo $hname > /etc/hostname
-cat <<EOT > /etc/hosts
-127.0.0.1    localhost.localdomain localhost
-127.0.1.1    $hname
-EOT
-
-
-
+echo "127.0.0.1    localhost.localdomain localhost" > /etc/hosts
+if [ -z $dnssuffix ]; then
+   echo "127.0.1.1    $hname" >> /etc/hosts
+else
+   echo "127.0.1.1    $hname $hname.$dnssuffix" >> /etc/hosts
+fi
 
 
 
@@ -298,9 +297,8 @@ cat /root/root.bashrc >> /root/.bashrc
 echo;echo;echo '*****************************************************'
 echo "Configuring serial console and default.target to multi-user.target"
 echo " "; sleep 1
-ln -s /lib/systemd/system/serial-getty@.service /etc/systemd/system/getty.target.wants/serial-getty@ttyAMA0.service
-rm -f /lib/systemd/system/default.target
-ln -s /lib/systemd/system/multi-user.target /lib/systemd/system/default.target
+ln -fs /lib/systemd/system/serial-getty@.service /etc/systemd/system/getty.target.wants/serial-getty@ttyAMA0.service
+ln -fs /lib/systemd/system/multi-user.target /lib/systemd/system/default.target
 
 
 

@@ -10,7 +10,7 @@ repo_sec='http://security.debian.org/debian-security/'
 arch='armel'
 machine='nsa320'
 
-kernel='4.20.6-kirkwood-tld-1'
+kernel='5.1.11-kirkwood-tld-2'
 
 samba=false
 hpnssh=false
@@ -35,9 +35,11 @@ dnssuffix=''
 usbblkdev='/dev/sdc'
 write2usb=true
 pack2archive=false
-send2server=false
-server2send=''
-serverusername=''
+
+# Will implement the below at a later time, maybe.
+#send2server=false
+#server2send=''
+#serverusername=''
 
 move_to_raid_on_first_boot=true
 raid_rootfs_partition_size=15360
@@ -48,7 +50,7 @@ nsa320_dtb_chip_delay_0x28=true
 
 packs_required=' dbus ca-certificates device-tree-compiler build-essential i2c-tools u-boot-tools initramfs-tools isc-dhcp-client ntp ntpdate ssh mtd-utils parted mdadm rsync '
 
-packs_recommended=' sudo mc htop unzip bzip2 nano vim bash-completion device-tre-compiler iperf ethtool iftop iptables iptables-persistent curl ntfs-3g btrfs-tools hdparm iotop bonnie++ lm-sensors haveged less man locate '
+packs_recommended=' sudo mc htop unzip bzip2 nano vim bash-completion device-tree-compiler iperf ethtool iftop iptables iptables-persistent curl ntfs-3g btrfs-tools hdparm iotop bonnie++ lm-sensors haveged less man locate '
 
 packs_other=' tree screen command-not-found fancontrol '
 
