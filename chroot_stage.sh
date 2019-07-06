@@ -46,11 +46,15 @@ apt-get upgrade -y
 
 
 
-echo;echo;echo '*****************************************************'
-echo "Setting timezone..."
-echo "(currently selected $timezone)"; sleep 1
-echo $timezone > /etc/timezone && dpkg-reconfigure --frontend=noninteractive tzdata
+#echo;echo;echo '*****************************************************'
+#echo "Setting timezone..."
+#echo "(currently selected $timezone)"; sleep 1
+#echo $timezone > /etc/timezone && dpkg-reconfigure --frontend=noninteractive tzdata
 
+# Timezone will aways be set to UTC.
+echo;echo;echo '*****************************************************'
+echo "Setting timezone to UTC..."
+ln -fs /usr/share/zoneinfo/UTC /etc/localtime && dpkg-reconfigure --frontend=noninteractive tzdata
 
 
 echo;echo;echo '*****************************************************'

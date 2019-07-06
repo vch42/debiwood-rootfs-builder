@@ -26,10 +26,10 @@ sntp_ip='10.42.0.132'
 sntp_mask='255.255.255.0'
 
 
-timezone='UTC'
 initial_user='user'
 initial_pass='changeme'
 hname='debNAS'
+dnssuffix=''
 
 
 usbblkdev='/dev/sdc'

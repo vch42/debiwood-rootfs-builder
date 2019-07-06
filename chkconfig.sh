@@ -47,10 +47,10 @@ if [ -z "$kernel" ]; then
 	echo 'No value found for $kernel, falling back to '$kernel
 fi
 
-if [ -z "$timezone" ]; then
-	timezone='UTC'
-	echo 'No value found for $timezone, falling back to '$timezone
-fi
+#if [ -z "$timezone" ]; then
+#	timezone='UTC'
+#	echo 'No value found for $timezone, falling back to '$timezone
+#fi
 
 if [ -z "$initial_user" ]; then
 	initial_user='user'
@@ -75,9 +75,11 @@ fi
 if ! [[ $move_to_raid_on_first_boot ]]; then
     packs+=" busybox-syslogd "
     create_swap=false
+    filesystem='f2fs'
     echo '$move_to_raid_on_first_boot is false. Swap and logging on USB is not recommended, it leads to increased medium wear.'
     echo 'Disabling swap creation and installing busybox-syslogd to log to RAM.'
     echo 'Will implement logs persistence at a later time.'
+    echo 'Also, setting filesystem to f2fs, a better choice for flash drives.'
 fi
 
 
