@@ -31,7 +31,7 @@ hname='debNAS'
 dnssuffix=''
 
 
-usbblkdev='/dev/sdc'
+usbblkdev='/dev/sdX'
 write2usb=true
 pack2archive=false
 
