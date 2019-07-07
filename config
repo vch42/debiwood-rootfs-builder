@@ -11,8 +11,11 @@ machine='nsa320'
 
 kernel='5.1.11-kirkwood-tld-2'
 
-samba=false
-hpnssh=false
+samba=true
+
+# HPN SSH doesn't work atm.
+#hpnssh=true
+
 cups=false
 create_swap=true
 samba_from_source=false
@@ -31,7 +34,7 @@ hname='debNAS'
 dnssuffix=''
 
 
-usbblkdev='/dev/sdX'
+usbblkdev='/dev/sdb'
 write2usb=true
 pack2archive=false
 
