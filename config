@@ -52,7 +52,7 @@ nsa320_dtb_chip_delay_0x28=true
 
 packs_required=' dbus ca-certificates device-tree-compiler build-essential i2c-tools u-boot-tools initramfs-tools isc-dhcp-client ntp ntpdate ssh mtd-utils parted mdadm rsync '
 
-packs_recommended=' sudo mc htop unzip bzip2 nano vim bash-completion device-tree-compiler iperf ethtool iftop iptables iptables-persistent curl ntfs-3g btrfs-tools hdparm iotop bonnie++ lm-sensors haveged less man locate '
+packs_recommended=' sudo mc htop unzip bzip2 nano vim bash-completion device-tree-compiler iperf ethtool iftop iptables iptables-persistent curl ntfs-3g btrfs-tools hdparm iotop bonnie++ lm-sensors haveged less man locate lsof psmisc '
 
 packs_other=' tree screen command-not-found fancontrol '
 
@@ -66,7 +66,8 @@ packs="$packs_required $packs_recommended $packs_other"
 
 tools=' qemu-user-static debootstrap binfmt-support udisks2 parted u-boot-tools '
 
-deps_hpn=' zlibc zlib1g zlib1g-dev libssl-dev libpam0g libpam0g-dev '
+# HPN SSH doesn't work atm.
+#deps_hpn=' zlibc zlib1g zlib1g-dev libssl-dev libpam0g libpam0g-dev '
 
 deps_samba=' acl attr autoconf dnsutils gdb krb5-user libjson-perl ntp perl perl-modules python-crypto '
 
@@ -80,9 +81,10 @@ if $samba; then
     packs+=" samba "
 fi
 
-if $hpnssh; then
-    packs+=$deps_hpn
-fi
+# HPN SSH doesn't work atm.
+#if $hpnssh; then
+#    packs+=$deps_hpn
+#fi
 
 if $cups; then
 	packs+=" cups "

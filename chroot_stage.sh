@@ -57,6 +57,9 @@ echo "Setting timezone to UTC..."
 ln -fs /usr/share/zoneinfo/UTC /etc/localtime && dpkg-reconfigure --frontend=noninteractive tzdata
 
 
+# to check
+# https://www.thomas-krenn.com/en/wiki/Perl_warning_Setting_locale_failed_in_Debian
+
 echo;echo;echo '*****************************************************'
 echo "Installing/Configuring locales to en_US.UTF-8"; sleep 1
 apt-get install -y locales dialog
