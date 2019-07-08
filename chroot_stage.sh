@@ -38,6 +38,12 @@ Acquire::ForceIPv4 "true";
 EOT
 
 
+echo;echo;echo '*****************************************************'
+echo "Updating apt packages.";sleep 1
+apt-get clean
+apt-get update
+
+
 # to check
 # https://www.thomas-krenn.com/en/wiki/Perl_warning_Setting_locale_failed_in_Debian
 echo;echo;echo '*****************************************************'
@@ -48,13 +54,16 @@ echo 'LANG="en_US.UTF-8"'>/etc/default/locale && \
 dpkg-reconfigure --frontend=noninteractive locales && \
 update-locale LANG=en_US.UTF-8
 
-
-
 echo;echo;echo '*****************************************************'
-echo "Updating apt and packages.";sleep 1
-apt-get clean
-apt-get update
+echo "Uprading all packages.";sleep 1
 apt-get upgrade -y
+
+
+#echo;echo;echo '*****************************************************'
+#echo "Updating apt and packages.";sleep 1
+#apt-get clean
+#apt-get update
+#apt-get upgrade -y
 
 
 
