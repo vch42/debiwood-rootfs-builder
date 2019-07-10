@@ -100,34 +100,6 @@ else
     update-command-not-found &> /dev/null
 
 
-    #install hpnssh
-    #if $hpnssh; then
-#	    cd /usr/src/hpnssh
-#	    tar zxf openssh-7.5p1.tar.gz
-#	    cd openssh-7.5p1
-#	    cat ../openssh-7_5_P1-hpn-14.13.diff | patch -p1
-#	    ./configure --prefix=/usr --sysconfdir=/etc/ssh --with-ssl-engine --with-pam
-#	    make
-#	    \cp /lib/systemd/system/ssh.service ../ssh.service
-#	    while [ $(pgrep -c sshd) -gt 1 ]; do
-#            systemctl stop ssh.service; sleep 1
-#            pkill --signal HUP sshd; sleep 1
-#            pkill --signal KILL sshd; sleep 1
-#        done
-#	    apt-get remove -y openssh-server openssh-client openssh-sftp-server ssh
-#
-#	    make host-key && make install
-#
-#	    cp ../ssh.service /lib/systemd/system/
-#
-#	    systemctl unmask ssh.service
-#	    systemctl enable ssh.service
-#	    systemctl start ssh.service
-#	    systemctl status ssh.service
-#	    systemctl stop ssh.service
-#    fi
-
-
 
 
     if $create_swap; then

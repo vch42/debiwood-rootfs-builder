@@ -11,14 +11,11 @@ machine='nsa320'
 
 kernel='5.1.11-kirkwood-tld-2'
 
-samba=true
-
-# HPN SSH doesn't work atm.
-#hpnssh=true
-
 cups=false
-create_swap=true
+samba=true
 samba_from_source=false
+
+create_swap=true
 
 uboot_sntp=true
 sntp_dns='1.1.1.1'
@@ -27,21 +24,16 @@ sntp_gw='10.42.0.1'
 sntp_ip='10.42.0.132'
 sntp_mask='255.255.255.0'
 
-
 initial_user='user'
 initial_pass='changeme'
+
 hname='debNAS'
 dnssuffix=''
-
 
 usbblkdev='/dev/sdX'
 write2usb=true
 pack2archive=false
 
-# Will implement the below at a later time, maybe.
-#send2server=false
-#server2send=''
-#serverusername=''
 
 move_to_raid_on_first_boot=true
 raid_rootfs_partition_size=15360
@@ -66,11 +58,7 @@ packs="$packs_required $packs_recommended $packs_other"
 
 tools=' qemu-user-static debootstrap binfmt-support udisks2 parted u-boot-tools '
 
-# HPN SSH doesn't work atm.
-#deps_hpn=' zlibc zlib1g zlib1g-dev libssl-dev libpam0g libpam0g-dev '
-
 deps_samba=' acl attr autoconf dnsutils gdb krb5-user libjson-perl ntp perl perl-modules python-crypto '
-
 
 
 if $samba_from_source; then
@@ -81,10 +69,6 @@ if $samba; then
     packs+=" samba "
 fi
 
-# HPN SSH doesn't work atm.
-#if $hpnssh; then
-#    packs+=$deps_hpn
-#fi
 
 if $cups; then
 	packs+=" cups "

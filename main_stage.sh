@@ -109,11 +109,6 @@ sed -i "s/size_of_raid_part/$raid_rootfs_partition_size/" $targetdir/etc/firstbo
 
 
 
-if $hpnssh; then
-    cp -rp ./stuff/hpnssh $targetdir/usr/src/
-    sed -i "s/hpnssh=false/hpnssh=true/" $targetdir/etc/firstboot.conf
-fi
-
 if $create_swap; then
     sed -i "s/create_swap=false/create_swap=true/" $targetdir/etc/firstboot.conf
 fi
@@ -178,7 +173,7 @@ if $write2usb; then
 		mkfs.$filesystem -F -L $label $usbblkdev"1"; sleep 1
 		mkdir -p /tmp/mnt
 		mount $usbblkdev"1" /tmp/mnt; sleep 1
-		#\cp -rpv $targetdir/* /tmp/mnt/; sleep 1
+                echo "Copying filesysytem to USB drive..."
 		\cp -rp $targetdir/* /tmp/mnt/; sleep 1
                 echo "Syncing USB drive..."
 		sync
