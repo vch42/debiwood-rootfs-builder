@@ -199,7 +199,7 @@ if $pack2archive; then
 	echo;echo;echo '*****************************************************'
 	echo "Generating $filename"
 	cd $targetdir
-	tar cpjf ../$filename .
+	tar cpjf $filename .
 	cd ..
 	ls -lh |grep $filename
 	if $send2server; then

@@ -24,8 +24,8 @@ deb $repo $distro main contrib non-free
 #deb-src $repo $distro main contrib non-free
 deb $repo $distro-updates main contrib non-free
 #deb-src $repo $distro-updates main contrib non-free
-deb $repo_sec $distro/updates main contrib non-free
-#deb-src $repo_sec $distro/updates main contrib non-free
+deb $repo_sec $distro-security main contrib non-free
+#deb-src $repo_sec $distro-security main contrib non-free
 EOT
 
 cat <<EOT > /etc/apt/apt.conf.d/71-no-recommends
