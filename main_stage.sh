@@ -170,7 +170,11 @@ if $write2usb; then
 		sleep 1
 		parted -s $usbblkdev mklabel msdos; sleep 1
 		parted -s -a optimal -- $usbblkdev mkpart primary 1 -1; sleep 1
-		mkfs.$filesystem -F -L $label $usbblkdev"1"; sleep 1
+		if [[ $filesystem = "f2fs" ]]; then
+		    mkfs.$filesystem -f -l $label $usbblkdev"1"; sleep 1
+		else
+		    mkfs.$filesystem -F -L $label $usbblkdev"1"; sleep 1
+		fi
 		mkdir -p /tmp/mnt
 		mount $usbblkdev"1" /tmp/mnt; sleep 1
                 echo "Copying filesysytem to USB drive..."
