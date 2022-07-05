@@ -41,7 +41,7 @@ else
         sleep 5
 
         mdadm --create /dev/md0 --run --force --metadata=0.90 --level=1 --raid-devices=2 missing /dev/sda1 && \
-        mkfs.$rfs_filesystem -L $rfs_label /dev/md0 && \
+        mkfs.$rfs_filesystem -F -L $rfs_label /dev/md0 && \
         mdadm --detail --scan >> /etc/mdadm/mdadm.conf && \
         sleep 5
 
