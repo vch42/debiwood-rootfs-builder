@@ -66,6 +66,7 @@ if [[ $move_to_raid_on_first_boot != true ]]; then
     packs+=" busybox-syslogd "
     create_swap=false
     filesystem='f2fs'
+    tools+=" f2fs-tools "
     echo '$move_to_raid_on_first_boot is false. Swap and logging on USB is not recommended, it leads to increased medium wear.'
     echo 'Disabling swap creation and installing busybox-syslogd to log to RAM.'
     echo 'Will implement logs persistence at a later time.'
