@@ -79,7 +79,7 @@ fi
 
 
 \cp -rp ./stuff/uEnv/uEnv_skel $targetdir/boot/uEnv
-
+\cp -rp ./stuff/update_images.txt $targetdir/boot
 
 \cp -p ./chroot_stage.sh $targetdir/root/
 \cp -p ./config $targetdir/root/
