@@ -214,8 +214,8 @@ fi
 
 echo;echo;echo '*****************************************************'
 echo "Setting  /etc/fstab"
-echo "LABEL=$label    /   $filesystem  errors=remount-ro  0  1"
 sleep 1
+echo "LABEL=$label    /   $filesystem  errors=remount-ro  0  1"
 cat <<EOT > /etc/fstab
 # /etc/fstab: static file system information.
 #
@@ -230,7 +230,6 @@ LABEL=$label       /                $filesystem  errors=remount-ro        0     
 
 
 EOT
-
 
 
 

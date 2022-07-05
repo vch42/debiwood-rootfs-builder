@@ -168,19 +168,20 @@ if $write2usb; then
        		     parted -s $usbblkdev rm $n;
 		done
 		sleep 1
+		
 		parted -s $usbblkdev mklabel msdos; sleep 1
 		parted -s -a optimal -- $usbblkdev mkpart primary 1 -1; sleep 1
-		if [[ $filesystem = "f2fs" ]]; then
-		    mkfs.$filesystem -f -l $label $usbblkdev"1"; sleep 1
-		else
-		    mkfs.$filesystem -F -L $label $usbblkdev"1"; sleep 1
-		fi
+		mkfs.ext4 -F -L $label $usbblkdev"1"; sleep 1
+		
 		mkdir -p /tmp/mnt
 		mount $usbblkdev"1" /tmp/mnt; sleep 1
-                echo "Copying filesysytem to USB drive..."
-		\cp -rp $targetdir/* /tmp/mnt/; sleep 1
-                echo "Syncing USB drive..."
+
+		echo "Copying filesysytem to USB drive..."
+                \cp -rp $targetdir/* /tmp/mnt/; sleep 1
+
+		echo "Syncing USB drive..."
 		sync
+
 cat <<EOT
 *****************************
 *** USB Install finished. ***

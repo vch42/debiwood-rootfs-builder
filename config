@@ -1,4 +1,4 @@
-label='rootfs'
+label='rootfs99'
 filesystem='ext4'
 targetdir="/tmp/$label-$(date +"%Y%m%d%H%M")"
 filename="$targetdir.tar.bz2"
@@ -20,8 +20,8 @@ create_swap=true
 uboot_sntp=true
 sntp_dns='8.8.8.8'
 sntp_server='europe.pool.ntp.org'
-sntp_gw='192.168.1.254'
-sntp_ip='192.168.1.199'
+sntp_gw='192.168.171.254'
+sntp_ip='192.168.171.199'
 sntp_mask='255.255.255.0'
 
 initial_user='user'
@@ -30,12 +30,12 @@ initial_pass='changeme'
 hname='debNAS'
 dnssuffix='localdomain.local'
 
-usbblkdev='/dev/sdX'
-write2usb=false
+usbblkdev='/dev/sdb'
+write2usb=true
 pack2archive=false
 
 
-move_to_raid_on_first_boot=true
+move_to_raid_on_first_boot=false
 raid_rootfs_partition_size=15360
 
 
