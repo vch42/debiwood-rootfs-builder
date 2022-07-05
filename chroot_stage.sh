@@ -4,15 +4,11 @@
 source /root/config
 source /root/chkconfig.sh
 
-export LANG=C
-
 
 echo;echo;echo '*****************************************************'
 echo "We have now chrooted to the rootfs."
 echo "Proceeding to debootstrap stage 2 install"; sleep 1
 /debootstrap/debootstrap --second-stage --keep-debootstrap-dir
-
-
 
 
 echo;echo;echo '*****************************************************'
@@ -44,33 +40,22 @@ apt-get clean
 apt-get update
 
 
-# to check
-# https://www.thomas-krenn.com/en/wiki/Perl_warning_Setting_locale_failed_in_Debian
 echo;echo;echo '*****************************************************'
 echo "Installing/Configuring locales to en_US.UTF-8"; sleep 1
+export LANGUAGE=en_US LANG=en_US.UTF-8 LC_ALL=C
+echo LANGUAGE=en_US > /etc/default/locale
+echo LANG=en_US.UTF-8 >> /etc/default/locale
+echo LC_ALL=C >> /etc/default/locale
 apt-get install -y locales dialog
-sed -i 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
-echo 'LANG="en_US.UTF-8"'>/etc/default/locale && \
-dpkg-reconfigure --frontend=noninteractive locales && \
-update-locale LANG=en_US.UTF-8
+locale-gen en_US.UTF-8
+dpkg-reconfigure --frontend=noninteractive locales
+update-locale LANG=C
 
 echo;echo;echo '*****************************************************'
 echo "Uprading all packages.";sleep 1
 apt-get upgrade -y
 
 
-#echo;echo;echo '*****************************************************'
-#echo "Updating apt and packages.";sleep 1
-#apt-get clean
-#apt-get update
-#apt-get upgrade -y
-
-
-
-#echo;echo;echo '*****************************************************'
-#echo "Setting timezone..."
-#echo "(currently selected $timezone)"; sleep 1
-#echo $timezone > /etc/timezone && dpkg-reconfigure --frontend=noninteractive tzdata
 
 # Timezone will aways be set to UTC.
 echo;echo;echo '*****************************************************'
