@@ -62,7 +62,7 @@ if [ $write2usb ] && [ -z "$usbblkdev" ]; then
 	echo '$write2usb is true, but no value found for $usbblkdev, disabling write2usb.'
 fi
 
-if ! [[ $move_to_raid_on_first_boot ]]; then
+if [[ $move_to_raid_on_first_boot != true ]]; then
     packs+=" busybox-syslogd "
     create_swap=false
     filesystem='f2fs'
