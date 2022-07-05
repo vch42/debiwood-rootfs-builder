@@ -88,11 +88,6 @@ echo " -setup machid/arcNumber for "$machine; sleep 2
 
 sed -i "s/set_label_here/$label/g; s/set_dtb_here/kirkwood-$machine/g; s/set_filesystem_here/$filesystem/g" /boot/uEnv
 
-#if [ $initsystem = "systemd" ]; then
-#    sed -ie "s/set_init_here/init=\/bin\/systemd/g" /boot/uEnv
-#else
-#    sed -ie "s/set_init_here//g" /boot/uEnv
-#fi
 
 case $machine in
 nsa310)
