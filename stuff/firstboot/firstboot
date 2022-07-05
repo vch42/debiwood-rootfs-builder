@@ -62,6 +62,7 @@ else
         e2label /dev/sdb1 "oldrfs" && \
         e2label /dev/sdc1 "oldrfs" && \
         mv /boot /old-boot && \
+        sync && \
         umount /tmp/mnt #&& \
         #uuid_raid_md0=$(blkid -o export /dev/md0|grep UUID|sed 's/UUID=//') && \
         #sed -i "s/LABEL=$rfs_label/UUID=\"$uuid_raid_md0\"/" /etc/fstab
