@@ -226,7 +226,7 @@ cat <<EOT > /etc/fstab
 # <file system> <mount point>   <type> <options>              <dump>  <pass>
 #device_UUID_here       /                ext4  errors=remount-ro        0       1
 
-LABEL=$label       /                ext4  errors=remount-ro        0       1
+LABEL=$label       /                $filesystem  errors=remount-ro        0       1
 
 
 EOT
