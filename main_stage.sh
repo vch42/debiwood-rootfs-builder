@@ -164,9 +164,9 @@ if $write2usb; then
 			umount $n ;
 		done
 		sleep 1
-#		for n in {1..9} ; do
-#			parted -s $usbblkdev rm $n;
-#		done
+		for n in {1..9} ; do
+       		     parted -s $usbblkdev rm $n;
+		done
 		sleep 1
 		parted -s $usbblkdev mklabel msdos; sleep 1
 		parted -s -a optimal -- $usbblkdev mkpart primary 1 -1; sleep 1
@@ -214,7 +214,7 @@ fi
 
 
 
-
+#todo mechanism to know what was actually added from the toolkit by this script and what was already there, offer to remove only what the script added.
 cat <<EOT
 Tools installed on this PC by these scripts:
 $tools
