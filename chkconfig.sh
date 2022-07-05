@@ -11,18 +11,13 @@ if [ -z "$filesystem" ]; then
 	echo 'No value found for $filesystem, falling back to '$filesystem
 fi
 
-#if [ -z "$initsystem" ]; then
-#	initsystem='systemd'
-#	echo 'No value found for $initsystem, falling back to '$initsystem
-#fi
-
 if [ -z "$distro" ]; then
-	distro='stretch'
+	distro='bullseye'
 	echo 'No value found for $distro, falling back to '$distro
 fi
 
 if [ -z "$repo" ]; then
-	repo='http://httpredir.debian.org/debian'
+	repo='http://deb.debian.org/debian'
 	echo 'No value found for $repo, falling back to '$repo
 fi
 
@@ -43,14 +38,9 @@ if [ -z "$machine" ]; then
 fi
 
 if [ -z "$kernel" ]; then
-	kernel='4.20.6-kirkwood-tld-1'
+	kernel='5.18.6-kirkwood-tld-1'
 	echo 'No value found for $kernel, falling back to '$kernel
 fi
-
-#if [ -z "$timezone" ]; then
-#	timezone='UTC'
-#	echo 'No value found for $timezone, falling back to '$timezone
-#fi
 
 if [ -z "$initial_user" ]; then
 	initial_user='user'
@@ -63,7 +53,7 @@ if [ -z "$initial_pass" ]; then
 fi
 
 if [ -z "$hname" ]; then
-	hname=$targetdir
+	hname='debNAS'
 	echo 'No value found for $hname, falling back to '$hname
 fi
 
@@ -79,6 +69,7 @@ if ! [[ $move_to_raid_on_first_boot ]]; then
     echo '$move_to_raid_on_first_boot is false. Swap and logging on USB is not recommended, it leads to increased medium wear.'
     echo 'Disabling swap creation and installing busybox-syslogd to log to RAM.'
     echo 'Will implement logs persistence at a later time.'
+    #todo implement logs persistence when using flash system drive and busybox-syslogd
     echo 'Also, setting filesystem to f2fs, a better choice for flash drives.'
 fi
 
