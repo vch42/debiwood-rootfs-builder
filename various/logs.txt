@@ -1,2 +1,0 @@
-http://forum.doozan.com/read.php?2,13702
-https://www.nohl.eu/tech-resources/notes-to-linux/log-files-in-tmpfs-without-breaking-logging/
