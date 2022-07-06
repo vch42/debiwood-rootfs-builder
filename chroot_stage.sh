@@ -207,7 +207,7 @@ echo "127.0.0.1    localhost.localdomain localhost" > /etc/hosts
 if [ -z $dnssuffix ]; then
    echo "127.0.1.1    $hname" >> /etc/hosts
 else
-   echo "127.0.1.1    $hname $hname.$dnssuffix" >> /etc/hosts
+   echo "127.0.1.1    $hname.$dnssuffix $hname" >> /etc/hosts
 fi
 
 
