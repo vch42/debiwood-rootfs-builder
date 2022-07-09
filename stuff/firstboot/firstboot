@@ -42,8 +42,11 @@ else
 
         mdadm --create /dev/md0 --run --force --metadata=0.90 --level=1 --raid-devices=2 missing /dev/sda1 && \
         mkfs.$rfs_filesystem -F -L $rfs_label /dev/md0 && \
+        sed -i '/DEVICE \/dev\/sd?*/d' /etc/mdadm/mdadm.conf && \
         mdadm --detail --scan >> /etc/mdadm/mdadm.conf && \
         sleep 5
+        
+        #echo 'DEVICE /dev/sd?*' >> /etc/mdadm/mdadm.conf
 
         debconf-set-selections <<< "mdadm mdadm/mail_to string root"
         debconf-set-selections <<< "mdadm mdadm/initrdstart string all"
