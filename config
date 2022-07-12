@@ -15,6 +15,9 @@ cups=false
 samba=true
 samba_from_source=false
 
+hdidle=false
+hdidle_from_source=false
+
 create_swap=false
 
 uboot_sntp=true
@@ -44,7 +47,7 @@ nsa320_dtb_chip_delay_0x28=true
 
 packs_required=' dbus ca-certificates device-tree-compiler build-essential i2c-tools u-boot-tools initramfs-tools isc-dhcp-client ntp ntpdate ssh mtd-utils parted mdadm rsync wget '
 
-packs_recommended=' sudo mc htop unzip bzip2 nano vim bash-completion device-tree-compiler iperf3 ethtool iftop iptables iptables-persistent curl ntfs-3g hdparm hddtemp hd-idle iotop bonnie++ lm-sensors haveged less man locate lsof psmisc '
+packs_recommended=' sudo mc htop unzip bzip2 nano vim bash-completion device-tree-compiler iperf3 ethtool iftop iptables iptables-persistent curl ntfs-3g hdparm hddtemp iotop bonnie++ lm-sensors haveged less man locate lsof psmisc '
 
 packs_other=' tree screen command-not-found fancontrol '
 
@@ -72,6 +75,10 @@ fi
 
 if $cups; then
 	packs+=" cups "
+fi
+
+if $hdidle; then
+	packs+=" hd-idle "
 fi
 
 if $nsa320_dtb_chip_delay_0x28; then
