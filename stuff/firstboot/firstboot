@@ -130,6 +130,22 @@ EOT
 
 
 
+     if $hdidle_from_source; then
+        cd /usr/src
+        git clone https://github.com/adelolmo/hd-idle.git
+        cd hd-idle
+        dpkg-buildpackage -us -uc -b
+        dpkg -i ../hd-idle*.deb
+
+        systemctl enable hd-idle
+        sed -i 's/START_HD_IDLE=false/START_HD_IDLE=true/g' /etc/default/hd-idle
+        sed -i '/HD_IDLE_OPTS/d' /etc/default/hd-idle
+        echo 'HD_IDLE_OPTS="-i 3000 -l /var/log/hd-idle.log"' >> /etc/default/hd-idle
+
+        cd -
+        apt purge -y dh-golang golang-go debhelper git && apt autoremove -y
+    fi
+
 
     #all done, prevent script to run on next boot
     sed -ie "s/no_run=false/no_run=true/" /etc/firstboot.conf

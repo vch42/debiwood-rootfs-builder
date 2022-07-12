@@ -96,6 +96,11 @@ if $move_to_raid_on_first_boot; then
 fi
 
 
+if $hdidle_from_source; then
+   sed -i 's/hdidle_from_source=false/hdidle_from_source=true/' $targetdir/etc/firstboot.conf
+fi
+
+
 sed -i "s/rootfs_fs_here/$filesystem/" $targetdir/etc/firstboot.conf
 sed -i "s/rootfs_label_here/$label/" $targetdir/etc/firstboot.conf
 sed -i "s/kernel_name_here/$kernel/" $targetdir/etc/firstboot.conf

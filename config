@@ -13,10 +13,8 @@ kernel='5.18.6-kirkwood-tld-1'
 
 cups=false
 samba=true
-samba_from_source=false
-
 hdidle=false
-hdidle_from_source=false
+hdidle_from_source=true
 
 create_swap=false
 
@@ -49,7 +47,7 @@ packs_required=' dbus ca-certificates device-tree-compiler build-essential i2c-t
 
 packs_recommended=' sudo mc htop unzip bzip2 nano vim bash-completion device-tree-compiler iperf3 ethtool iftop iptables iptables-persistent curl ntfs-3g hdparm hddtemp iotop bonnie++ lm-sensors haveged less man locate lsof psmisc '
 
-packs_other=' tree screen command-not-found fancontrol '
+packs_other=' tree screen command-not-found fancontrol acl dnsutils attr '
 
 packs="$packs_required $packs_recommended $packs_other"
 
@@ -61,15 +59,8 @@ packs="$packs_required $packs_recommended $packs_other"
 
 tools=' qemu-user-static debootstrap binfmt-support udisks2 parted u-boot-tools '
 
-deps_samba=' acl attr autoconf dnsutils gdb krb5-user libjson-perl ntp perl perl-modules python-crypto '
-
-
-if $samba_from_source; then
-    packs+=$deps_samba
-fi
-
 if $samba; then
-    packs+=" samba acl "
+    packs+=" samba "
 fi
 
 
@@ -80,6 +71,11 @@ fi
 if $hdidle; then
 	packs+=" hd-idle "
 fi
+
+if $hdidle_from_source; then
+        packs+=" dh-golang golang-go debhelper git "
+fi
+
 
 if $nsa320_dtb_chip_delay_0x28; then
     tools+=" device-tree-compiler "

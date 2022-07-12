@@ -385,27 +385,6 @@ systemctl daemon-reload
 systemctl enable leds.service
 
 
-if $hdidle_from_source; then
-	echo;echo;echo '*****************************************************'
-	echo "Installing HD-Idle from sources..."
-	echo ""; sleep 3
-	apt install -y dh-golang golang-go debhelper
-	cd /root
-	git clone https://github.com/adelolmo/hd-idle.git
-	cd hd-idle
-	dpkg-buildpackage -us -uc -b
-	dpkg -i ../hd-idle*.deb
-	
-	systemctl enable hd-idle
-	sed -i 's/START_HD_IDLE=false/START_HD_IDLE=true/g' /etc/default/hd-idle
-	sed -i '/HD_IDLE_OPTS/d' /etc/default/hd-idle
-	echo 'HD_IDLE_OPTS="-i 3000 -l /var/log/hd-idle.log"' >> /etc/default/hd-idle
-
-	cd /root
-	rm -rf ./hd-idle*
-	apt purge -y dh-golang golang-go debhelper
-fi
-
 
 
 echo;echo;echo '*****************************************************'
