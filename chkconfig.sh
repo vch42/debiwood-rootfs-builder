@@ -28,6 +28,9 @@ if $hdidle_from_source; then
         packs+=" dh-golang golang-go debhelper git "
 fi
 
+if $log_2_ram; then
+	packs+=" rsync "
+fi
 
 if $nsa320_dtb_chip_delay_0x28; then
     tools+=" device-tree-compiler "

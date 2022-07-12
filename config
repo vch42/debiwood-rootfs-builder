@@ -17,6 +17,7 @@ hdidle=false
 hdidle_from_source=true
 
 create_swap=false
+log_2_ram=true
 
 uboot_sntp=true
 sntp_dns='8.8.8.8'
