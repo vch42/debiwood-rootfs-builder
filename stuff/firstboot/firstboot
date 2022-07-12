@@ -152,11 +152,11 @@ EOT
 killall -9 hd-idle
 
 OPTS="-i 0 "
-for drive in $(ls /dev/disk/by-id/ata* | grep -v 'part'); do
-	OPTS+="-a $drive -i 3000 "
+for drive in \$(ls /dev/disk/by-id/ata* | grep -v 'part'); do
+	OPTS+="-a \$drive -i 3000 "
 done
 OPTS+="-l /var/log/hd-idle.log"
-sed -i "/HD_IDLE_OPTS=/c\HD_IDLE_OPTS=\"$OPTS\"" /etc/default/hd-idle
+sed -i "/HD_IDLE_OPTS=/c\HD_IDLE_OPTS=\"\$OPTS\"" /etc/default/hd-idle
 
 sleep 2
 EOT
