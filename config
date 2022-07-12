@@ -45,7 +45,7 @@ raid_rootfs_partition_size=15360
 nsa320_dtb_chip_delay_0x28=true
 
 
-packs_required=' dbus ca-certificates device-tree-compiler build-essential i2c-tools u-boot-tools initramfs-tools isc-dhcp-client ntp ntpdate ssh mtd-utils parted mdadm rsync wget '
+packs_required=' dbus ca-certificates device-tree-compiler build-essential i2c-tools u-boot-tools libubootenv-tool initramfs-tools isc-dhcp-client ntp ntpdate ssh mtd-utils parted mdadm rsync wget '
 
 packs_recommended=' sudo mc htop unzip bzip2 nano vim bash-completion device-tree-compiler iperf3 ethtool iftop iptables iptables-persistent curl ntfs-3g hdparm hddtemp smartmontools iotop bonnie++ lm-sensors haveged less man locate lsof psmisc '
 
