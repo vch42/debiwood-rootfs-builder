@@ -12,7 +12,7 @@ packs="$packs_required $packs_recommended $packs_other"
 tools=' qemu-user-static debootstrap binfmt-support udisks2 parted u-boot-tools '
 
 if $samba; then
-    packs+=" samba "
+    packs+=" samba smbclient cifs-utils "
 fi
 
 

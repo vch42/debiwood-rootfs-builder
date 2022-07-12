@@ -400,33 +400,6 @@ fi
 
 
 
-if $log_2_ram; then
-        echo;echo;echo '*****************************************************'
-        echo "Installing log2ram"
-	echo "https://github.com/azlux/log2ram#install"
-        echo " "; sleep 5
-
-	echo "deb [arch=amd64 signed-by=/usr/share/keyrings/azlux-archive-keyring.gpg] http://packages.azlux.fr/debian/ bullseye main" | sudo tee /etc/apt/sources.list.d/azlux.list
-	apt update && apt install log2ram
-	echo 'USE_RSYNC=true' >> /etc/log2ram.conf
-	cat<<EOT> /etc/systemd/system/log2ram-periodic.timer
-[Unit]
-Description=Periodic Log2Ram writing activities
-
-[Timer]
-Unit=log2ram-daily.service
-OnCalendar=0/2:30:00
-Persistent=true
-
-[Install]
-WantedBy=timers.target
-EOT
-	systemctl daemon-reload
-	systemctl enable --now log2ram-periodic.timer
-fi
-
-
-
 
 
 echo;echo;echo '*****************************************************'

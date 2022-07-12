@@ -167,6 +167,33 @@ EOT
     fi
 
 
+if $log_2_ram; then
+        echo;echo;echo '*****************************************************'
+        echo "Installing log2ram"
+        echo "https://github.com/azlux/log2ram#install"
+        echo " "; sleep 5
+
+        echo "deb [arch=amd64 signed-by=/usr/share/keyrings/azlux-archive-keyring.gpg] http://packages.azlux.fr/debian/ bullseye main" > /etc/apt/sources.list.d/azlux.list
+        wget -O /usr/share/keyrings/azlux-archive-keyring.gpg  https://azlux.fr/repo.gpg
+        apt update && apt install log2ram
+        echo 'USE_RSYNC=true' >> /etc/log2ram.conf
+        cat<<EOT> /etc/systemd/system/log2ram-periodic.timer
+[Unit]
+Description=Periodic Log2Ram writing activities
+
+[Timer]
+Unit=log2ram-daily.service
+OnCalendar=0/2:30:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+EOT
+        systemctl daemon-reload
+        systemctl enable --now log2ram-periodic.timer
+fi
+
+
     #all done, prevent script to run on next boot
     sed -ie "s/no_run=false/no_run=true/" /etc/firstboot.conf
     systemctl disable firstboot.service
