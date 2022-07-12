@@ -1,6 +1,42 @@
 #!/bin/bash
 #Check config variables and fall-back to defaults if needed
 
+
+# Composing package list to be installed
+
+packs_required=' dbus ca-certificates device-tree-compiler build-essential i2c-tools u-boot-tools initramfs-tools isc-dhcp-client ntp ntpdate ssh mtd-utils parted mdadm rsync wget '
+packs="$packs_required $packs_recommended $packs_other"
+
+###########################################################################################################################################################
+
+tools=' qemu-user-static debootstrap binfmt-support udisks2 parted u-boot-tools '
+
+if $samba; then
+    packs+=" samba "
+fi
+
+
+if $cups; then
+        packs+=" cups "
+fi
+
+if $hdidle; then
+        packs+=" hd-idle "
+fi
+
+if $hdidle_from_source; then
+        packs+=" dh-golang golang-go debhelper git "
+fi
+
+
+if $nsa320_dtb_chip_delay_0x28; then
+    tools+=" device-tree-compiler "
+fi
+#############################################################################################################################################################
+
+
+# Some defaults
+
 if [ -z "$label" ]; then
 	label='rootfs'
 	echo 'No value found for $label, falling back to '$label
@@ -57,18 +93,14 @@ if [ -z "$hname" ]; then
 	echo 'No value found for $hname, falling back to '$hname
 fi
 
+if [ -z "$dnssuffix" ]; then
+	dnssuffix='home.arpa'
+	echo 'No value found for $hname, falling back to '$dnssuffix
+fi
+
 if [ $write2usb ] && [ -z "$usbblkdev" ]; then
 	write2usb=false
 	echo '$write2usb is true, but no value found for $usbblkdev, disabling write2usb.'
-fi
-
-if [[ $move_to_raid_on_first_boot != true ]]; then
-    packs+=" busybox-syslogd "
-    create_swap=false
-    echo '$move_to_raid_on_first_boot is false. Swap and logging on USB is not recommended, it leads to increased medium wear.'
-    echo 'Disabling swap creation and installing busybox-syslogd to log to RAM.'
-    echo 'Will implement logs persistence at a later time.'
-    #todo implement logs persistence when using flash system drive and busybox-syslogd
 fi
 
 
