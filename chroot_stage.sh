@@ -396,7 +396,7 @@ net.ipv6.conf.all.disable_ipv6 = 1
 net.ipv6.conf.default.disable_ipv6 = 1
 net.ipv6.conf.lo.disable_ipv6 = 1
 EOT
-
+fi
 
 
 
@@ -407,6 +407,38 @@ debconf-set-selections <<< 'iptables-persistent iptables-persistent/autosave_v4 
 debconf-set-selections <<< 'iptables-persistent iptables-persistent/autosave_v6 boolean true'
 apt-get install -y $packs
 echo 'DEVICE /dev/sd?*' >> /etc/mdadm/mdadm.conf
+if $samba; then
+        echo;echo;echo '*****************************************************'
+        echo "Adding limited samba system user \"nas\" for guest account "
+        echo "and installing a minimal config with an open share..."
+        echo " "; sleep 5
+        useradd -rUM -s /usr/sbin/nologin nas
+        mkdir /shares; chown nas:nas /shares
+	mv /etc/samba/smb.conf /etc/samba/smb.conf.bak
+        cat<<EOT >> /etc/samba/smb.conf
+[global]
+	log file = /var/log/samba/log.%m
+	logging = file
+	max log size = 1000
+	panic action = /usr/share/samba/panic-action %d
+	server role = standalone server
+	workgroup = home.arpa
+	map to guest = Bad User
+	guest account = nas
+	usershare allow guests = Yes
+	use sendfile = Yes
+
+[share1]
+	path = /shares
+	read only = No
+	browseable = Yes
+	guest ok = Yes
+	create mask = 0775
+	force create mode = 0775
+	directory mask = 0775
+	force directory mode = 0775
+EOT
+fi
 update-initramfs -u -k all
 
 
