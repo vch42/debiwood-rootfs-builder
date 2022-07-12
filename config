@@ -15,11 +15,11 @@ cups=false
 samba=true
 samba_from_source=false
 
-create_swap=true
+create_swap=false
 
 uboot_sntp=true
 sntp_dns='8.8.8.8'
-sntp_server='europe.pool.ntp.org'
+sntp_server='pool.ntp.org'
 sntp_gw='192.168.1.254'
 sntp_ip='192.168.1.199'
 sntp_mask='255.255.255.0'
@@ -28,7 +28,7 @@ initial_user='user'
 initial_pass='changeme'
 
 hname='debNAS'
-dnssuffix='localdomain.local'
+dnssuffix='home.arpa'
 
 usbblkdev='/dev/sdX'
 write2usb=false
@@ -44,7 +44,7 @@ nsa320_dtb_chip_delay_0x28=true
 
 packs_required=' dbus ca-certificates device-tree-compiler build-essential i2c-tools u-boot-tools initramfs-tools isc-dhcp-client ntp ntpdate ssh mtd-utils parted mdadm rsync wget '
 
-packs_recommended=' sudo mc htop unzip bzip2 nano vim bash-completion device-tree-compiler iperf3 ethtool iftop iptables iptables-persistent curl ntfs-3g hdparm iotop bonnie++ lm-sensors haveged less man locate lsof psmisc '
+packs_recommended=' sudo mc htop unzip bzip2 nano vim bash-completion device-tree-compiler iperf3 ethtool iftop iptables iptables-persistent curl ntfs-3g hdparm hddtemp hd-idle iotop bonnie++ lm-sensors haveged less man locate lsof psmisc '
 
 packs_other=' tree screen command-not-found fancontrol '
 
@@ -66,7 +66,7 @@ if $samba_from_source; then
 fi
 
 if $samba; then
-    packs+=" samba "
+    packs+=" samba acl "
 fi
 
 

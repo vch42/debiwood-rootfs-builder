@@ -171,8 +171,15 @@ if $write2usb; then
 		
 		parted -s $usbblkdev mklabel msdos; sleep 1
 		parted -s -a optimal -- $usbblkdev mkpart primary 1 -1; sleep 1
-		mkfs.ext4 -F -L $label $usbblkdev"1"; sleep 1
-		
+
+		# if staying on USB as OS drive, avoid ext4lazyinit, else it does not matter
+		# https://www.thomas-krenn.com/en/wiki/Ext4_Filesystem#Lazy_Initialization
+		if [[ move_to_raid_on_first_boot=false ]]; then
+			mkfs.ext4 -E lazy_itable_init=0,lazy_journal_init=0 -F -L $label $usbblkdev"1"; sleep 1
+		else
+			mkfs.ext4 -F -L $label $usbblkdev"1"; sleep 1
+		fi
+
 		mkdir -p /tmp/mnt
 		mount $usbblkdev"1" /tmp/mnt; sleep 1
 
