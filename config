@@ -1,5 +1,5 @@
 # label to assign to rootfs; do not omit one, it is needed for uboot to be able to boot the system
-label='rootfs48529'
+label='rootfs'
 
 # filesystem type for rootfs
 filesystem='ext4'
@@ -21,7 +21,7 @@ arch='armel'
 machine='nsa320'
 
 # kernel version to install, see in stuff/kern for a list of supported kernels
-kernel='5.15.5-kirkwood-tld-1'
+kernel='5.18.6-kirkwood-tld-1'
 
 # install cups
 cups=false
@@ -48,8 +48,8 @@ log_2_ram=true
 uboot_sntp=true
 sntp_dns='8.8.8.8'
 sntp_server='pool.ntp.org'
-sntp_gw='192.168.171.254'
-sntp_ip='192.168.171.199'
+sntp_gw='192.168.1.254'
+sntp_ip='192.168.1.199'
 sntp_mask='255.255.255.0'
 
 # disable ipv6 in Linux
@@ -64,9 +64,9 @@ hname='debNAS'
 dnssuffix='home.arpa'
 
 # usb device where the rootfs will be installed
-usbblkdev='/dev/sdb'
+usbblkdev='/dev/sdX'
 # should we install rootfs on usb device
-write2usb=true
+write2usb=false
 # archive the target directory for archival
 pack2archive=false
 
