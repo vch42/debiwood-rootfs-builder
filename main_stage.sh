@@ -86,10 +86,10 @@ fi
 \cp -p ./chkconfig.sh $targetdir/root/
 
 
-\cp -p ./stuff/firstboot/firstboot $targetdir/usr/sbin/
-\cp -p ./stuff/firstboot/firstboot.conf $targetdir/etc/
-\cp -p ./stuff/firstboot/firstboot.service $targetdir/root/
-
+install -m 755 ./stuff/firstboot/firstboot $targetdir/usr/sbin/
+install -m 644 ./stuff/firstboot/firstboot.conf $targetdir/etc/
+install -m 755 ./stuff/firstboot/firstboot.service $targetdir/root/
+install -m 755 ./stuff/mkimage-ui $targetdir/usr/sbin/
 
 if $move_to_raid_on_first_boot; then
    sed -i 's/move_to_raid=false/move_to_raid=true/' $targetdir/etc/firstboot.conf
@@ -110,10 +110,9 @@ sed -i "s/kernel_name_here/$kernel/" $targetdir/etc/firstboot.conf
 sed -i "s/size_of_raid_part/$raid_rootfs_partition_size/" $targetdir/etc/firstboot.conf
 
 
-\cp -p ./stuff/leds/leds $targetdir/usr/sbin/
-\cp -p ./stuff/leds/leds.service $targetdir/root/
-
-\cp -p ./stuff/root.bashrc $targetdir/root/
+install -m 755 ./stuff/leds/leds $targetdir/usr/sbin/
+install -m 755 ./stuff/leds/leds.service $targetdir/root/
+install -m 755 ./stuff/root.bashrc $targetdir/root/
 
 
 

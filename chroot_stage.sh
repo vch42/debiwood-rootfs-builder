@@ -346,11 +346,10 @@ EOT
 echo;echo;echo '*****************************************************'
 echo "Setting firstboot.service to run /usr/sbin/firstboot "
 echo " "; sleep 1
-\cp /root/firstboot.service /lib/systemd/system/
-chmod +x /usr/sbin/firstboot
+install -m 755 /root/firstboot.service /etc/systemd/system/
 systemctl daemon-reload
 systemctl enable firstboot.service
-
+rm -f /root/firstboot.service
 
 
 echo;echo;echo '*****************************************************'
@@ -379,11 +378,10 @@ systemctl enable rc-local.service
 echo;echo;echo '*****************************************************'
 echo "Creating the service to start/stop LEDs"
 echo ""; sleep 3
-chmod +x /usr/sbin/leds
-\cp /root/leds.service /lib/systemd/system/
+install -m 755 /root/leds.service /etc/systemd/system/
 systemctl daemon-reload
 systemctl enable leds.service
-
+rm -f /root/leds.service
 
 
 

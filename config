@@ -1,51 +1,87 @@
-label='rootfs'
+# label to assign to rootfs; do not omit one, it is needed for uboot to be able to boot the system
+label='rootfs48529'
+
+# filesystem type for rootfs
 filesystem='ext4'
+
+# working directory for this script (rootfs will be generated there)
 targetdir="/tmp/$label-$(date +"%Y%m%d%H%M")"
+# archive name if the option to generate archive is active in the config
 filename="$targetdir.tar.bz2"
 
+# Debian version to be installed in the root fs
 distro='bullseye'
+
+# Debian repos
 repo='http://deb.debian.org/debian'
 repo_sec='http://security.debian.org/debian-security'
+
+# architecture and machine type
 arch='armel'
 machine='nsa320'
 
-kernel='5.18.6-kirkwood-tld-1'
+# kernel version to install, see in stuff/kern for a list of supported kernels
+kernel='5.15.5-kirkwood-tld-1'
 
+# install cups
 cups=false
+
+# install samba
 samba=true
+
+# install hd-idle package
 hdidle=false
+
+# install hd-idle from source (https://github.com/adelolmo/hd-idle)
 hdidle_from_source=true
 
+# create swap file at first boot
 create_swap=false
+
+# install log2ram script and configure logging in ram (+periodic persistence)
+# (https://github.com/azlux/log2ram)
 log_2_ram=true
 
+# setup uboot sntp - sync system clock with ntp before OS boot
+# (https://forum.doozan.com/read.php?2,25820,26116#msg-26116)
+# (https://forum.doozan.com/read.php?3,16003,16003#msg-16003)
 uboot_sntp=true
 sntp_dns='8.8.8.8'
 sntp_server='pool.ntp.org'
-sntp_gw='192.168.1.254'
-sntp_ip='192.168.1.199'
+sntp_gw='192.168.171.254'
+sntp_ip='192.168.171.199'
 sntp_mask='255.255.255.0'
 
+# disable ipv6 in Linux
 disable_ipv6=true
 
+# initial user and pass => change when setup is done
 initial_user='user'
 initial_pass='changeme'
 
+# hostname and dns suffix
 hname='debNAS'
 dnssuffix='home.arpa'
 
-usbblkdev='/dev/sdX'
-write2usb=false
+# usb device where the rootfs will be installed
+usbblkdev='/dev/sdb'
+# should we install rootfs on usb device
+write2usb=true
+# archive the target directory for archival
 pack2archive=false
 
-
+# move rootfs to SATA drive in RAID0 partition at first boot
 move_to_raid_on_first_boot=false
+
+# RAID0 rootfs partition size in MB
 raid_rootfs_partition_size=15360
 
-
+# some NSA320 have a strange timing issue with their flash chips
+# this change allows the ones having the issue to wortk ok, and has no side effect on the devices not exhibiting the problem
 nsa320_dtb_chip_delay_0x28=true
 
 
+# Other packages; needs more currating, removing some of these will cause the rootfs and its scripts/setup to fail. Handle with care.
 packs_recommended=' sudo mc htop unzip bzip2 nano vim bash-completion device-tree-compiler iperf3 ethtool iftop iptables iptables-persistent curl ntfs-3g hdparm hddtemp smartmontools iotop bonnie++ lm-sensors fancontrol haveged less man locate lsof psmisc libubootenv-tool tree screen command-not-found acl attr dnsutils '
 
 packs_other=' '

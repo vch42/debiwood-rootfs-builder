@@ -1,0 +1,73 @@
+#!/usr/bin/env bash
+
+if [[ "$EUID" -ne 0 ]]; then echo "Please run as root"; exit 1; fi
+if [[ -z $(which mkimage) ]]; then echo "Missing mkimage tool, you need to install the u-boot-tools package. Aborting!"; fi
+if [[ -z $(which dialog) ]]; then echo "Missing dialog tool, you need to install the dialog package. Aborting!"; fi
+
+version_selected=""
+version_index=0
+
+version_index=$($(which dialog) --stdout \
+--clear --backtitle "Mkimage mini UI" --title "About" \
+--msgbox "$(echo " " ; echo "This tool is a simple UI for regenerating uImage and uInitrd files in /boot from the selected Linux kernel version.")" \
+0 0 \
+--clear --backtitle "Mkimage mini UI" --title "Current state:" \
+--msgbox "$(\
+echo ; echo ;\
+echo "Running kernel:" $(uname -sr);\
+echo ' '; echo ' ----- '; echo ' ';\
+echo 'Current boot image files:';\
+echo ' ';\
+echo "$($(which mkimage) -l /boot/uImage | head -2)";\
+echo;\
+echo "$($(which mkimage) -l /boot/uInitrd | head -2)";\
+echo ' '; echo ' ----- '; echo ' ';\
+echo "Available (installed) Linux kernels: ";\
+echo ' ';\
+echo "$($(which linux-version) list | sort -r)";\
+echo ' '; echo ' '\
+)" 0 0 \
+--and-widget \
+--clear --backtitle "Mkimage mini UI" --title "Select version to use:" \
+--menu "  " 0 0 0 $(\
+k=1;\
+for x in $($(which linux-version) list | sort -r); do \
+echo $k; \
+echo -n " "; \
+echo $x; \
+((k++)); \
+done))
+
+
+if [[ -z $version_index ]]; then
+        echo "Aborted.";
+        exit 1;
+else
+        version_selected=$($(which linux-version) list | sort -r | sed "${version_index}q;d" )
+        #echo $version_selected
+fi
+
+
+
+if [[ ! -e /boot/initrd.img-$version_selected ]]; then
+        update-initramfs -v -c -k $version_selected 2>/dev/null | $(which dialog) --clear --backtitle "Mkimage mini UI" --progressbox "Ramdisk file initrd.img-$version_selected seems to be missing.\nRe-generating now, please wait...\n\nupdate-initramfs: Generating /boot/initrd.img-$version_selected" 20 130
+        sync
+else
+	update-initramfs -v -u -k $version_selected 2>/dev/null | $(which dialog) --clear --backtitle "Mkimage mini UI" --progressbox "Updating ramdisk file initrd.img-$version_selected\nPlease wait...\n\n" 20 130
+	sync
+fi
+
+build_images(){
+        echo "Generating uImage:"
+        $(which mkimage) -A arm -O linux -T kernel  -C none -a 0x00008000 -e 0x00008000 -n Linux-$version_selected     -d /boot/vmlinuz-$version_selected    /boot/uImage
+        echo
+        echo "Generating uInitrd:"
+        $(which mkimage) -A arm -O linux -T ramdisk -C gzip -a 0x00000000 -e 0x00000000 -n initramfs-$version_selected -d /boot/initrd.img-$version_selected /boot/uInitrd
+        sync
+        sleep 10
+}
+
+build_images | $(which dialog) --backtitle "Mkimage mini UI" --progressbox "Generating uboot boot files from Linux $version_selected.\n" 25 75 --and-widget --backtitle "Mkimage mini UI" --title "Done" --msgbox "\nAll done! \nIf you have not seen any errors, now it would be a great time to reboot the system to complete the task." 10 45
+
+clear
+
