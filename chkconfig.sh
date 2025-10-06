@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #Check config variables and fall-back to defaults if needed
 
 

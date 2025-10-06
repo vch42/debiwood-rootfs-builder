@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #chroot_stage.sh
 
 source /root/config

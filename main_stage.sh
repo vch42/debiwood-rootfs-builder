@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #main_stage.sh
 
 if [[ `id -u` -ne 0 ]]; then

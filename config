@@ -82,7 +82,7 @@ nsa320_dtb_chip_delay_0x28=true
 
 
 # Other packages; needs more currating, removing some of these will cause the rootfs and its scripts/setup to fail. Handle with care.
-packs_recommended=' sudo mc htop unzip bzip2 nano vim bash-completion device-tree-compiler iperf3 ethtool iftop iptables iptables-persistent curl ntfs-3g hdparm hddtemp smartmontools iotop bonnie++ lm-sensors fancontrol haveged less man locate lsof psmisc libubootenv-tool tree screen command-not-found acl attr dnsutils '
+packs_recommended=' sudo mc htop unzip bzip2 nano vim bash-completion device-tree-compiler iperf3 ethtool iftop iptables iptables-persistent curl ntfs-3g hdparm hddtemp smartmontools iotop bonnie++ lm-sensors fancontrol haveged less man locate lsof psmisc libubootenv-tool tree screen command-not-found acl attr dnsutils popularity-contest '
 
 packs_other=' '
 
